@@ -1,0 +1,7 @@
+{
+  "plugins": [
+    "D:\\Programs\\repositories\\python\\ApplicationFramework\\plugins\\cmd_executor",
+    "D:\\Programs\\repositories\\python\\ApplicationFramework\\plugins\\demo_counter",
+    "D:\\Programs\\repositories\\python\\ApplicationFramework\\plugins\\demo_notes"
+  ]
+}
