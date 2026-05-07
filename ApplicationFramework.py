@@ -31,6 +31,7 @@
 
 import importlib.util
 import json
+import os
 import sys
 import traceback
 from dataclasses import dataclass
@@ -65,6 +66,7 @@ from qfluentwidgets import (
 from customWidget import (
     InfoBarWithButton,
     MessageConfirmBox)
+from Utils import WindowsScaleFactorSetting
 
 if __name__ == "__main__":
     sys.modules.setdefault("ApplicationFramework", sys.modules[__name__])
@@ -561,10 +563,10 @@ def main() -> None:
     QApplication.setHighDpiScaleFactorRoundingPolicy(
         Qt.HighDpiScaleFactorRoundingPolicy.PassThrough
     )
-
+    os.environ["QT_SCALE_FACTOR"] = "1.25"
     app = QApplication(sys.argv)
     app.setAttribute(Qt.AA_DontCreateNativeWidgetSiblings)
-
+    WindowsScaleFactorSetting()
     window = ApplicationFramework()
     window.show()
 

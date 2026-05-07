@@ -1,7 +1,7 @@
 {
   "plugins": [
-    "D:\\Programs\\repositories\\python\\ApplicationFramework\\plugins\\cmd_executor",
-    "D:\\Programs\\repositories\\python\\ApplicationFramework\\plugins\\demo_counter",
-    "D:\\Programs\\repositories\\python\\ApplicationFramework\\plugins\\demo_notes"
+    "D:\\Program\\Python\\repositories\\ApplicationFramework\\plugins\\cmd_executor\\__init__.py",
+    "D:\\Program\\Python\\repositories\\ApplicationFramework\\plugins\\demo_counter\\__init__.py",
+    "D:\\Program\\Python\\repositories\\ApplicationFramework\\plugins\\demo_notes\\__init__.py"
   ]
 }
