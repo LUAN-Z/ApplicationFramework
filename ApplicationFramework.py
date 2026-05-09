@@ -31,7 +31,6 @@
 
 import importlib.util
 import json
-import os
 import sys
 import traceback
 from dataclasses import dataclass
@@ -39,6 +38,7 @@ from pathlib import Path
 from typing import Dict, Iterable, Optional, Type
 
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QCursor
 from PyQt5.QtWidgets import (
     QApplication,
     QFileDialog,
@@ -113,7 +113,7 @@ class PagePlugin(ApplicationPlugin):
 
     def __init__(self, info: PluginInfo, page_class: Type[QWidget]):
         self.info = info
-        self.page_class = page_class
+        self.page_class = page_class 
 
     def create_widget(self, parent: Optional[QWidget] = None) -> QWidget:
         return self.page_class(parent)
@@ -258,11 +258,7 @@ class PluginCenterPage(ScrollArea):
         self.refresh()
 
     def refresh(self) -> None:
-        while self.layout.count():
-            item = self.layout.takeAt(0)
-            widget = item.widget()
-            if widget:
-                widget.deleteLater()
+        self._clear_layout(self.layout)
 
         title = StrongBodyLabel("插件管理", self)
         self.layout.addWidget(title)
@@ -279,6 +275,16 @@ class PluginCenterPage(ScrollArea):
             self.layout.addWidget(self._create_plugin_card(plugin))
 
         self.layout.addStretch(1)
+
+    def _clear_layout(self, layout) -> None:
+        while layout.count():
+            item = layout.takeAt(0)
+            widget = item.widget()
+            child_layout = item.layout()
+            if widget:
+                widget.deleteLater()
+            elif child_layout:
+                self._clear_layout(child_layout)
 
     def _create_plugin_card(self, plugin: ApplicationPlugin) -> CardWidget:
         info = plugin.info
@@ -305,6 +311,11 @@ class PluginCenterPage(ScrollArea):
         unload_btn.clicked.connect(lambda _, pid=info.plugin_id: self._unload_plugin(pid))
         unload_btn.setEnabled(is_loaded)
 
+        jump_btn = PushButton("跳转", card)
+        jump_btn.setIcon(FIF.RIGHT_ARROW)
+        jump_btn.clicked.connect(lambda _, pid=info.plugin_id: self._jump_to_plugin(pid))
+        jump_btn.setEnabled(is_loaded)
+
         remove_btn = PushButton("移除", card)
         remove_btn.setIcon(FIF.CLOSE)
         remove_btn.clicked.connect(lambda _, pid=info.plugin_id: self._remove_plugin(pid))
@@ -313,13 +324,14 @@ class PluginCenterPage(ScrollArea):
         card_layout.addLayout(text_layout, 1)
         card_layout.addWidget(load_btn)
         card_layout.addWidget(unload_btn)
+        card_layout.addWidget(jump_btn)
         card_layout.addWidget(remove_btn)
         return card
 
     def _load_plugin(self, plugin_id: str) -> None:
         try:
             widget = self.framework.plugin_manager.load(plugin_id)
-            self.framework.navigationInterface.setCurrentItem(widget.objectName())
+            self.framework.navigate_to_widget(widget)
             self.refresh()
             InfoBar.success(
                 title="已加载",
@@ -336,6 +348,14 @@ class PluginCenterPage(ScrollArea):
                 position=InfoBarPosition.TOP,
                 duration=4000,
             )
+
+    def _jump_to_plugin(self, plugin_id: str) -> None:
+        loaded = self.framework.plugin_manager.loaded_plugins.get(plugin_id)
+        if not loaded:
+            self.refresh()
+            return
+
+        self.framework.navigate_to_widget(loaded.widget)
 
     def _unload_plugin(self, plugin_id: str) -> None:
         plugin_name = self.framework.plugin_manager.available_plugins[plugin_id].info.name
@@ -392,9 +412,10 @@ class ApplicationFramework(FluentWindow):
         self.resize(1200, 900)
         setThemeColor("#0078D4")
 
+        self.app_dir = Path(__file__).resolve().parent
         self.plugin_manager = PluginManager(self)
-        self.plugin_dir = Path(plugin_dir)
-        self.plugin_config_path = Path(plugin_config)
+        self.plugin_dir = self._resolve_app_path(plugin_dir)
+        self.plugin_config_path = self._resolve_app_path(plugin_config)
         self.user_plugin_paths: Dict[str, Path] = {}
 
         # self._register_builtin_plugins()
@@ -409,7 +430,15 @@ class ApplicationFramework(FluentWindow):
         )
 
         self.navigationInterface.setExpandWidth(200)
+        self._load_startup_plugins()
+        self.plugin_center_page.refresh()
         self.navigationInterface.setCurrentItem(self.plugin_center_page.objectName())
+
+    def _resolve_app_path(self, path: str | Path) -> Path:
+        path = Path(path)
+        if path.is_absolute():
+            return path
+        return self.app_dir / path
 
     def add_plugin_widget(self, plugin: ApplicationPlugin, widget: QWidget) -> None:
         info = plugin.info
@@ -426,6 +455,31 @@ class ApplicationFramework(FluentWindow):
 
         if hasattr(self, "stackedWidget"):
             self.stackedWidget.removeWidget(widget)
+
+    def navigate_to_widget(self, widget: QWidget) -> None:
+        if hasattr(self, "switchTo"):
+            self.switchTo(widget)
+        self.navigationInterface.setCurrentItem(widget.objectName())
+
+    def center_on_current_screen(self) -> None:
+        screen = self.screen() or QApplication.primaryScreen()
+        if not screen:
+            return
+
+        available_geometry = screen.availableGeometry()
+        frame_geometry = self.frameGeometry()
+        frame_geometry.moveCenter(available_geometry.center())
+        self.move(frame_geometry.topLeft())
+
+    def center_on_startup_screen(self) -> None:
+        screen = QApplication.screenAt(QCursor.pos()) or QApplication.primaryScreen()
+        if not screen:
+            return
+
+        available_geometry = screen.availableGeometry()
+        frame_geometry = self.frameGeometry()
+        frame_geometry.moveCenter(available_geometry.center())
+        self.move(frame_geometry.topLeft())
 
     def add_plugin(self) -> None:
         paths = self._select_plugin_paths()
@@ -521,6 +575,13 @@ class ApplicationFramework(FluentWindow):
             except Exception:
                 traceback.print_exc()
 
+    def _load_startup_plugins(self) -> None:
+        for plugin_id in list(self.user_plugin_paths.keys()):
+            try:
+                self.plugin_manager.load(plugin_id)
+            except Exception:
+                traceback.print_exc()
+
     def _save_user_plugins(self) -> None:
         data = {
             "plugins": [
@@ -558,16 +619,17 @@ class ApplicationFramework(FluentWindow):
             self.plugin_manager.unload(plugin_id)
         event.accept()
 
-
 def main() -> None:
+    WindowsScaleFactorSetting()
+    QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
+    QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps, True)
     QApplication.setHighDpiScaleFactorRoundingPolicy(
         Qt.HighDpiScaleFactorRoundingPolicy.PassThrough
     )
-    os.environ["QT_SCALE_FACTOR"] = "1.25"
     app = QApplication(sys.argv)
     app.setAttribute(Qt.AA_DontCreateNativeWidgetSiblings)
-    WindowsScaleFactorSetting()
     window = ApplicationFramework()
+    window.center_on_startup_screen()
     window.show()
 
     sys.exit(app.exec_())

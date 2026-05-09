@@ -12,8 +12,32 @@ class WindowsScaleFactorType(Enum):
 
 
 class WindowsScaleFactorSetting:
-    def __init__(self): 
-        self.set_scale_factor()
+    def __init__(self, scale_factor: WindowsScaleFactorType=WindowsScaleFactorType.SCALE_FACTOR_AUTO):
+        self.set_scale_factor(scale_factor)
+
+    def enable_per_monitor_dpi_awareness(self):
+        if os.name != "nt":
+            return
+
+        try:
+            # Windows 10+: per-monitor v2 lets Qt recalculate scaling for the
+            # screen where the window is actually shown.
+            ctypes.windll.user32.SetProcessDpiAwarenessContext(ctypes.c_void_p(-4))
+            return
+        except Exception:
+            pass
+
+        try:
+            # Windows 8.1 fallback: PROCESS_PER_MONITOR_DPI_AWARE.
+            ctypes.windll.shcore.SetProcessDpiAwareness(2)
+            return
+        except Exception:
+            pass
+
+        try:
+            ctypes.windll.user32.SetProcessDPIAware()
+        except Exception:
+            pass
 
     def cal_windows_scaling_factor(self):
         try:
@@ -38,6 +62,12 @@ class WindowsScaleFactorSetting:
             return [factor, "用户设置"]
 
     def set_scale_factor(self, scale_factor: WindowsScaleFactorType=WindowsScaleFactorType.SCALE_FACTOR_AUTO):
+        if scale_factor == WindowsScaleFactorType.SCALE_FACTOR_AUTO:
+            self.enable_per_monitor_dpi_awareness()
+            os.environ.pop("QT_SCALE_FACTOR", None)
+            print("界面缩放比例已设置为自动 (来源: 每显示器 DPI)")
+            return
+
         factor, identity = self.get_scale_factor(scale_factor)
         os.environ["QT_SCALE_FACTOR"] = str(factor)
         # logger.debug(f"已将环境变量 QT_SCALE_FACTOR 设为 {factor} (来源: {identity})")
