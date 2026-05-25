@@ -1,6 +1,9 @@
 {
   "plugins": [
-    "D:\\Programs\\repositories\\python\\ApplicationFramework\\plugins\\cmd_executor\\__init__.py",
-    "D:\\Programs\\repositories\\python\\ApplicationFramework\\plugins\\demo_notes\\__init__.py"
-  ]
+    "plugins/cmd_executor/__init__.py",
+    "plugins/demo_counter/__init__.py",
+    "plugins/demo_notes/__init__.py",
+    "plugins/json_viewer/__init__.py"
+  ],
+  "open_screen_interface": "json_viewer"
 }

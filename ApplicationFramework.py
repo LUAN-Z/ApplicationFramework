@@ -426,13 +426,13 @@ class ApplicationFramework(FluentWindow):
             self.plugin_center_page,
             FIF.APPLICATION,
             "插件管理",
-            NavigationItemPosition.TOP,
+            NavigationItemPosition.BOTTOM,
         )
 
         self.navigationInterface.setExpandWidth(200)
         self._load_startup_plugins()
         self.plugin_center_page.refresh()
-        self.navigationInterface.setCurrentItem(self.plugin_center_page.objectName())
+        self._navigate_to_open_screen()
 
     def _resolve_app_path(self, path: str | Path) -> Path:
         path = Path(path)
@@ -559,17 +559,22 @@ class ApplicationFramework(FluentWindow):
 
     def _load_user_plugins(self) -> None:
         if not self.plugin_config_path.exists():
+            self.open_screen_interface = ""
             return
 
         try:
             data = json.loads(self.plugin_config_path.read_text(encoding="utf-8"))
         except Exception:
             traceback.print_exc()
+            self.open_screen_interface = ""
             return
+
+        self.open_screen_interface = data.get("open_screen_interface", "")
 
         for raw_path in data.get("plugins", []):
             try:
-                plugin_path = self.plugin_manager.resolve_plugin_path(Path(raw_path))
+                resolved = self._resolve_app_path(raw_path)
+                plugin_path = self.plugin_manager.resolve_plugin_path(resolved)
                 plugin = self.plugin_manager.register_from_path(plugin_path)
                 self.user_plugin_paths[plugin.info.plugin_id] = plugin_path
             except Exception:
@@ -582,12 +587,34 @@ class ApplicationFramework(FluentWindow):
             except Exception:
                 traceback.print_exc()
 
+    def _navigate_to_open_screen(self) -> None:
+        """根据插件配置 open_screen_interface 跳转到对应界面。"""
+        target = getattr(self, "open_screen_interface", "")
+
+        if target and target != self.plugin_center_page.objectName():
+            # 在已加载的插件中查找匹配的 widget
+            for loaded in self.plugin_manager.loaded_plugins.values():
+                if loaded.widget.objectName() == target:
+                    self.navigationInterface.setCurrentItem(target)
+                    return
+
+        # 默认回到插件管理页
+        self.navigationInterface.setCurrentItem(self.plugin_center_page.objectName())
+
     def _save_user_plugins(self) -> None:
+        existing = {}
+        if self.plugin_config_path.exists():
+            try:
+                existing = json.loads(self.plugin_config_path.read_text(encoding="utf-8"))
+            except Exception:
+                pass
+
         data = {
             "plugins": [
                 str(path)
                 for _, path in sorted(self.user_plugin_paths.items())
-            ]
+            ],
+            "open_screen_interface": existing.get("open_screen_interface", ""),
         }
         if self.plugin_config_path.parent != Path("."):
             self.plugin_config_path.parent.mkdir(parents=True, exist_ok=True)
@@ -615,9 +642,34 @@ class ApplicationFramework(FluentWindow):
     #         traceback.print_exc()
 
     def closeEvent(self, event) -> None:
+        # 保存当前界面到配置，下次启动自动恢复
+        try:
+            current_widget = self.stackedWidget.currentWidget()
+            if current_widget:
+                self._save_open_screen_interface(current_widget.objectName())
+        except Exception:
+            pass
+
         for plugin_id in list(self.plugin_manager.loaded_plugins.keys()):
-            self.plugin_manager.unload(plugin_id)
+            try:
+                self.plugin_manager.unload(plugin_id)
+            except Exception:
+                pass
         event.accept()
+
+    def _save_open_screen_interface(self, interface_name: str) -> None:
+        """将当前界面名称写入 plugins.json 的 open_screen_interface 字段。"""
+        existing = {}
+        if self.plugin_config_path.exists():
+            try:
+                existing = json.loads(self.plugin_config_path.read_text(encoding="utf-8"))
+            except Exception:
+                pass
+        existing["open_screen_interface"] = interface_name
+        self.plugin_config_path.write_text(
+            json.dumps(existing, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
 
 def main() -> None:
     WindowsScaleFactorSetting()
@@ -630,6 +682,7 @@ def main() -> None:
     app.setAttribute(Qt.AA_DontCreateNativeWidgetSiblings)
     window = ApplicationFramework()
     window.center_on_startup_screen()
+    window._navigate_to_open_screen()
     window.show()
 
     sys.exit(app.exec_())

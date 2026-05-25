@@ -1,0 +1,65 @@
+{
+  "BatchCompileInterface": {
+    "enableCompilation": true,
+    "flowcompilerPath": "D:/Code/repositories/TestflowGenerator/Template/P7-200ball_V5.0.25_240322/flowcompiler-v0.1.3.exe",
+    "funDefinitionPath": "D:/Code/repositories/TestflowGenerator/Template/P7-200ball_V5.0.25_240322/funDefinition_V1.1.05.txt",
+    "tfDisableVersionCheck": true,
+    "tfTransformHeatupCode": 0
+  },
+  "SettingInterface": {
+    "checkUpdateAtStartup": true,
+    "defaultInterface": "MultiTestflowPackerInterface",
+    "latestInterface": "TestflowAssemblerInterface",
+    "startupInterfaceType": "latestInterface",
+    "updateSilently": false,
+    "windowsFontFamily": "PingFang SC",
+    "windowsFontSize": 15,
+    "windowsScaleFactor": "Auto"
+  },
+  "TestflowAssemblerInterface": {
+    "delCfgFileAfterAssembly": true,
+    "sendFirstSucceedFileToPacker": 0,
+    "switchToPackerAfterAssembly": 0
+  },
+  "TestflowPackerInterface": {
+    "enableCustomVersionName": false,
+    "flowcompilerPath": "D:/Program/Python/repositories/TestflowGenerator/Test/P16_参考包/flowcompiler-v0.1.6.exe",
+    "funDefinitionPath": "D:/Program/Python/repositories/TestflowGenerator/Test/P16_参考包/funDefinition_x86_V1.0.17.txt",
+    "iniConfig": {
+      "Config.gdec_UI_INIT_TIMEOUT_MACHINE": "3800",
+      "Config.gstr_UI_INIT_TEST_WAY": "FT2",
+      "Config.str_UI_STM32_VERSION": "V4.2.41_251201"
+    },
+    "iniFilePassword": "",
+    "mpsAutoLogin": false,
+    "mpsLoginKeepAlive": false,
+    "mpsOrderNumberList": [
+      "TDM20250707",
+      "TDM20250505",
+      "TDM20250404",
+      "TDM20250303",
+      "TDM20251010",
+      "TDM20250210"
+    ],
+    "mpsProductLine": "",
+    "mpsRememberPwd": false,
+    "mpsSoftwareType": "",
+    "templateFolder": "D:/Program/Python/repositories/TestflowGenerator/Test/P16_参考包",
+    "uploadAfterPacking": true
+  },
+  "QFluentWidgets": {
+    "FontFamilies": [
+      "Segoe UI",
+      "Microsoft YaHei",
+      "PingFang SC"
+    ],
+    "ThemeColor": "#ff8c39aa",
+    "ThemeMode": "Light"
+  },
+  "MultitestflowPackerInterface": {
+    "flowcompilerPath": "D:/Program/Python/repositories/TestflowGenerator/Template/P7-200ball_V5.1.04_PL_V5.0.09/flowcompiler-v0.1.9.exe",
+    "funDefinitionPath": "D:/Program/Python/repositories/TestflowGenerator/Template/P7-200ball_V5.1.04_PL_V5.0.09/funDefinition_V1.1.23.txt",
+    "templateFolder": "D:/Program/Python/repositories/TestflowGenerator/Template/P7-200ball_V5.1.04_PL_V5.0.09/V5.1.04",
+    "uploadAfterPacking": true
+  }
+}
