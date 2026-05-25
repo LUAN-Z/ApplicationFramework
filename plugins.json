@@ -3,7 +3,9 @@
     "plugins/cmd_executor/__init__.py",
     "plugins/demo_counter/__init__.py",
     "plugins/demo_notes/__init__.py",
-    "plugins/json_viewer/__init__.py"
+    "plugins/json_viewer/__init__.py",
+    "plugins/config_viewer/__init__.py",
+    "plugins/todo/__init__.py"
   ],
-  "open_screen_interface": "json_viewer"
+  "open_screen_interface": "command_executor"
 }

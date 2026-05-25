@@ -595,11 +595,11 @@ class ApplicationFramework(FluentWindow):
             # 在已加载的插件中查找匹配的 widget
             for loaded in self.plugin_manager.loaded_plugins.values():
                 if loaded.widget.objectName() == target:
-                    self.navigationInterface.setCurrentItem(target)
+                    self.navigate_to_widget(loaded.widget)
                     return
 
         # 默认回到插件管理页
-        self.navigationInterface.setCurrentItem(self.plugin_center_page.objectName())
+        self.navigate_to_widget(self.plugin_center_page)
 
     def _save_user_plugins(self) -> None:
         existing = {}

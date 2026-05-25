@@ -422,27 +422,34 @@ class JsonViewerPage(QWidget):
 
     def _build_tree(self):
         self.tree.blockSignals(True)
+        self.tree.setUpdatesEnabled(False)
+        was_animated = self.tree.isAnimated()
+        self.tree.setAnimated(False)
         try:
             self.tree.clear()
             if self.json_data is None:
                 self.status_label.setText("无数据")
                 return
 
-            root = QTreeWidgetItem(self.tree)
+            # 先以分离方式构建 root，待子节点全部就绪后一次性挂入并展开，
+            # 避免 Qt 在每次插入时对已展开/已挂载的节点做布局与重绘。
+            root = QTreeWidgetItem()
             root.setData(0, Qt.UserRole, self.json_data)
-            root.setData(0, Qt.UserRole + 3, True)  # root 已填充
+            root.setData(0, Qt.UserRole + 3, True)
             root.setText(0, "root")
             root.setText(2, type(self.json_data).__name__)
-            root.setExpanded(True)
             font = root.font(0)
             font.setBold(True)
             root.setFont(0, font)
 
-            # 只填充第一层子节点
             self._populate_children(self.json_data, root)
 
+            self.tree.addTopLevelItem(root)
+            root.setExpanded(True)
             self.tree.setColumnWidth(2, 50)
         finally:
+            self.tree.setAnimated(was_animated)
+            self.tree.setUpdatesEnabled(True)
             self.tree.blockSignals(False)
 
         self.status_label.setText(
@@ -451,19 +458,29 @@ class JsonViewerPage(QWidget):
         )
 
     def _populate_children(self, data: Any, parent: QTreeWidgetItem):
-        """填充容器节点的直接子节点（惰性加载用）。"""
+        """填充容器节点的直接子节点（惰性加载用）。
+
+        先把所有子节点构建为分离 item，再用 addChildren 批量挂载——
+        相比逐个 QTreeWidgetItem(parent)，能将 N 次模型变更通知缩减为 1 次，
+        在数千节点的容器上是数量级的差距。
+        """
+        items = []
         if isinstance(data, dict):
             for key, value in data.items():
-                item = QTreeWidgetItem(parent)
+                item = QTreeWidgetItem()
                 item.setText(0, str(key))
                 item.setData(0, Qt.UserRole + 2, key)
                 self._set_cell(item, value)
+                items.append(item)
         elif isinstance(data, list):
             for idx, value in enumerate(data):
-                item = QTreeWidgetItem(parent)
+                item = QTreeWidgetItem()
                 item.setText(0, f"[{idx}]")
                 item.setData(0, Qt.UserRole + 2, idx)
                 self._set_cell(item, value)
+                items.append(item)
+        if items:
+            parent.addChildren(items)
 
     def _on_item_expanded(self, item: QTreeWidgetItem):
         """展开节点时惰性加载子节点。"""
@@ -471,10 +488,12 @@ class JsonViewerPage(QWidget):
             return  # 已填充或非容器
         value = item.data(0, Qt.UserRole)
         self.tree.blockSignals(True)
+        self.tree.setUpdatesEnabled(False)
         try:
             self._populate_children(value, item)
             item.setData(0, Qt.UserRole + 3, True)
         finally:
+            self.tree.setUpdatesEnabled(True)
             self.tree.blockSignals(False)
 
     def _ensure_populated(self, item: QTreeWidgetItem):
@@ -482,10 +501,12 @@ class JsonViewerPage(QWidget):
         if item.data(0, Qt.UserRole + 3) is False:
             value = item.data(0, Qt.UserRole)
             self.tree.blockSignals(True)
+            self.tree.setUpdatesEnabled(False)
             try:
                 self._populate_children(value, item)
                 item.setData(0, Qt.UserRole + 3, True)
             finally:
+                self.tree.setUpdatesEnabled(True)
                 self.tree.blockSignals(False)
 
     def _set_cell(self, item: QTreeWidgetItem, value: Any):
@@ -799,6 +820,17 @@ class JsonViewerPage(QWidget):
             self._save_as()
             return
 
+        from customWidget import MessageConfirmBox
+
+        confirmed = MessageConfirmBox(
+            parent=self.window(),
+            title="确认保存",
+            content=f"确定要覆盖保存到 \"{os.path.basename(self.current_file_path)}\" 吗？",
+            show_cancel_btn=True,
+        ).exec()
+        if not confirmed:
+            return
+
         try:
             with open(self.current_file_path, "w", encoding="utf-8") as f:
                 json.dump(self.json_data, f, ensure_ascii=False, indent=2)
@@ -829,6 +861,17 @@ class JsonViewerPage(QWidget):
             self, "另存为", "", "JSON 文件 (*.json);;所有文件 (*)",
         )
         if not path:
+            return
+
+        from customWidget import MessageConfirmBox
+
+        confirmed = MessageConfirmBox(
+            parent=self.window(),
+            title="确认另存为",
+            content=f"确定要保存到 \"{os.path.basename(path)}\" 吗？",
+            show_cancel_btn=True,
+        ).exec()
+        if not confirmed:
             return
 
         try:
