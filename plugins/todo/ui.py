@@ -54,6 +54,7 @@ from qfluentwidgets import (
     TransparentTogglePushButton,
     TransparentToggleToolButton,
     isDarkTheme,
+    qconfig,
     themeColor,
 )
 
@@ -100,6 +101,17 @@ def _muted_color() -> str:
 
 def _subtle_color() -> str:
     return "#6E7378" if isDarkTheme() else "#888"
+
+
+def _embed_lineedit_style() -> str:
+    """主题感知的 LineEdit 透明嵌入样式;包含 color 以避免在深色主题下退回到默认黑色。
+
+    qfluentwidgets 的文字色来自全局 QSS,但 inline 样式表对同一选择器的
+    所有属性 take precedence — 没显式写 color 时,该控件的 color 会退回
+    Qt 默认黑,在深色背景上完全看不清。所以这里必须按主题输出 color。
+    """
+    color = "#F2F2F2" if isDarkTheme() else "#202020"
+    return f"LineEdit {{ border: 0; background: transparent; color: {color}; }}"
 
 
 # ── 列表名输入对话框 ───────────────────────────────────────
@@ -380,10 +392,13 @@ class TaskRow(CardWidget):
         font: QFont = self.title_label.font()
         font.setStrikeOut(bool(self.task.get("completed")))
         self.title_label.setFont(font)
+        # 必须始终显式设 color — setStyleSheet("") 在 BodyLabel 上不一定能
+        # 稳定地恢复 qfluentwidgets 的主题文字色,深色模式下会退回 Qt 默认黑。
         if self.task.get("completed"):
-            self.title_label.setStyleSheet(f"color: {_muted_color()};")
+            color = _muted_color()
         else:
-            self.title_label.setStyleSheet("")
+            color = "#F2F2F2" if isDarkTheme() else "#202020"
+        self.title_label.setStyleSheet(f"color: {color};")
 
     def _on_check(self, _state):
         completed = self.check.isChecked()
@@ -415,9 +430,12 @@ class TasksPane(QWidget):
     taskStarred = pyqtSignal(str, bool)
     taskSelected = pyqtSignal(str)
     searchChanged = pyqtSignal(str)
+    archiveToggled = pyqtSignal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        self._archive_expanded = False
+        self._archive_header: Optional[QWidget] = None
         layout = QVBoxLayout(self)
         layout.setContentsMargins(28, 24, 28, 20)
         layout.setSpacing(14)
@@ -435,7 +453,6 @@ class TasksPane(QWidget):
         head_text.setSpacing(0)
         self.title = LargeTitleLabel("我的一天", self)
         self.subtitle = CaptionLabel("", self)
-        self.subtitle.setStyleSheet(f"color: {_subtle_color()};")
         head_text.addWidget(self.title)
         head_text.addWidget(self.subtitle)
         head_row.addLayout(head_text, 1)
@@ -484,9 +501,7 @@ class TasksPane(QWidget):
         self.add_edit = LineEdit(self)
         self.add_edit.setPlaceholderText("添加任务（回车提交）")
         self.add_edit.setClearButtonEnabled(True)
-        self.add_edit.setStyleSheet(
-            "LineEdit { border: 0; background: transparent; }"
-        )
+        self.add_edit.setStyleSheet(_embed_lineedit_style())
         self.add_edit.returnPressed.connect(self._on_add)
         add_layout.addWidget(self.add_edit, 1)
 
@@ -505,9 +520,26 @@ class TasksPane(QWidget):
         v.addWidget(msg)
         sub = BodyLabel("从下方输入框开始添加，或试试拖拽到「我的一天」", w)
         sub.setAlignment(Qt.AlignCenter)
-        sub.setStyleSheet(f"color: {_subtle_color()};")
         v.addWidget(sub)
+        self._empty_sub = sub
         return w
+
+    def refresh_theme_styles(self):
+        """主题切换后刷新依赖 isDarkTheme() 的颜色。"""
+        subtle = _subtle_color()
+        for label in (self.subtitle, getattr(self, "_empty_sub", None)):
+            if label is not None:
+                label.setStyleSheet(f"color: {subtle};")
+        # 透明嵌入式输入框的文字色也要跟主题刷新
+        if hasattr(self, "add_edit"):
+            self.add_edit.setStyleSheet(_embed_lineedit_style())
+        # TaskRow 内部的 chip / title 颜色在每次 show_tasks 重建时刷新,
+        # 主题切换后用户操作触发刷新即可;这里直接重建已存在的 row 也无副作用
+        for row in self.findChildren(TaskRow):
+            row._apply_completion_style()
+            for chip in row._meta_widgets:
+                for lbl in chip.findChildren(CaptionLabel):
+                    lbl.setStyleSheet(f"color: {subtle};")
 
     def set_header(self, name: str, kind: Optional[str], done: int, total: int):
         icon = SYSTEM_LIST_ICONS.get(kind, FIF.LABEL)
@@ -520,7 +552,19 @@ class TasksPane(QWidget):
         else:
             self.subtitle.setText(f"已完成 {done} / {total}")
 
-    def show_tasks(self, tasks: List[Dict[str, Any]]):
+    def show_tasks(self, tasks: List[Dict[str, Any]],
+                   archived: Optional[List[Dict[str, Any]]] = None):
+        archived = archived or []
+
+        # 清除旧的归档分组标题
+        if self._archive_header is not None:
+            try:
+                self.rows_layout.removeWidget(self._archive_header)
+            except Exception:
+                pass
+            self._archive_header.deleteLater()
+            self._archive_header = None
+
         # 移除旧任务行（保留 empty + stretch）
         for i in reversed(range(self.rows_layout.count())):
             item = self.rows_layout.itemAt(i)
@@ -529,30 +573,76 @@ class TasksPane(QWidget):
                 self.rows_layout.takeAt(i)
                 w.deleteLater()
 
-        # 排序
-        def sort_key(t):
+        # active: important 在前,然后按到期日 / 创建时间
+        def active_sort_key(t):
             return (
-                bool(t.get("completed")),
                 not bool(t.get("important")),
                 t.get("due_date") or "9999",
                 t.get("created_at") or "",
             )
 
-        tasks_sorted = sorted(tasks, key=sort_key)
+        # archived: 最近完成的排在最前
+        def archived_sort_key(t):
+            return t.get("completed_at") or t.get("created_at") or ""
 
-        if not tasks_sorted:
+        tasks_sorted = sorted(tasks, key=active_sort_key)
+        archived_sorted = sorted(archived, key=archived_sort_key, reverse=True)
+
+        if not tasks_sorted and not archived_sorted:
             self.empty_widget.show()
-        else:
-            self.empty_widget.hide()
-            for t in tasks_sorted:
-                row = TaskRow(t, self)
-                row.toggled.connect(self.taskToggled.emit)
-                row.starred.connect(self.taskStarred.emit)
-                row.selected.connect(self.taskSelected.emit)
-                # 插在最后的 stretch 之前
-                self.rows_layout.insertWidget(
-                    self.rows_layout.count() - 1, row
-                )
+            return
+
+        self.empty_widget.hide()
+        for t in tasks_sorted:
+            row = self._make_task_row(t)
+            self.rows_layout.insertWidget(
+                self.rows_layout.count() - 1, row
+            )
+
+        if archived_sorted:
+            header = self._build_archive_header(len(archived_sorted))
+            self._archive_header = header
+            self.rows_layout.insertWidget(
+                self.rows_layout.count() - 1, header
+            )
+            if self._archive_expanded:
+                for t in archived_sorted:
+                    row = self._make_task_row(t)
+                    self.rows_layout.insertWidget(
+                        self.rows_layout.count() - 1, row
+                    )
+
+    def _make_task_row(self, task: Dict[str, Any]) -> "TaskRow":
+        row = TaskRow(task, self)
+        row.toggled.connect(self.taskToggled.emit)
+        row.starred.connect(self.taskStarred.emit)
+        row.selected.connect(self.taskSelected.emit)
+        return row
+
+    def _build_archive_header(self, count: int) -> QWidget:
+        w = QWidget(self)
+        w.setObjectName("TodoArchiveHeader")
+        w.setCursor(Qt.PointingHandCursor)
+        w.setMinimumHeight(34)
+        h = QHBoxLayout(w)
+        h.setContentsMargins(8, 10, 8, 4)
+        h.setSpacing(8)
+
+        arrow = "▾" if self._archive_expanded else "▸"
+        label = StrongBodyLabel(f"{arrow}  已完成  ·  {count}", w)
+        label.setStyleSheet(f"color: {_subtle_color()};")
+        h.addWidget(label)
+        h.addStretch(1)
+
+        # 让整行可点击
+        def _mouse_press(event):
+            if event.button() == Qt.LeftButton:
+                self._archive_expanded = not self._archive_expanded
+                self.archiveToggled.emit()
+            QWidget.mousePressEvent(w, event)
+
+        w.mousePressEvent = _mouse_press
+        return w
 
     def _on_add(self):
         text = self.add_edit.text().strip()
@@ -583,9 +673,7 @@ class StepRow(QWidget):
 
         self.edit = LineEdit(self)
         self.edit.setText(step["title"])
-        self.edit.setStyleSheet(
-            "LineEdit { border: 0; background: transparent; }"
-        )
+        self.edit.setStyleSheet(_embed_lineedit_style())
         self.edit.editingFinished.connect(self._on_edit)
         layout.addWidget(self.edit, 1)
 
@@ -674,9 +762,7 @@ class DetailPane(QWidget):
         tc_layout.addWidget(self.check)
 
         self.title_edit = LineEdit(self)
-        self.title_edit.setStyleSheet(
-            "LineEdit { border: 0; background: transparent; }"
-        )
+        self.title_edit.setStyleSheet(_embed_lineedit_style())
         self.title_edit.editingFinished.connect(self._on_title)
         tc_layout.addWidget(self.title_edit, 1)
 
@@ -736,9 +822,7 @@ class DetailPane(QWidget):
         ass_l.addWidget(plus_icon)
         self.add_step_edit = LineEdit(self)
         self.add_step_edit.setPlaceholderText("添加步骤")
-        self.add_step_edit.setStyleSheet(
-            "LineEdit { border: 0; background: transparent; }"
-        )
+        self.add_step_edit.setStyleSheet(_embed_lineedit_style())
         self.add_step_edit.returnPressed.connect(self._on_add_step)
         ass_l.addWidget(self.add_step_edit, 1)
         steps_layout.addWidget(self.add_step_row)
@@ -758,7 +842,6 @@ class DetailPane(QWidget):
         # 底部
         foot = QHBoxLayout()
         self.foot_label = CaptionLabel("", self)
-        self.foot_label.setStyleSheet(f"color: {_subtle_color()};")
         foot.addWidget(self.foot_label)
         foot.addStretch(1)
         self.delete_btn = TransparentToolButton(FIF.DELETE, self)
@@ -770,14 +853,22 @@ class DetailPane(QWidget):
         scroll.setWidget(body)
         outer.addWidget(scroll)
 
-        # 背景轻微区分
+        # 背景轻微区分(由 TodoPage._apply_theme_styles 统一刷新)
         self.setAutoFillBackground(True)
-        self.setStyleSheet(
-            f"QWidget#TodoDetailPane {{ "
-            f"background: {'#1e1e1e' if isDarkTheme() else '#f8f8f8'}; "
-            f"border-left: 1px solid {'#2c2c2c' if isDarkTheme() else '#e5e5e5'}; "
-            f"}}"
-        )
+        self.refresh_theme_styles()
+
+    def refresh_theme_styles(self):
+        """主题切换后刷新依赖 isDarkTheme() 的颜色。"""
+        if hasattr(self, "foot_label"):
+            self.foot_label.setStyleSheet(f"color: {_subtle_color()};")
+        # 透明嵌入式输入框的文字色也要跟主题刷新
+        if hasattr(self, "title_edit"):
+            self.title_edit.setStyleSheet(_embed_lineedit_style())
+        if hasattr(self, "add_step_edit"):
+            self.add_step_edit.setStyleSheet(_embed_lineedit_style())
+        # 已有的 StepRow 也要跟着刷
+        for step_row in self.findChildren(StepRow):
+            step_row.edit.setStyleSheet(_embed_lineedit_style())
 
     # ── 工具 ──
 
@@ -972,13 +1063,6 @@ class TodoPage(QWidget):
         self.lists_pane = ListsPane(self)
         # 给左栏一点底色
         self.lists_pane.setAutoFillBackground(True)
-        self.lists_pane.setStyleSheet(
-            f"QWidget#TodoListsPane {{ "
-            f"background: {'#1a1a1a' if isDarkTheme() else '#f3f3f3'}; "
-            f"border-right: 1px solid "
-            f"{'#2c2c2c' if isDarkTheme() else '#e5e5e5'}; "
-            f"}}"
-        )
         root.addWidget(self.lists_pane)
 
         self.tasks_pane = TasksPane(self)
@@ -989,8 +1073,37 @@ class TodoPage(QWidget):
         root.addWidget(self.detail_pane)
 
         self._wire()
+        self._apply_theme_styles()
+        # 主题切换实时刷新依赖 isDarkTheme() 的内联样式
+        qconfig.themeChanged.connect(self._apply_theme_styles)
         self._refresh_lists()
         self._refresh_tasks()
+
+    def _apply_theme_styles(self):
+        """主题切换时重新生成依赖 isDarkTheme() 的内联样式。"""
+        dark = isDarkTheme()
+        self.lists_pane.setStyleSheet(
+            f"QWidget#TodoListsPane {{ "
+            f"background: {'#1a1a1a' if dark else '#f3f3f3'}; "
+            f"border-right: 1px solid "
+            f"{'#2c2c2c' if dark else '#e5e5e5'}; "
+            f"}}"
+        )
+        self.detail_pane.setStyleSheet(
+            f"QWidget#TodoDetailPane {{ "
+            f"background: {'#1e1e1e' if dark else '#f8f8f8'}; "
+            f"border-left: 1px solid {'#2c2c2c' if dark else '#e5e5e5'}; "
+            f"}}"
+        )
+        # 同步给两个子面板内的 caption 颜色
+        self.tasks_pane.refresh_theme_styles()
+        self.detail_pane.refresh_theme_styles()
+        # 主题切换时强制重建列表项,刷新 QListWidgetItem 缓存的图标 pixmap
+        try:
+            self._refresh_lists()
+            self._refresh_tasks()
+        except AttributeError:
+            pass
 
     # ── 信号 ──
 
@@ -1007,6 +1120,7 @@ class TodoPage(QWidget):
         T.taskStarred.connect(self._on_task_starred)
         T.taskSelected.connect(self._on_task_selected)
         T.searchChanged.connect(self._on_search_changed)
+        T.archiveToggled.connect(self._refresh_tasks)
 
         D = self.detail_pane
         D.titleChanged.connect(lambda tid, v: self._update_task(tid, title=v))
@@ -1100,6 +1214,7 @@ class TodoPage(QWidget):
     # ── 任务 ──
 
     def _filtered_tasks(self) -> List[Dict[str, Any]]:
+        """搜索过滤后的全部任务(含已完成)。归档分组由 TasksPane 负责拆分。"""
         tasks = self.store.tasks_for_list(self.current_list_id)
         if self._search_keyword:
             kw = self._search_keyword.lower()
@@ -1112,11 +1227,30 @@ class TodoPage(QWidget):
 
     def _refresh_tasks(self):
         cur_list = self.store.get_list(self.current_list_id) or {"name": "任务"}
-        tasks = self._filtered_tasks()
-        done = sum(1 for t in tasks if t.get("completed"))
+        all_tasks = self._filtered_tasks()
+
+        # active = 未完成 或 已 pin 的(包含已完成 + pin,因为重要任务不归档)
+        # archived = 已完成且未 pin
+        # 搜索时全部展开,方便回看
+        if self._search_keyword:
+            active = all_tasks
+            archived: List[Dict[str, Any]] = []
+        else:
+            active = [
+                t for t in all_tasks
+                if not t.get("completed") or t.get("important")
+            ]
+            archived = [
+                t for t in all_tasks
+                if t.get("completed") and not t.get("important")
+            ]
+
+        done = sum(1 for t in all_tasks if t.get("completed"))
         kind = cur_list.get("kind") if cur_list.get("system") else None
-        self.tasks_pane.set_header(cur_list["name"], kind, done, len(tasks))
-        self.tasks_pane.show_tasks(tasks)
+        self.tasks_pane.set_header(
+            cur_list["name"], kind, done, len(all_tasks)
+        )
+        self.tasks_pane.show_tasks(active, archived)
         # 列表角标也要更新
         self._refresh_lists()
 

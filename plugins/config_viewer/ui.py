@@ -8,7 +8,7 @@ import os
 from typing import Dict, List, Optional, Tuple
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QColor, QDragEnterEvent, QDropEvent
+from PyQt5.QtGui import QColor, QDragEnterEvent, QDropEvent, QPalette
 from PyQt5.QtWidgets import (
     QAction,
     QApplication,
@@ -35,6 +35,8 @@ from qfluentwidgets import (
     SplitPushButton,
     StrongBodyLabel,
     TreeWidget,
+    isDarkTheme,
+    qconfig,
 )
 
 # ── 配色 ────────────────────────────────────────────────
@@ -73,6 +75,21 @@ class ConfigTreeWidget(TreeWidget):
         self.setAnimated(True)
         self.setContextMenuPolicy(Qt.CustomContextMenu)
         self.customContextMenuRequested.connect(self._show_context_menu)
+        # Qt 默认的 AlternateBase 是接近白色的浅灰,深色主题下显得格外刺眼
+        self._refresh_alt_palette()
+        qconfig.themeChanged.connect(self._refresh_alt_palette)
+
+    def _refresh_alt_palette(self):
+        pal = self.palette()
+        if isDarkTheme():
+            pal.setColor(QPalette.AlternateBase, QColor(255, 255, 255, 12))
+            pal.setColor(QPalette.Base, QColor(0, 0, 0, 0))
+        else:
+            pal.setColor(QPalette.AlternateBase, QColor(0, 0, 0, 10))
+            pal.setColor(QPalette.Base, QColor(0, 0, 0, 0))
+        self.setPalette(pal)
+        if self.viewport() is not None:
+            self.viewport().setPalette(pal)
 
     # 拖拽 ──
 
@@ -183,6 +200,12 @@ class ConfigViewerPage(QWidget):
         self.parser: Optional[configparser.RawConfigParser] = None
         self._dirty = False
         self._init_ui()
+        # 主题切换时重建树,确保前景色 / 编辑标记重新着色
+        qconfig.themeChanged.connect(self._on_theme_changed)
+
+    def _on_theme_changed(self):
+        if self.parser is not None:
+            self._build_tree()
 
     # ── UI 构建 ──────────────────────────────────────────
 

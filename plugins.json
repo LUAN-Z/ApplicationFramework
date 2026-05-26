@@ -7,5 +7,7 @@
     "plugins/config_viewer/__init__.py",
     "plugins/todo/__init__.py"
   ],
-  "open_screen_interface": "command_executor"
+  "open_screen_interface": "command_executor",
+  "theme_color": "#d4a963",
+  "theme_mode": "Dark"
 }

@@ -9,7 +9,7 @@ from typing import Any
 
 from PyQt5.QtCore import Qt, QUrl
 from PyQt5.QtGui import QDesktopServices, QDragEnterEvent, QDropEvent
-from PyQt5.QtGui import QColor
+from PyQt5.QtGui import QColor, QPalette
 from PyQt5.QtWidgets import (
     QAction,
     QApplication,
@@ -38,14 +38,22 @@ from qfluentwidgets import (
     StrongBodyLabel,
     TreeWidget,
     RoundMenu,
+    isDarkTheme,
+    qconfig,
 )
 
 # ── 类型着色 ──────────────────────────────────────────────
+# 这些十六进制色在浅色 / 深色主题下都有足够对比度
 COLOR_STRING = QColor("#4CAF50")
 COLOR_NUMBER = QColor("#42A5F5")
 COLOR_BOOL = QColor("#FFA726")
 COLOR_NULL = QColor("#9E9E9E")
 COLOR_EDITED = QColor("#FF5722")
+
+
+def _default_color() -> QColor:
+    """未知类型的回退颜色,跟随主题 — 浅色用深灰,深色用近白。"""
+    return QColor("#E6E6E6") if isDarkTheme() else QColor("#202020")
 
 
 def _value_color(value: Any) -> QColor:
@@ -57,7 +65,7 @@ def _value_color(value: Any) -> QColor:
         return COLOR_NUMBER
     if isinstance(value, str):
         return COLOR_STRING
-    return QColor("#FFFFFF")
+    return _default_color()
 
 
 def _value_label(value: Any, max_len: int = 100) -> str:
@@ -138,6 +146,22 @@ class JsonTreeWidget(TreeWidget):
         self.setAnimated(True)
         self.setContextMenuPolicy(Qt.CustomContextMenu)
         self.customContextMenuRequested.connect(self._show_context_menu)
+        # Qt 默认的 AlternateBase 是接近白色的浅灰,深色主题下显得格外刺眼
+        self._refresh_alt_palette()
+        qconfig.themeChanged.connect(self._refresh_alt_palette)
+
+    def _refresh_alt_palette(self):
+        pal = self.palette()
+        if isDarkTheme():
+            pal.setColor(QPalette.AlternateBase, QColor(255, 255, 255, 12))
+            pal.setColor(QPalette.Base, QColor(0, 0, 0, 0))
+        else:
+            pal.setColor(QPalette.AlternateBase, QColor(0, 0, 0, 10))
+            pal.setColor(QPalette.Base, QColor(0, 0, 0, 0))
+        self.setPalette(pal)
+        # 视图本身也需要同步,viewport() 才是真正绘制行背景的部件
+        if self.viewport() is not None:
+            self.viewport().setPalette(pal)
 
     # 拖拽 ──
 
@@ -237,6 +261,13 @@ class JsonViewerPage(QWidget):
         self.current_file_path = ""
         self.json_data: Any = None
         self._init_ui()
+        # 主题切换时重建树,刷新 setForeground 的缓存颜色
+        qconfig.themeChanged.connect(self._on_theme_changed)
+
+    def _on_theme_changed(self):
+        """主题变化时重建树,让 _value_color 的回退色重新计算。"""
+        if self.json_data is not None:
+            self._build_tree()
 
     # ── UI 构建 ──────────────────────────────────────────
 

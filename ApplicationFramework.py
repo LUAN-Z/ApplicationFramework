@@ -38,20 +38,20 @@ from pathlib import Path
 from typing import Dict, Iterable, Optional, Type
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QCursor
+from PyQt5.QtGui import QColor, QCursor
 from PyQt5.QtWidgets import (
     QApplication,
     QFileDialog,
+    QFrame,
     QHBoxLayout,
     QMessageBox,
     QVBoxLayout,
     QWidget,
 )
-
 from qfluentwidgets import (
     BodyLabel,
     CardWidget,
-    FluentIcon as FIF,
+    ColorDialog,
     FluentWindow,
     InfoBar,
     InfoBarPosition,
@@ -60,12 +60,16 @@ from qfluentwidgets import (
     PushButton,
     ScrollArea,
     StrongBodyLabel,
+    Theme,
+    qconfig,
+    setTheme,
     setThemeColor,
+    themeColor,
+    toggleTheme,
 )
+from qfluentwidgets import FluentIcon as FIF
 
-from customWidget import (
-    InfoBarWithButton,
-    MessageConfirmBox)
+from customWidget import InfoBarWithButton, MessageConfirmBox
 from Utils import WindowsScaleFactorSetting
 
 if __name__ == "__main__":
@@ -113,7 +117,7 @@ class PagePlugin(ApplicationPlugin):
 
     def __init__(self, info: PluginInfo, page_class: Type[QWidget]):
         self.info = info
-        self.page_class = page_class 
+        self.page_class = page_class
 
     def create_widget(self, parent: Optional[QWidget] = None) -> QWidget:
         return self.page_class(parent)
@@ -211,7 +215,11 @@ class PluginManager:
                 yield file_path
         for child in plugin_dir.iterdir():
             init_file = child / "__init__.py"
-            if child.is_dir() and init_file.exists() and self._is_plugin_entry(init_file):
+            if (
+                child.is_dir()
+                and init_file.exists()
+                and self._is_plugin_entry(init_file)
+            ):
                 yield init_file
 
     def _is_plugin_entry(self, path: Path) -> bool:
@@ -248,8 +256,18 @@ class PluginCenterPage(ScrollArea):
         self.framework = framework
         self.setObjectName("PluginCenterPage")
         self.setWidgetResizable(True)
+        # ScrollArea 自身去掉边框,让 FluentWindow 的整体背景透出来
+        self.setFrameShape(QFrame.NoFrame)
+        self.setStyleSheet(
+            "QScrollArea { background: transparent; border: 0; }"
+        )
 
         self.container = QWidget(self)
+        self.container.setObjectName("PluginCenterContainer")
+        # 内层容器透明,避免在深色主题下露出默认浅色底
+        self.container.setStyleSheet(
+            "QWidget#PluginCenterContainer { background: transparent; }"
+        )
         self.layout = QVBoxLayout(self.container)
         self.layout.setContentsMargins(20, 20, 20, 20)
         self.layout.setSpacing(12)
@@ -297,7 +315,9 @@ class PluginCenterPage(ScrollArea):
         text_layout = QVBoxLayout()
         name_label = StrongBodyLabel(f"{info.name}  v{info.version}", card)
         status = "已加载" if is_loaded else "未加载"
-        desc_label = BodyLabel(f"{info.description or info.plugin_id}    状态: {status}", card)
+        desc_label = BodyLabel(
+            f"{info.description or info.plugin_id}    状态: {status}", card
+        )
         text_layout.addWidget(name_label)
         text_layout.addWidget(desc_label)
 
@@ -308,17 +328,23 @@ class PluginCenterPage(ScrollArea):
 
         unload_btn = PushButton("卸载", card)
         unload_btn.setIcon(FIF.DELETE)
-        unload_btn.clicked.connect(lambda _, pid=info.plugin_id: self._unload_plugin(pid))
+        unload_btn.clicked.connect(
+            lambda _, pid=info.plugin_id: self._unload_plugin(pid)
+        )
         unload_btn.setEnabled(is_loaded)
 
         jump_btn = PushButton("跳转", card)
         jump_btn.setIcon(FIF.RIGHT_ARROW)
-        jump_btn.clicked.connect(lambda _, pid=info.plugin_id: self._jump_to_plugin(pid))
+        jump_btn.clicked.connect(
+            lambda _, pid=info.plugin_id: self._jump_to_plugin(pid)
+        )
         jump_btn.setEnabled(is_loaded)
 
         remove_btn = PushButton("移除", card)
         remove_btn.setIcon(FIF.CLOSE)
-        remove_btn.clicked.connect(lambda _, pid=info.plugin_id: self._remove_plugin(pid))
+        remove_btn.clicked.connect(
+            lambda _, pid=info.plugin_id: self._remove_plugin(pid)
+        )
         remove_btn.setEnabled(self.framework.is_user_plugin(info.plugin_id))
 
         card_layout.addLayout(text_layout, 1)
@@ -335,7 +361,9 @@ class PluginCenterPage(ScrollArea):
             self.refresh()
             InfoBar.success(
                 title="已加载",
-                content=self.framework.plugin_manager.available_plugins[plugin_id].info.name,
+                content=self.framework.plugin_manager.available_plugins[
+                    plugin_id
+                ].info.name,
                 parent=self.framework,
                 position=InfoBarPosition.TOP,
                 duration=2000,
@@ -358,7 +386,9 @@ class PluginCenterPage(ScrollArea):
         self.framework.navigate_to_widget(loaded.widget)
 
     def _unload_plugin(self, plugin_id: str) -> None:
-        plugin_name = self.framework.plugin_manager.available_plugins[plugin_id].info.name
+        plugin_name = self.framework.plugin_manager.available_plugins[
+            plugin_id
+        ].info.name
         if not self.framework.confirm_action(
             "确认卸载",
             f"确定要卸载插件“{plugin_name}”吗？",
@@ -379,7 +409,9 @@ class PluginCenterPage(ScrollArea):
             )
 
     def _remove_plugin(self, plugin_id: str) -> None:
-        plugin_name = self.framework.plugin_manager.available_plugins[plugin_id].info.name
+        plugin_name = self.framework.plugin_manager.available_plugins[
+            plugin_id
+        ].info.name
         if not self.framework.confirm_action(
             "确认移除",
             f"确定要移除插件“{plugin_name}”吗？移除后下次启动不会自动加载到插件管理。",
@@ -406,11 +438,12 @@ class ApplicationFramework(FluentWindow):
     页面插件通过 addSubInterface 接入；页面创建和生命周期交给插件管理器。
     """
 
-    def __init__(self, plugin_dir: str = "plugins", plugin_config: str = "plugins.json"):
+    def __init__(
+        self, plugin_dir: str = "plugins", plugin_config: str = "plugins.json"
+    ):
         super().__init__()
         self.setWindowTitle("应用框架")
         self.resize(1200, 900)
-        setThemeColor("#0078D4")
 
         self.app_dir = Path(__file__).resolve().parent
         self.plugin_manager = PluginManager(self)
@@ -418,8 +451,17 @@ class ApplicationFramework(FluentWindow):
         self.plugin_config_path = self._resolve_app_path(plugin_config)
         self.user_plugin_paths: Dict[str, Path] = {}
 
+        # 默认主题色 / 主题模式;真正的值会在 _load_user_plugins() 里从配置覆盖
+        self.theme_color = "#0078D4"
+        self.theme_mode = ""
+        setThemeColor(self.theme_color)
+
         # self._register_builtin_plugins()
         self._load_user_plugins()
+
+        # 应用从配置中读到的主题色 / 主题模式
+        setThemeColor(self.theme_color)
+        self._apply_saved_theme_mode()
 
         self.plugin_center_page = PluginCenterPage(self, self)
         self.addSubInterface(
@@ -428,11 +470,88 @@ class ApplicationFramework(FluentWindow):
             "插件管理",
             NavigationItemPosition.BOTTOM,
         )
+        self.navigationInterface.addItem(
+            routeKey="theme",
+            icon=FIF.CONSTRACT,
+            text="切换主题",
+            onClick=self._toggle_theme_and_save,
+            selectable=False,
+            tooltip="切换主题",
+            position=NavigationItemPosition.BOTTOM,
+        )
+        self.navigationInterface.addItem(
+            routeKey="theme_color",
+            icon=FIF.PALETTE,
+            text="主题色",
+            onClick=self._open_theme_color_dialog,
+            selectable=False,
+            tooltip="选择主题色",
+            position=NavigationItemPosition.BOTTOM,
+        )
 
         self.navigationInterface.setExpandWidth(200)
         self._load_startup_plugins()
         self.plugin_center_page.refresh()
         self._navigate_to_open_screen()
+
+    # ── 主题持久化 ────────────────────────────────────────
+
+    def _apply_saved_theme_mode(self) -> None:
+        """根据 self.theme_mode 设置当前主题。空字符串表示沿用默认。"""
+        mode = (self.theme_mode or "").lower()
+        mapping = {
+            "light": Theme.LIGHT,
+            "dark": Theme.DARK,
+            "auto": Theme.AUTO,
+        }
+        if mode in mapping:
+            setTheme(mapping[mode])
+
+    def _toggle_theme_and_save(self) -> None:
+        """切换主题并把新模式持久化到 plugins.json。"""
+        toggleTheme()
+        try:
+            new_mode = qconfig.theme.value
+        except AttributeError:
+            from qfluentwidgets import isDarkTheme
+            new_mode = "dark" if isDarkTheme() else "light"
+        self.theme_mode = new_mode
+        self._save_theme_settings()
+
+    def _open_theme_color_dialog(self) -> None:
+        """弹出 ColorDialog 选择主题色,确认后持久化并实时应用。"""
+        try:
+            current = QColor(self.theme_color)
+        except Exception:
+            current = themeColor()
+        dlg = ColorDialog(current, "选择主题色", self)
+        dlg.colorChanged.connect(self._on_theme_color_changed)
+        dlg.exec()
+
+    def _on_theme_color_changed(self, color: QColor) -> None:
+        if not color.isValid():
+            return
+        self.theme_color = color.name()
+        setThemeColor(self.theme_color)
+        self._save_theme_settings()
+
+    def _save_theme_settings(self) -> None:
+        """把 theme_color / theme_mode 写回 plugins.json。"""
+        existing: Dict = {}
+        if self.plugin_config_path.exists():
+            try:
+                existing = json.loads(
+                    self.plugin_config_path.read_text(encoding="utf-8")
+                )
+            except Exception:
+                existing = {}
+        existing["theme_color"] = self.theme_color
+        existing["theme_mode"] = self.theme_mode
+        self.plugin_config_path.parent.mkdir(parents=True, exist_ok=True)
+        self.plugin_config_path.write_text(
+            json.dumps(existing, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
 
     def _resolve_app_path(self, path: str | Path) -> Path:
         path = Path(path)
@@ -501,7 +620,9 @@ class ApplicationFramework(FluentWindow):
         if added_plugins:
             self._save_user_plugins()
             self.plugin_center_page.refresh()
-            self.navigationInterface.setCurrentItem(self.plugin_center_page.objectName())
+            self.navigationInterface.setCurrentItem(
+                self.plugin_center_page.objectName()
+            )
 
             InfoBar.success(
                 title="插件已添加",
@@ -533,9 +654,9 @@ class ApplicationFramework(FluentWindow):
             parent=self,
             title=title,
             content=content,
-            show_cancel_btn=True,).exec()
-        return result       
-        
+            show_cancel_btn=True,
+        ).exec()
+        return result
 
     def is_user_plugin(self, plugin_id: str) -> bool:
         return plugin_id in self.user_plugin_paths
@@ -571,6 +692,14 @@ class ApplicationFramework(FluentWindow):
 
         self.open_screen_interface = data.get("open_screen_interface", "")
 
+        # 主题色 / 主题模式 — 在 __init__ 中会被读取并应用
+        saved_color = data.get("theme_color")
+        if isinstance(saved_color, str) and saved_color.strip():
+            self.theme_color = saved_color.strip()
+        saved_mode = data.get("theme_mode")
+        if isinstance(saved_mode, str):
+            self.theme_mode = saved_mode.strip()
+
         for raw_path in data.get("plugins", []):
             try:
                 resolved = self._resolve_app_path(raw_path)
@@ -605,16 +734,23 @@ class ApplicationFramework(FluentWindow):
         existing = {}
         if self.plugin_config_path.exists():
             try:
-                existing = json.loads(self.plugin_config_path.read_text(encoding="utf-8"))
+                existing = json.loads(
+                    self.plugin_config_path.read_text(encoding="utf-8")
+                )
             except Exception:
                 pass
 
         data = {
             "plugins": [
-                str(path)
-                for _, path in sorted(self.user_plugin_paths.items())
+                str(path) for _, path in sorted(self.user_plugin_paths.items())
             ],
             "open_screen_interface": existing.get("open_screen_interface", ""),
+            "theme_color": getattr(
+                self, "theme_color", existing.get("theme_color", "#0078D4")
+            ),
+            "theme_mode": getattr(
+                self, "theme_mode", existing.get("theme_mode", "")
+            ),
         }
         if self.plugin_config_path.parent != Path("."):
             self.plugin_config_path.parent.mkdir(parents=True, exist_ok=True)
@@ -630,7 +766,7 @@ class ApplicationFramework(FluentWindow):
     #         self.plugin_manager.register(
     #             PagePlugin(
     #                 PluginInfo(
-    #                     plugin_id="command_tool", 
+    #                     plugin_id="command_tool",
     #                     name="命令执行",
     #                     description="批量配置并执行命令行工具",
     #                     icon=FIF.COMMAND_PROMPT,
@@ -662,7 +798,9 @@ class ApplicationFramework(FluentWindow):
         existing = {}
         if self.plugin_config_path.exists():
             try:
-                existing = json.loads(self.plugin_config_path.read_text(encoding="utf-8"))
+                existing = json.loads(
+                    self.plugin_config_path.read_text(encoding="utf-8")
+                )
             except Exception:
                 pass
         existing["open_screen_interface"] = interface_name
@@ -670,6 +808,7 @@ class ApplicationFramework(FluentWindow):
             json.dumps(existing, ensure_ascii=False, indent=2),
             encoding="utf-8",
         )
+
 
 def main() -> None:
     WindowsScaleFactorSetting()

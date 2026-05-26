@@ -1,0 +1,4531 @@
+{
+    "LPDDR-1": {
+        "url": "http://jira.longsys.com/browse/LPDDR-1",
+        "create_date": "2021-11-25",
+        "type": "故障",
+        "summary": "【P7_556ball功能测试不良】ZJC0010A1418 Z11Lx8 64Gbit 556ball 功能测试3pcs fail，降频测试均fail",
+        "status": "已完成"
+    },
+    "LPDDR-2": {
+        "url": "http://jira.longsys.com/browse/LPDDR-2",
+        "create_date": "2022-5-18",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0011S0027 eMCP4X Z42Mx2 64+32Gb 9pcs 2133MHz,1866MHz常温常压、高温常压过炉前功能不良",
+        "status": "已完成"
+    },
+    "LPDDR-3": {
+        "url": "http://jira.longsys.com/browse/LPDDR-3",
+        "create_date": "2022-1-20",
+        "type": "故障",
+        "summary": "【P7_254ball功能测试不良】ZJC0011S0005 Z42Mx2 eMCP4x 64GB+32Gbit 254ball 功能测试高温&常温1pcs fail",
+        "status": "已完成"
+    },
+    "LPDDR-5": {
+        "url": "http://jira.longsys.com/browse/LPDDR-5",
+        "create_date": "2021-12-31",
+        "type": "故障",
+        "summary": "【P7_254ball高温功能测试功耗偏高】ZJC0011S0021 Z42Mx2 128GB+32Gbit 高温功能测试1pcs 2133MHz 功耗偏高",
+        "status": "已完成"
+    },
+    "LPDDR-6": {
+        "url": "http://jira.longsys.com/browse/LPDDR-6",
+        "create_date": "2021-12-31",
+        "type": "故障",
+        "summary": "【P7_254ball功能测试不良】ZJC0011S0021 Z42Mx2 128GB+32Gbit 常温功能测试1pcs 2133MHz fail，降频至1866MHz测试pass",
+        "status": "已完成"
+    },
+    "LPDDR-7": {
+        "url": "http://jira.longsys.com/browse/LPDDR-7",
+        "create_date": "2022-4-7",
+        "type": "故障",
+        "summary": "【P7_254ball功能测试不良】ZJC0011S0006 Z42Mx2 uMCP4x 128GB+32Gbit 254ball 功能测试高温&常温4pcs fail，降频测试均fail，错误信息一致",
+        "status": "已完成"
+    },
+    "LPDDR-8": {
+        "url": "http://jira.longsys.com/browse/LPDDR-8",
+        "create_date": "2022-3-10",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0011S0028 eMCP4X Z42Mx2 128+32Gb 4pcs 2133MHz,1866MHz常温常压、高温常压过炉前功能不良",
+        "status": "已完成"
+    },
+    "LPDDR-9": {
+        "url": "http://jira.longsys.com/browse/LPDDR-9",
+        "create_date": "2022-1-20",
+        "type": "故障",
+        "summary": "【P7_254ball功能测试不良】ZJC0011S0007 Z42Mx2 eMCP4x 128GB+32Gbit 254ball 功能测试高温&常温3pcs fail",
+        "status": "已完成"
+    },
+    "LPDDR-10": {
+        "url": "http://jira.longsys.com/browse/LPDDR-10",
+        "create_date": "2022-3-16",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0011S0025 ePOP3 8GB+8Gb 933MHz 低温冷启动测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-11": {
+        "url": "http://jira.longsys.com/browse/LPDDR-11",
+        "create_date": "2022-3-16",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0011S0025 ePOP3 8GB+8Gb 933MHz 压力测试reboot测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-12": {
+        "url": "http://jira.longsys.com/browse/LPDDR-12",
+        "create_date": "2021-11-18",
+        "type": "故障",
+        "summary": "【老化测试不良】 ZJC0010C0018 LPDDR4X Z42Mx1 16Gb 5pcs LP4X模式低温高压ColdReboot测试多频率fail且报错信息一致",
+        "status": "已完成"
+    },
+    "LPDDR-13": {
+        "url": "http://jira.longsys.com/browse/LPDDR-13",
+        "create_date": "2021-11-18",
+        "type": "故障",
+        "summary": "【老化测试不良】 ZJC0010C0018 LPDDR4X Z42Mx1 16Gb 2pcs LP4X模式低温高压reboot测试多频率fail且报错信息一致",
+        "status": "已完成"
+    },
+    "LPDDR-14": {
+        "url": "http://jira.longsys.com/browse/LPDDR-14",
+        "create_date": "2021-12-13",
+        "type": "故障",
+        "summary": "LPDDR4X 32Gbit 200L TFBGA 過爐後 QC Tool 測試 fail 5 ea",
+        "status": "已完成"
+    },
+    "LPDDR-17": {
+        "url": "http://jira.longsys.com/browse/LPDDR-17",
+        "create_date": "2021-8-28",
+        "type": "故障",
+        "summary": "功能测试不良 ZJC0010A1498 K4U8 16Gbit 过炉后功能测试功耗偏大",
+        "status": "已完成"
+    },
+    "LPDDR-18": {
+        "url": "http://jira.longsys.com/browse/LPDDR-18",
+        "create_date": "2021-8-23",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0010A1498 K4U8 16Gb HTBIB测试架测良率FT1+FT2出现初始化超时样品15PCS，降频测试情况一致",
+        "status": "已完成"
+    },
+    "LPDDR-19": {
+        "url": "http://jira.longsys.com/browse/LPDDR-19",
+        "create_date": "2021-10-9",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010A1504 U8EBx2 16Gb LP4X模式功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-20": {
+        "url": "http://jira.longsys.com/browse/LPDDR-20",
+        "create_date": "2021-8-23",
+        "type": "故障",
+        "summary": "ZJC0010A1498 P60测试架测过炉前FT1+FT2出现功耗偏大样品",
+        "status": "已完成"
+    },
+    "LPDDR-21": {
+        "url": "http://jira.longsys.com/browse/LPDDR-21",
+        "create_date": "2021-11-23",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010A1504 U8EBx2 16Gb LP4X模式高温 、常温1pcs 功能测试功耗偏大",
+        "status": "已完成"
+    },
+    "LPDDR-22": {
+        "url": "http://jira.longsys.com/browse/LPDDR-22",
+        "create_date": "2022-2-14",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C0183 LPDDR4X U8EAx2 16Gb 1pcs 功能测试常温高温均不良",
+        "status": "已完成"
+    },
+    "LPDDR-24": {
+        "url": "http://jira.longsys.com/browse/LPDDR-24",
+        "create_date": "2022-3-15",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C0071 LPDDR4X U8EAx2 16Gb 3pcs 功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-25": {
+        "url": "http://jira.longsys.com/browse/LPDDR-25",
+        "create_date": "2021-9-29",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010A1498 LPDDR4X K4U8x2 16Gb 19pcs 功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-27": {
+        "url": "http://jira.longsys.com/browse/LPDDR-27",
+        "create_date": "2021-11-16",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0010A1504 LPDDR4x U8EBx2 16Gb测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-30": {
+        "url": "http://jira.longsys.com/browse/LPDDR-30",
+        "create_date": "2021-9-29",
+        "type": "故障",
+        "summary": "【功能测试功耗偏大】ZJC0010A1498 LPDDR4X K4U8x2 16Gb 6pcs 功能测试多次功耗偏大",
+        "status": "已完成"
+    },
+    "LPDDR-31": {
+        "url": "http://jira.longsys.com/browse/LPDDR-31",
+        "create_date": "2021-9-29",
+        "type": "故障",
+        "summary": "【功能测试报BIN3】ZJC0010A1498 LPDDR4X K4U8x2 16Gb 3pcs 功能测试多次BIN3",
+        "status": "已完成"
+    },
+    "LPDDR-32": {
+        "url": "http://jira.longsys.com/browse/LPDDR-32",
+        "create_date": "2022-2-15",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C0165 LPDDR4X U8EBx4 32Gb 14pcs 常温常压、高温常压功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-33": {
+        "url": "http://jira.longsys.com/browse/LPDDR-33",
+        "create_date": "2022-1-24",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010A1376 LPDDR4X Z42Mx2 32Gb 1pcs 常高温常压功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-35": {
+        "url": "http://jira.longsys.com/browse/LPDDR-35",
+        "create_date": "2021-9-29",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010A1501 Z42M LPDDR4X 32Gbit 1pcs LP4X常温良率测试报pattern错误，1800MHz测试BIN1",
+        "status": "已完成"
+    },
+    "LPDDR-36": {
+        "url": "http://jira.longsys.com/browse/LPDDR-36",
+        "create_date": "2021-7-27",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0010A1432 Z31Mx4 32Gb 测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-37": {
+        "url": "http://jira.longsys.com/browse/LPDDR-37",
+        "create_date": "2022-3-15",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C0286 LPDDR4X Z42N 32Gb 9pcs 常温高温功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-38": {
+        "url": "http://jira.longsys.com/browse/LPDDR-38",
+        "create_date": "2021-9-14",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010A1501 LPDDR4X Z42Mx2 32Gb 1pcs 功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-39": {
+        "url": "http://jira.longsys.com/browse/LPDDR-39",
+        "create_date": "2022-2-22",
+        "type": "故障",
+        "summary": "【功能不良】ZJC0010C0106 Z42Mx2 32Gb 1866MHz高温功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-40": {
+        "url": "http://jira.longsys.com/browse/LPDDR-40",
+        "create_date": "2021-10-26",
+        "type": "故障",
+        "summary": "【老化测试不良】 ZJC0010A1501 LPDDR4X Z42Mx2 32Gb 2pcs LP4X模式老化测试多频率fail且报错信息一致",
+        "status": "已完成"
+    },
+    "LPDDR-42": {
+        "url": "http://jira.longsys.com/browse/LPDDR-42",
+        "create_date": "2022-4-1",
+        "type": "故障",
+        "summary": "【功能不良】ZJC0010C0124 Z42Mx2（Prime+1P） 32Gb 功能良率测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-43": {
+        "url": "http://jira.longsys.com/browse/LPDDR-43",
+        "create_date": "2021-12-6",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C0132 LPDDR4X U8EBx4 32Gb 27pcs功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-44": {
+        "url": "http://jira.longsys.com/browse/LPDDR-44",
+        "create_date": "2021-12-20",
+        "type": "故障",
+        "summary": "【老化测试不良】 ZJC0010C0132 LPDDR4X U8EBx4 32Gb 1pcs LP4X模式高温低压游戏测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-45": {
+        "url": "http://jira.longsys.com/browse/LPDDR-45",
+        "create_date": "2022-3-23",
+        "type": "故障",
+        "summary": "【功能良率测试】ZJC0010C0124 Z42M 32Gb 常温 4模式 1866MHz 常温功能和压力测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-46": {
+        "url": "http://jira.longsys.com/browse/LPDDR-46",
+        "create_date": "2022-2-10",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C0138 LPDDR4X U8EAx4 32Gb 10pcs 常温10pcs功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-47": {
+        "url": "http://jira.longsys.com/browse/LPDDR-47",
+        "create_date": "2021-12-14",
+        "type": "故障",
+        "summary": "【功能测试不良】IDF0001A0524 LPDDR4X Z32Mx2 32Gb 2pcs高温功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-48": {
+        "url": "http://jira.longsys.com/browse/LPDDR-48",
+        "create_date": "2021-12-20",
+        "type": "故障",
+        "summary": "【老化测试不良】 ZJC0010C0132 LPDDR4X U8EBx4 32Gb 1pcs LP4X模式低温高压休眠唤醒测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-49": {
+        "url": "http://jira.longsys.com/browse/LPDDR-49",
+        "create_date": "2021-10-23",
+        "type": "故障",
+        "summary": "【功能测试功耗偏大】ZJC0010A1501 ZJC0010A1501 LPDDR4X Z42Mx2 32Gb 1pcs 功能测试多次功耗偏大",
+        "status": "已完成"
+    },
+    "LPDDR-50": {
+        "url": "http://jira.longsys.com/browse/LPDDR-50",
+        "create_date": "2021-9-28",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010A1501 Z42Mx2 LPDDR4X 32Gbit 1pcs LP4高温良率测试报pattern错误，1800MHz测试BIN1",
+        "status": "已完成"
+    },
+    "LPDDR-51": {
+        "url": "http://jira.longsys.com/browse/LPDDR-51",
+        "create_date": "2021-12-17",
+        "type": "故障",
+        "summary": "【高温功能测试功耗异常】ZJC0010C0123 LPDDR4X Z42Mx2 高温功能测试部分样品功耗偏高、部分样品功耗偏低",
+        "status": "已完成"
+    },
+    "LPDDR-52": {
+        "url": "http://jira.longsys.com/browse/LPDDR-52",
+        "create_date": "2021-10-20",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010A1501 LPDDR4X Z42Mx2 32Gb 1pcs 功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-53": {
+        "url": "http://jira.longsys.com/browse/LPDDR-53",
+        "create_date": "2021-12-17",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C0123 LPDDR4X Z42Mx2 12pcs 高温功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-54": {
+        "url": "http://jira.longsys.com/browse/LPDDR-54",
+        "create_date": "2021-12-17",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C0123 LPDDR4X Z42Mx2 9pcs 常温功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-55": {
+        "url": "http://jira.longsys.com/browse/LPDDR-55",
+        "create_date": "2021-7-26",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0010A1450 Z11N+Z10N 24Gb 测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-56": {
+        "url": "http://jira.longsys.com/browse/LPDDR-56",
+        "create_date": "2021-7-21",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A1374 Z3BMx2 低温高压testdram 1866MHz测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-58": {
+        "url": "http://jira.longsys.com/browse/LPDDR-58",
+        "create_date": "2021-9-9",
+        "type": "故障",
+        "summary": "功能测试不良 ZJC0010A1496 Z11Mx2+Z10Mx2 24Gb 功耗偏大",
+        "status": "已完成"
+    },
+    "LPDDR-59": {
+        "url": "http://jira.longsys.com/browse/LPDDR-59",
+        "create_date": "2021-7-18",
+        "type": "故障",
+        "summary": "【老化不良】 ZJC0010A1374 Z3BMx2 常温常压reboot 1866MHz测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-60": {
+        "url": "http://jira.longsys.com/browse/LPDDR-60",
+        "create_date": "2022-3-18",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C0243 LPDDR4X U2EMX2 24Gb 4pcs 功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-61": {
+        "url": "http://jira.longsys.com/browse/LPDDR-61",
+        "create_date": "2021-9-24",
+        "type": "故障",
+        "summary": "老化异常 ZJC0010A1496 Z11Mx2+Z10Mx2 24Gb 低温常压变频异常和低温高压reboot异常",
+        "status": "已完成"
+    },
+    "LPDDR-62": {
+        "url": "http://jira.longsys.com/browse/LPDDR-62",
+        "create_date": "2021-11-3",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C0032 LPDDR4X Z20Mx2+Z21Mx2 24Gb 3pcs 功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-63": {
+        "url": "http://jira.longsys.com/browse/LPDDR-63",
+        "create_date": "2022-4-14",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C0243 LPDDR4X U2EMx2 24Gb 11pcs 功能测试常温高温均不良",
+        "status": "已完成"
+    },
+    "LPDDR-65": {
+        "url": "http://jira.longsys.com/browse/LPDDR-65",
+        "create_date": "2021-9-6",
+        "type": "故障",
+        "summary": "过炉前功能测试不良 ZJC0010A1496 Z11Mx2+Z10Mx2 24Gb 初始化异常和pattern错误",
+        "status": "已完成"
+    },
+    "LPDDR-66": {
+        "url": "http://jira.longsys.com/browse/LPDDR-66",
+        "create_date": "2021-8-4",
+        "type": "故障",
+        "summary": "【过炉后量产不良】ZJC0010A1454 Z20M+Z21M 24Gb (OSE)过炉后量产测试1pcs功耗偏高",
+        "status": "已完成"
+    },
+    "LPDDR-67": {
+        "url": "http://jira.longsys.com/browse/LPDDR-67",
+        "create_date": "2021-7-22",
+        "type": "故障",
+        "summary": "【兼容性测试不良】ZJC0010A1374 Z3BMx2 兼容性测试鲁大师无法测试",
+        "status": "已完成"
+    },
+    "LPDDR-68": {
+        "url": "http://jira.longsys.com/browse/LPDDR-68",
+        "create_date": "2021-7-27",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A1374 Z3BMx2 低温高压testdram 测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-69": {
+        "url": "http://jira.longsys.com/browse/LPDDR-69",
+        "create_date": "2021-7-12",
+        "type": "故障",
+        "summary": "【老化不良】 ZJC0010A1374 Z3BMx2 常温常压休眠唤醒测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-70": {
+        "url": "http://jira.longsys.com/browse/LPDDR-70",
+        "create_date": "2021-8-25",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0010A1454 Z20M+Z21M 24Gb (OSE)量产测试4pcs FAIL，降频测试均FAIL",
+        "status": "已完成"
+    },
+    "LPDDR-71": {
+        "url": "http://jira.longsys.com/browse/LPDDR-71",
+        "create_date": "2021-10-19",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A1500 Z32M+Z31M 48Gb 低温高压休眠唤醒LP4X模式测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-72": {
+        "url": "http://jira.longsys.com/browse/LPDDR-72",
+        "create_date": "2021-8-25",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0010A1430 Z32M+Z31M 48Gb 200ball测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-73": {
+        "url": "http://jira.longsys.com/browse/LPDDR-73",
+        "create_date": "2021-10-21",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A1500 Z32M+Z31M 48Gb 常温常压recovery LP4X模式测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-74": {
+        "url": "http://jira.longsys.com/browse/LPDDR-74",
+        "create_date": "2021-12-3",
+        "type": "故障",
+        "summary": "【功能测试不良】IDF0001A0574 LPDDR4X Z2BMx4 2pcs 高温功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-75": {
+        "url": "http://jira.longsys.com/browse/LPDDR-75",
+        "create_date": "2021-11-5",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A1500 Z32M+Z31M 48Gb 低温高压随机填充测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-76": {
+        "url": "http://jira.longsys.com/browse/LPDDR-76",
+        "create_date": "2021-10-25",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A1500 Z32M+Z31M 48Gb 低温高压变频测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-77": {
+        "url": "http://jira.longsys.com/browse/LPDDR-77",
+        "create_date": "2021-7-6",
+        "type": "故障",
+        "summary": "M6-200ball-socket可靠性验证报告【PCR】测架异常",
+        "status": "已完成"
+    },
+    "LPDDR-78": {
+        "url": "http://jira.longsys.com/browse/LPDDR-78",
+        "create_date": "2022-1-17",
+        "type": "故障",
+        "summary": "【功能不良】ZJC0010C0170 Z01Mx3 24Gb 1800MHz功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-81": {
+        "url": "http://jira.longsys.com/browse/LPDDR-81",
+        "create_date": "2022-2-22",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C0262 LPDDR4 Z01Mx3 24Gb 1pcs 常温常压、高温常压过炉前init_timeout报错",
+        "status": "已完成"
+    },
+    "LPDDR-83": {
+        "url": "http://jira.longsys.com/browse/LPDDR-83",
+        "create_date": "2021-12-30",
+        "type": "故障",
+        "summary": "【功能不良】ZJC0010C0106 Z42Mx2 32Gb 1866MHz 常温功能ATE循环测试不稳定",
+        "status": "已完成"
+    },
+    "LPDDR-85": {
+        "url": "http://jira.longsys.com/browse/LPDDR-85",
+        "create_date": "2022-2-10",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C0165 LPDDR4X U8EBx4 32Gb 5pcs 常温常压、高温常压过炉前MR8报错",
+        "status": "已完成"
+    },
+    "LPDDR-86": {
+        "url": "http://jira.longsys.com/browse/LPDDR-86",
+        "create_date": "2021-10-21",
+        "type": "故障",
+        "summary": "【老化测试不良】ZJC0011A0463 eMCP4X Z32Mx2 64GB+32Gb 2133MHz 1pcs 低温常压老化测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-87": {
+        "url": "http://jira.longsys.com/browse/LPDDR-87",
+        "create_date": "2021-8-5",
+        "type": "故障",
+        "summary": "概要：【量产不良】ZJC0011A0463 Z32Mx2 64GB+32Gb (OSE)2133MHz量产测试2pcs FAIL",
+        "status": "已完成"
+    },
+    "LPDDR-88": {
+        "url": "http://jira.longsys.com/browse/LPDDR-88",
+        "create_date": "2021-9-8",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0011A0463 eMCP4X Z32Mx2 64GB+32Gb 8pcs 功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-89": {
+        "url": "http://jira.longsys.com/browse/LPDDR-89",
+        "create_date": "2021-9-3",
+        "type": "故障",
+        "summary": "【过炉后功能测试不良】ZJC0011A0463 eMCP4X Z32Mx2 64GB+32Gb 过炉后9pcs 功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-90": {
+        "url": "http://jira.longsys.com/browse/LPDDR-90",
+        "create_date": "2021-10-21",
+        "type": "故障",
+        "summary": "【老化测试不良】ZJC0011A0463 eMCP4X Z32Mx2 64GB+32Gb 2133MHz 1pcs 低温高压老化测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-91": {
+        "url": "http://jira.longsys.com/browse/LPDDR-91",
+        "create_date": "2021-8-10",
+        "type": "故障",
+        "summary": "【POP CD通道不良】ZJC0010A1418 Z11Lx8 64Gbit 556ball 可靠性试验前良率测试2pcs CD通道fail，降频测试均FAIL错误信息均一致",
+        "status": "已完成"
+    },
+    "LPDDR-92": {
+        "url": "http://jira.longsys.com/browse/LPDDR-92",
+        "create_date": "2021-9-2",
+        "type": "故障",
+        "summary": "【POP老化测试不良】ZJC0010A1418 LPDDR4X Z11Lx8 1pcs CD通道低温高压游戏多频率测试不良，AB通道测试PASS",
+        "status": "已完成"
+    },
+    "LPDDR-93": {
+        "url": "http://jira.longsys.com/browse/LPDDR-93",
+        "create_date": "2021-8-12",
+        "type": "故障",
+        "summary": "【量产不良】",
+        "status": "已完成"
+    },
+    "LPDDR-94": {
+        "url": "http://jira.longsys.com/browse/LPDDR-94",
+        "create_date": "2021-9-8",
+        "type": "故障",
+        "summary": "【POP老化测试不良】ZJC0010A1418 LPDDR4X Z11Lx8 1pcs AB通道常温常压游戏2133MHz、1866MHz测试不良，CD通道测试PASS",
+        "status": "已完成"
+    },
+    "LPDDR-96": {
+        "url": "http://jira.longsys.com/browse/LPDDR-96",
+        "create_date": "2021-8-11",
+        "type": "故障",
+        "summary": "【POP 量产不良】ZJC0010A1418 Z11Lx8 64Gbit 556ball 量产测试6pcs fail，降频测试错误信息均一致",
+        "status": "已完成"
+    },
+    "LPDDR-97": {
+        "url": "http://jira.longsys.com/browse/LPDDR-97",
+        "create_date": "2021-7-30",
+        "type": "故障",
+        "summary": "【POP 过炉后量产不良】ZJC0010A1418 Z11Lx8 64Gbit 556ball 量产测试CD通道1pcs fail，降频测试FAIL，1600MHz 测试pass，错误类型均一致",
+        "status": "已完成"
+    },
+    "LPDDR-98": {
+        "url": "http://jira.longsys.com/browse/LPDDR-98",
+        "create_date": "2022-3-18",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C0264 LPDDR4X Z32M 32Gb 295pcs 功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-99": {
+        "url": "http://jira.longsys.com/browse/LPDDR-99",
+        "create_date": "2021-12-2",
+        "type": "故障",
+        "summary": "【功能不良】ZJC0010C0102 LPDDR4x Z42Mx2 32Gb （PTN） 功能不良",
+        "status": "已完成"
+    },
+    "LPDDR-101": {
+        "url": "http://jira.longsys.com/browse/LPDDR-101",
+        "create_date": "2022-2-15",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C0207 LPDDR4X Z32Mx2 32Gb 4pcs 常温高温功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-102": {
+        "url": "http://jira.longsys.com/browse/LPDDR-102",
+        "create_date": "2021-7-18",
+        "type": "故障",
+        "summary": "【老化不良】 ZJC0010A1327 Z11Lx2 1800MHz 高温测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-103": {
+        "url": "http://jira.longsys.com/browse/LPDDR-103",
+        "create_date": "2021-7-2",
+        "type": "故障",
+        "summary": "【老化不良】 ZJC0010A1327 Z11Lx2 1600MHz 高温测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-104": {
+        "url": "http://jira.longsys.com/browse/LPDDR-104",
+        "create_date": "2022-2-24",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C0253 LPDDR4 Z01Mx3 24Gb 1pcs 常温常压、高温常压过炉前init_timeout报错",
+        "status": "已完成"
+    },
+    "LPDDR-105": {
+        "url": "http://jira.longsys.com/browse/LPDDR-105",
+        "create_date": "2021-12-21",
+        "type": "故障",
+        "summary": "【老化测试不良】IDF0001A0524 LPDDR4X Z32Mx2 32Gb 4pcs低温高压变频、1pcs高温低压变频 LP4X模式老化测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-106": {
+        "url": "http://jira.longsys.com/browse/LPDDR-106",
+        "create_date": "2021-12-21",
+        "type": "故障",
+        "summary": "老化测试不良】IDF0001A0524 LPDDR4X Z32Mx2 32Gb 1pcs低温高压monkey LP4X模式老化测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-107": {
+        "url": "http://jira.longsys.com/browse/LPDDR-107",
+        "create_date": "2021-12-21",
+        "type": "故障",
+        "summary": "【老化测试不良】IDF0001A0524 LPDDR4X Z32Mx2 32Gb 1pcs低温常压testdram、1pcs低温高压testdram LP4X模式老化测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-108": {
+        "url": "http://jira.longsys.com/browse/LPDDR-108",
+        "create_date": "2021-12-21",
+        "type": "故障",
+        "summary": "【老化测试不良】IDF0001A0524 LPDDR4X Z32Mx2 32Gb 1pcs低温高压testdram LP4模式老化测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-109": {
+        "url": "http://jira.longsys.com/browse/LPDDR-109",
+        "create_date": "2021-12-2",
+        "type": "故障",
+        "summary": "ZIP21100241 LPDDR4X Z2BMx2过炉验证 Fail分析",
+        "status": "已完成"
+    },
+    "LPDDR-110": {
+        "url": "http://jira.longsys.com/browse/LPDDR-110",
+        "create_date": "2021-8-18",
+        "type": "故障",
+        "summary": "【电流板固件问题】V3.3.52电流板固件不支持底板固件OTA",
+        "status": "已完成"
+    },
+    "LPDDR-113": {
+        "url": "http://jira.longsys.com/browse/LPDDR-113",
+        "create_date": "2020-7-22",
+        "type": "故障",
+        "summary": "【LPDDR4 低温-30℃老化BIN2】OSE LPDDR4X 32Gb Z32Mx2 Prime 1866MHz LP4模式低温高压-30℃ testdram老化BIN2",
+        "status": "已完成"
+    },
+    "LPDDR-114": {
+        "url": "http://jira.longsys.com/browse/LPDDR-114",
+        "create_date": "2020-7-22",
+        "type": "故障",
+        "summary": "【LPDDR4 低温-30℃老化BIN2】OSE LPDDR4X 32Gb Z32Mx2 Prime 1866MHz LP4模式低温常压-30℃ testdram老化BIN2",
+        "status": "已完成"
+    },
+    "LPDDR-115": {
+        "url": "http://jira.longsys.com/browse/LPDDR-115",
+        "create_date": "2020-7-22",
+        "type": "故障",
+        "summary": "【LPDDR4 高温85℃老化BIN2】OSE LPDDR4X 32Gb Z32Mx2 Prime 1866MHz LP4模式高温常压85℃ testdram老化BIN2",
+        "status": "已完成"
+    },
+    "LPDDR-116": {
+        "url": "http://jira.longsys.com/browse/LPDDR-116",
+        "create_date": "2020-8-9",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0010A0950 LPDDR4X 32Gbit OSE Prime搭配MT6771_V1.01量产测试（过炉后）出现pattern fail（ init timeout）",
+        "status": "已完成"
+    },
+    "LPDDR-117": {
+        "url": "http://jira.longsys.com/browse/LPDDR-117",
+        "create_date": "2020-7-22",
+        "type": "故障",
+        "summary": "【LPDDR4x 高温85℃老化BIN2】OSE LPDDR4X 32Gb Z32Mx2 Prime 1866MHz LP4X模式高温低压85℃ testdram老化BIN2",
+        "status": "已完成"
+    },
+    "LPDDR-118": {
+        "url": "http://jira.longsys.com/browse/LPDDR-118",
+        "create_date": "2020-7-22",
+        "type": "故障",
+        "summary": "【LPDDR4 高温85℃老化BIN2】OSE LPDDR4X 32Gb Z32Mx2 Prime 1866MHz LP4模式高温低压85℃ testdram老化BIN2",
+        "status": "已完成"
+    },
+    "LPDDR-119": {
+        "url": "http://jira.longsys.com/browse/LPDDR-119",
+        "create_date": "2020-7-22",
+        "type": "故障",
+        "summary": "【LPDDR4X 低温-30℃老化BIN2】OSE LPDDR4X 32Gb Z32Mx2 Prime 1866MHz LP4X模式低温高压-30℃ testdram老化BIN2",
+        "status": "已完成"
+    },
+    "LPDDR-120": {
+        "url": "http://jira.longsys.com/browse/LPDDR-120",
+        "create_date": "2020-12-2",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0804 LPDDR4x Z11L 16Gbit 低温高压Monkey黑屏",
+        "status": "已完成"
+    },
+    "LPDDR-121": {
+        "url": "http://jira.longsys.com/browse/LPDDR-121",
+        "create_date": "2020-10-27",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0912 LPDDR4x 16Gbit 高温常压Testdram BIN2",
+        "status": "已完成"
+    },
+    "LPDDR-122": {
+        "url": "http://jira.longsys.com/browse/LPDDR-122",
+        "create_date": "2020-12-2",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0804 LPDDR4x Z11L 16Gbit 低温高压Reboot Fail",
+        "status": "已完成"
+    },
+    "LPDDR-123": {
+        "url": "http://jira.longsys.com/browse/LPDDR-123",
+        "create_date": "2020-10-27",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0912 LPDDR4x 16Gbit 低温常压Testdram 黑屏",
+        "status": "已完成"
+    },
+    "LPDDR-124": {
+        "url": "http://jira.longsys.com/browse/LPDDR-124",
+        "create_date": "2020-10-23",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0912 LPDDR4x 16Gbit 低温高压Testdram Fail",
+        "status": "已完成"
+    },
+    "LPDDR-125": {
+        "url": "http://jira.longsys.com/browse/LPDDR-125",
+        "create_date": "2020-10-23",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0912 LPDDR4x 16Gbit 常温常压Testdram Fail",
+        "status": "已完成"
+    },
+    "LPDDR-126": {
+        "url": "http://jira.longsys.com/browse/LPDDR-126",
+        "create_date": "2020-12-2",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0804 LPDDR4x Z11L 16Gbit 常温常压变频Fail",
+        "status": "已完成"
+    },
+    "LPDDR-127": {
+        "url": "http://jira.longsys.com/browse/LPDDR-127",
+        "create_date": "2020-12-2",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0804 LPDDR4x Z11L 16Gbit 低温常压Testdram黑屏",
+        "status": "已完成"
+    },
+    "LPDDR-128": {
+        "url": "http://jira.longsys.com/browse/LPDDR-128",
+        "create_date": "2020-11-25",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0804 Z11L LPDDR4X 16Gbit 低温高压Testdram BIN2",
+        "status": "已完成"
+    },
+    "LPDDR-129": {
+        "url": "http://jira.longsys.com/browse/LPDDR-129",
+        "create_date": "2020-12-2",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0804 LPDDR4x Z11L 16Gbit 低温常压FFFF填充Fail",
+        "status": "已完成"
+    },
+    "LPDDR-130": {
+        "url": "http://jira.longsys.com/browse/LPDDR-130",
+        "create_date": "2020-10-27",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0912 LPDDR4x 16Gbit 低温高压Testdram BIN2",
+        "status": "已完成"
+    },
+    "LPDDR-131": {
+        "url": "http://jira.longsys.com/browse/LPDDR-131",
+        "create_date": "2020-8-9",
+        "type": "故障",
+        "summary": "【LPDDR4 高温65℃低压老化黑屏】KYEC LPDDR4X 12Gbit Z1AMx2 1p 1800MHz LPDDR4模式 高温低压老化出现黑屏（1pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-133": {
+        "url": "http://jira.longsys.com/browse/LPDDR-133",
+        "create_date": "2020-8-9",
+        "type": "故障",
+        "summary": "【LPDDR4 低温-30℃高压老化黑屏】KYEC LPDDR4X 12Gbit Z1AMx2 1p 1800MHz LPDDR4模式 低温高压老化出现黑屏（1pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-134": {
+        "url": "http://jira.longsys.com/browse/LPDDR-134",
+        "create_date": "2020-7-22",
+        "type": "故障",
+        "summary": "【LPDDR4 低温-30℃常压老化重启】KYEC LPDDR4X 12Gbit Z1AMx2 1p 1800MHz LPDDR4模式 低温常压老化出现重启（1pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-135": {
+        "url": "http://jira.longsys.com/browse/LPDDR-135",
+        "create_date": "2020-8-9",
+        "type": "故障",
+        "summary": "【LPDDR4X 低温-30℃常压老化BIN2】KYEC LPDDR4X 12Gbit Z1AMx2 1p 1800MHz LPDDR4X模式 低温常压老化出现BIN2（1pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-136": {
+        "url": "http://jira.longsys.com/browse/LPDDR-136",
+        "create_date": "2020-8-9",
+        "type": "故障",
+        "summary": "【LPDDR4 高温65℃常压老化黑屏】KYEC LPDDR4X 12Gbit Z1AMx2 1p 1800MHz LPDDR4模式 高温常压老化出现黑屏（1pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-138": {
+        "url": "http://jira.longsys.com/browse/LPDDR-138",
+        "create_date": "2021-6-4",
+        "type": "故障",
+        "summary": "【POP 过炉后量产不良】ZJC0010A1347 Z11Lx8 64Gbit 556ball 量产测试CD通道1pcs fail，降频测试均FAIL，错误信息均一致",
+        "status": "已完成"
+    },
+    "LPDDR-139": {
+        "url": "http://jira.longsys.com/browse/LPDDR-139",
+        "create_date": "2020-12-2",
+        "type": "故障",
+        "summary": "【eMCP4x 常温常压视频闪退】OSE eMCP4x 64GB+32Gb Z32Mx2 Prime 1866MHz LP4X模式常温常压视频闪退",
+        "status": "已完成"
+    },
+    "LPDDR-140": {
+        "url": "http://jira.longsys.com/browse/LPDDR-140",
+        "create_date": "2020-12-2",
+        "type": "故障",
+        "summary": "eMCP4x 常温常压老化出现M6-function fail】OSE eMCP4x 64GB+32Gb Z32Mx2 Prime 1866MHz LP4模式常温常压老化测试出现M6-function fail",
+        "status": "已完成"
+    },
+    "LPDDR-141": {
+        "url": "http://jira.longsys.com/browse/LPDDR-141",
+        "create_date": "2020-12-2",
+        "type": "故障",
+        "summary": "【eMCP4x 常温常压Monkey卡死】OSE eMCP4x 64GB+32Gb Z32Mx2 Prime 1866MHz LP4X模式常温常压Monkey卡死",
+        "status": "已完成"
+    },
+    "LPDDR-142": {
+        "url": "http://jira.longsys.com/browse/LPDDR-142",
+        "create_date": "2020-12-2",
+        "type": "故障",
+        "summary": "eMCP4x -30℃低温高压老化测试超时出现BIN2】OSE eMCP4x 64GB+32Gb Z32Mx2 Prime 1800MHz LP4模式低温高压老化测试超时出现BIN2",
+        "status": "已完成"
+    },
+    "LPDDR-143": {
+        "url": "http://jira.longsys.com/browse/LPDDR-143",
+        "create_date": "2020-12-2",
+        "type": "故障",
+        "summary": "eMCP4x 常温常压变频Burnln测试超时出现BIN2】OSE eMCP4x 64GB+32Gb Z32Mx2 Prime 1866MHz LP4模式常温常压变频Burnln测试超时出现BIN2",
+        "status": "已完成"
+    },
+    "LPDDR-144": {
+        "url": "http://jira.longsys.com/browse/LPDDR-144",
+        "create_date": "2020-12-3",
+        "type": "故障",
+        "summary": "eMCP4x常温常压视频测试提示：无法播放此视频】OSE eMCP4x 64GB+32Gb Z32Mx2 Prime 1866MHz LP4模式常温常压视频测试提示：无法播放此视频",
+        "status": "已完成"
+    },
+    "LPDDR-146": {
+        "url": "http://jira.longsys.com/browse/LPDDR-146",
+        "create_date": "2021-3-31",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0010A0423 eMCP4X 128GB+32Gb (OSE)搭配P60_V1.0.22量产测试出现run_lk_timeout错误",
+        "status": "已完成"
+    },
+    "LPDDR-148": {
+        "url": "http://jira.longsys.com/browse/LPDDR-148",
+        "create_date": "2020-11-18",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0011A0388 eMCP4X 64GB+32Gb Z32Mx2",
+        "status": "已完成"
+    },
+    "LPDDR-149": {
+        "url": "http://jira.longsys.com/browse/LPDDR-149",
+        "create_date": "2021-7-19",
+        "type": "故障",
+        "summary": "【POP 量产不良】ZJC0010A1347 Z11Lx8 64Gbit 556ball 量产测试2pcs fail，降频测试错误信息均一致",
+        "status": "已完成"
+    },
+    "LPDDR-160": {
+        "url": "http://jira.longsys.com/browse/LPDDR-160",
+        "create_date": "2020-12-25",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0011A0338 uMCP 64GB+32Gb Z32Mx2",
+        "status": "已完成"
+    },
+    "LPDDR-161": {
+        "url": "http://jira.longsys.com/browse/LPDDR-161",
+        "create_date": "2020-12-2",
+        "type": "故障",
+        "summary": "【eMCP4x 低温-30℃变频Burnln BIN4】OSE eMCP4x 64GB+32Gb Z32Mx2 Prime 1800MHz LP4X模式高压-30℃ 变频Burnln BIN4",
+        "status": "已完成"
+    },
+    "LPDDR-162": {
+        "url": "http://jira.longsys.com/browse/LPDDR-162",
+        "create_date": "2020-12-2",
+        "type": "故障",
+        "summary": "【eMCP4x 高温65℃老化屏幕异常】OSE eMCP4x 64GB+32Gb Z32Mx2 Prime 1800MHz LP4X模式高温低压65℃ testdram屏幕异常",
+        "status": "已完成"
+    },
+    "LPDDR-163": {
+        "url": "http://jira.longsys.com/browse/LPDDR-163",
+        "create_date": "2020-12-2",
+        "type": "故障",
+        "summary": "【eMCP4x 低温-30℃老化屏幕异常】OSE eMCP4x 64GB+32Gb Z32Mx2 Prime 1800MHz LP4X模式低温高压-30℃ testdram屏幕异常",
+        "status": "已完成"
+    },
+    "LPDDR-164": {
+        "url": "http://jira.longsys.com/browse/LPDDR-164",
+        "create_date": "2020-12-2",
+        "type": "故障",
+        "summary": "eMCP4x 65℃高温常压老化BIN2+黑屏】OSE eMCP4x 64GB+32Gb Z32Mx2 Prime 1800MHz LP4模式高温常压老化BIN2+黑屏",
+        "status": "已完成"
+    },
+    "LPDDR-165": {
+        "url": "http://jira.longsys.com/browse/LPDDR-165",
+        "create_date": "2020-12-31",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0804 LPDDR4x Z11L 16Gbit 低温高压变频 Fail",
+        "status": "已完成"
+    },
+    "LPDDR-166": {
+        "url": "http://jira.longsys.com/browse/LPDDR-166",
+        "create_date": "2020-12-30",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0804 LPDDR4x Z11L 16Gbit 常温常压Testdram Fail",
+        "status": "已完成"
+    },
+    "LPDDR-167": {
+        "url": "http://jira.longsys.com/browse/LPDDR-167",
+        "create_date": "2020-12-2",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0804 LPDDR4x Z11L 16Gbit 低温高压视频黑屏",
+        "status": "已完成"
+    },
+    "LPDDR-168": {
+        "url": "http://jira.longsys.com/browse/LPDDR-168",
+        "create_date": "2020-12-31",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0804 LPDDR4x Z11L 16Gbit 常温常压Monkey 卡死",
+        "status": "已完成"
+    },
+    "LPDDR-169": {
+        "url": "http://jira.longsys.com/browse/LPDDR-169",
+        "create_date": "2020-12-31",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0804 LPDDR4x Z11L 16Gbit 常温常压休眠唤醒 Fail",
+        "status": "已完成"
+    },
+    "LPDDR-170": {
+        "url": "http://jira.longsys.com/browse/LPDDR-170",
+        "create_date": "2020-12-2",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0804 LPDDR4x Z11L 16Gbit 低温常压随机填充Fail",
+        "status": "已完成"
+    },
+    "LPDDR-171": {
+        "url": "http://jira.longsys.com/browse/LPDDR-171",
+        "create_date": "2020-12-30",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0804 LPDDR4x Z11L 16Gbit 低温常压Testdram背光",
+        "status": "已完成"
+    },
+    "LPDDR-172": {
+        "url": "http://jira.longsys.com/browse/LPDDR-172",
+        "create_date": "2020-12-2",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0804 LPDDR4x Z11L 16Gbit 常温常压Testdram黑屏",
+        "status": "已完成"
+    },
+    "LPDDR-173": {
+        "url": "http://jira.longsys.com/browse/LPDDR-173",
+        "create_date": "2020-12-30",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0804 LPDDR4x Z11L 16Gbit 常温常压变频 Fail",
+        "status": "已完成"
+    },
+    "LPDDR-174": {
+        "url": "http://jira.longsys.com/browse/LPDDR-174",
+        "create_date": "2020-12-31",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0804 LPDDR4x Z11L 16Gbit 高温低压变频 Fail",
+        "status": "已完成"
+    },
+    "LPDDR-175": {
+        "url": "http://jira.longsys.com/browse/LPDDR-175",
+        "create_date": "2020-12-2",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0804 LPDDR4x Z11L 16Gbit 低温高压Testdram Fail",
+        "status": "已完成"
+    },
+    "LPDDR-176": {
+        "url": "http://jira.longsys.com/browse/LPDDR-176",
+        "create_date": "2020-12-2",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A0804 LPDDR4x Z11L 16Gbit 常温常压Recovery Fail",
+        "status": "已完成"
+    },
+    "LPDDR-177": {
+        "url": "http://jira.longsys.com/browse/LPDDR-177",
+        "create_date": "2020-11-9",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0010A0804 Z11L LPDDR4X 16Gbit 169pcs中1pcs不良",
+        "status": "已完成"
+    },
+    "LPDDR-178": {
+        "url": "http://jira.longsys.com/browse/LPDDR-178",
+        "create_date": "2021-1-25",
+        "type": "故障",
+        "summary": "Z11Lx2 16Gbit过炉前QCTool测试PASS，过炉后测试Fail",
+        "status": "已完成"
+    },
+    "LPDDR-181": {
+        "url": "http://jira.longsys.com/browse/LPDDR-181",
+        "create_date": "2020-12-17",
+        "type": "故障",
+        "summary": "【开机成功率低】ZJC0010A0804 LPDDR4x Z11L 16Gbit 环境(1.17V&1800MHz)",
+        "status": "已完成"
+    },
+    "LPDDR-184": {
+        "url": "http://jira.longsys.com/browse/LPDDR-184",
+        "create_date": "2019-10-15",
+        "type": "故障",
+        "summary": "【不良品分析】pattern不良（样机测试）ZJC0010A0248（BIN5 Chipping） Z11Nx2 16Gb",
+        "status": "已完成"
+    },
+    "LPDDR-185": {
+        "url": "http://jira.longsys.com/browse/LPDDR-185",
+        "create_date": "2020-8-31",
+        "type": "故障",
+        "summary": "【高温65°C老化熄屏】华天 Z21Mx2 prime 高温65°C testdram老化熄屏",
+        "status": "已完成"
+    },
+    "LPDDR-186": {
+        "url": "http://jira.longsys.com/browse/LPDDR-186",
+        "create_date": "2019-10-15",
+        "type": "故障",
+        "summary": "【不良品分析】pattern不良（样机测试）ZJC0010A0248（BIN4 Pad异常） Z11Nx2 16Gb",
+        "status": "已完成"
+    },
+    "LPDDR-187": {
+        "url": "http://jira.longsys.com/browse/LPDDR-187",
+        "create_date": "2019-10-15",
+        "type": "故障",
+        "summary": "【不良品分析】pattern不良（样机测试）ZJC0010A0248（BIN5 Chipping） Z11Nx2 16Gb",
+        "status": "已完成"
+    },
+    "LPDDR-190": {
+        "url": "http://jira.longsys.com/browse/LPDDR-190",
+        "create_date": "2019-12-13",
+        "type": "故障",
+        "summary": "【不良品分析】pattern不良(样机测试) ZJC0010A0725 Z10N×4(4P wafer) 200ball LPDDR4X 16Gb",
+        "status": "已完成"
+    },
+    "LPDDR-191": {
+        "url": "http://jira.longsys.com/browse/LPDDR-191",
+        "create_date": "2019-12-4",
+        "type": "故障",
+        "summary": "【P60&P25平台pattern测试差异】ZJC0010A0370 Z10Nx4 LPDDR4X 16Gb存在部分样品使用P60测试timeout，P25测试pass",
+        "status": "已完成"
+    },
+    "LPDDR-192": {
+        "url": "http://jira.longsys.com/browse/LPDDR-192",
+        "create_date": "2019-11-27",
+        "type": "故障",
+        "summary": "【不良品分析】pattern不良(样机测试) ZJC0010A0726 Z10N×4(4P wafer) 200ball LPDDR4X 16Gb",
+        "status": "已完成"
+    },
+    "LPDDR-193": {
+        "url": "http://jira.longsys.com/browse/LPDDR-193",
+        "create_date": "2019-11-27",
+        "type": "故障",
+        "summary": "【不良品分析】pattern不良(样机测试) ZJC0010A0725 Z10N×4(4P wafer) 200ball LPDDR4X 16Gb",
+        "status": "已完成"
+    },
+    "LPDDR-194": {
+        "url": "http://jira.longsys.com/browse/LPDDR-194",
+        "create_date": "2020-8-7",
+        "type": "故障",
+        "summary": "【脚本V0419 验证】log记录的测试时间跟界面显示有时会相差1s",
+        "status": "已完成"
+    },
+    "LPDDR-195": {
+        "url": "http://jira.longsys.com/browse/LPDDR-195",
+        "create_date": "2020-10-21",
+        "type": "故障",
+        "summary": "【量产不良】LPDDR4X 16Gbit 169pcs中1pcs不良",
+        "status": "已完成"
+    },
+    "LPDDR-196": {
+        "url": "http://jira.longsys.com/browse/LPDDR-196",
+        "create_date": "2020-6-30",
+        "type": "故障",
+        "summary": "【QCTool V1.0.06验证】验证过程中，出现系统崩溃的情况",
+        "status": "已完成"
+    },
+    "LPDDR-197": {
+        "url": "http://jira.longsys.com/browse/LPDDR-197",
+        "create_date": "2020-8-7",
+        "type": "故障",
+        "summary": "【脚本V0419 验证】替换Lconfig文件后，保存的ini名字没有显示在界面上",
+        "status": "已完成"
+    },
+    "LPDDR-198": {
+        "url": "http://jira.longsys.com/browse/LPDDR-198",
+        "create_date": "2019-9-27",
+        "type": "故障",
+        "summary": "【量产不良】P60_V2.0.07系统搭配MPTool_V1.2.3.1无法进行量产测试",
+        "status": "已完成"
+    },
+    "LPDDR-199": {
+        "url": "http://jira.longsys.com/browse/LPDDR-199",
+        "create_date": "2020-8-7",
+        "type": "故障",
+        "summary": "【验证QCTool_V1.0.05】验证过程中，部分log信息记录被覆盖。",
+        "status": "已完成"
+    },
+    "LPDDR-200": {
+        "url": "http://jira.longsys.com/browse/LPDDR-200",
+        "create_date": "2020-8-7",
+        "type": "故障",
+        "summary": "【脚本V0419 验证】MPTool正常测试时报错：agent_creat_log_fail。",
+        "status": "已完成"
+    },
+    "LPDDR-201": {
+        "url": "http://jira.longsys.com/browse/LPDDR-201",
+        "create_date": "2020-8-7",
+        "type": "故障",
+        "summary": "【脚本V0419 验证】使能全地址测试，只需测一个type时，测试重复了",
+        "status": "已完成"
+    },
+    "LPDDR-202": {
+        "url": "http://jira.longsys.com/browse/LPDDR-202",
+        "create_date": "2020-6-20",
+        "type": "故障",
+        "summary": "Z21M冷启动异常根本原因确认",
+        "status": "已完成"
+    },
+    "LPDDR-204": {
+        "url": "http://jira.longsys.com/browse/LPDDR-204",
+        "create_date": "2020-9-23",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0010A0914 LPDDR4X 8Gb(OSE)搭配P60_V1.0.22量产测试出现init_timeout",
+        "status": "已完成"
+    },
+    "LPDDR-205": {
+        "url": "http://jira.longsys.com/browse/LPDDR-205",
+        "create_date": "2020-12-25",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A1126 Z1AM LPDDR4X 8Gbit 常温常压Testdram Fail",
+        "status": "已完成"
+    },
+    "LPDDR-206": {
+        "url": "http://jira.longsys.com/browse/LPDDR-206",
+        "create_date": "2021-7-14",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0010A1327 Z11Lx2 8Gb pl__V1.0.27&recovery-V2.0.17 16pcs fail",
+        "status": "已完成"
+    },
+    "LPDDR-207": {
+        "url": "http://jira.longsys.com/browse/LPDDR-207",
+        "create_date": "2021-5-18",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0010A1327 Z11Lx2 8Gb pl__V1.0.27&recovery-V2.0.17 1pcs fail 过炉后出现异常",
+        "status": "已完成"
+    },
+    "LPDDR-208": {
+        "url": "http://jira.longsys.com/browse/LPDDR-208",
+        "create_date": "2020-12-25",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A1126 Z1AM LPDDR4X 8Gbit 高温低压Testdram 黑屏",
+        "status": "已完成"
+    },
+    "LPDDR-213": {
+        "url": "http://jira.longsys.com/browse/LPDDR-213",
+        "create_date": "2019-9-9",
+        "type": "故障",
+        "summary": "【老化不良】P60 8Gb容量样品直接开机老化测试出现开机反应缓慢、卡顿、apk启动失败异常",
+        "status": "已完成"
+    },
+    "LPDDR-214": {
+        "url": "http://jira.longsys.com/browse/LPDDR-214",
+        "create_date": "2020-12-25",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A1126 Z1AM LPDDR4X 8Gbit 低温高压变频 3pcs Fail",
+        "status": "已完成"
+    },
+    "LPDDR-216": {
+        "url": "http://jira.longsys.com/browse/LPDDR-216",
+        "create_date": "2021-1-20",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A1215 Z11L LPDDR4X 32Gbit 低温常压冷启动成功率仅50%",
+        "status": "已完成"
+    },
+    "LPDDR-217": {
+        "url": "http://jira.longsys.com/browse/LPDDR-217",
+        "create_date": "2021-1-15",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A1215 Z11L LPDDR4X 32Gbit 低温高压Testdram Fail",
+        "status": "已完成"
+    },
+    "LPDDR-219": {
+        "url": "http://jira.longsys.com/browse/LPDDR-219",
+        "create_date": "2021-1-15",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010A1215 Z11L LPDDR4X 32Gbit 低温常压填充 Fail",
+        "status": "已完成"
+    },
+    "LPDDR-221": {
+        "url": "http://jira.longsys.com/browse/LPDDR-221",
+        "create_date": "2019-8-29",
+        "type": "故障",
+        "summary": "【恢复出厂异常】P60 恢复出厂设置系统起不来，重新刷机可正常",
+        "status": "已完成"
+    },
+    "LPDDR-222": {
+        "url": "http://jira.longsys.com/browse/LPDDR-222",
+        "create_date": "2019-8-30",
+        "type": "故障",
+        "summary": "【视频老化】视频老化测试70h后，100%出现“can't play this vidio”异常",
+        "status": "已完成"
+    },
+    "LPDDR-223": {
+        "url": "http://jira.longsys.com/browse/LPDDR-223",
+        "create_date": "2019-9-19",
+        "type": "故障",
+        "summary": "【系统问题】P60文件系统损坏，无法保存设置及外部应用，重启开机后所有数据丢失，系统恢复默认设置",
+        "status": "已完成"
+    },
+    "LPDDR-224": {
+        "url": "http://jira.longsys.com/browse/LPDDR-224",
+        "create_date": "2019-9-20",
+        "type": "故障",
+        "summary": "【老化不良】ATE_P60测架LPDDR4模式下VDDQ值比实际preloader设定值偏高",
+        "status": "已完成"
+    },
+    "LPDDR-225": {
+        "url": "http://jira.longsys.com/browse/LPDDR-225",
+        "create_date": "2021-1-21",
+        "type": "故障",
+        "summary": "Z11Lx4 32Gbit良率测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-228": {
+        "url": "http://jira.longsys.com/browse/LPDDR-228",
+        "create_date": "2020-7-7",
+        "type": "故障",
+        "summary": "【LPDDR4x 高温65℃低压老化重启】华天 LPDDR4x 24Gb Z2BMx2 Prime 1866MHz LPDDR4x模式 高温低压老化出现重启（1pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-229": {
+        "url": "http://jira.longsys.com/browse/LPDDR-229",
+        "create_date": "2020-7-7",
+        "type": "故障",
+        "summary": "【LPDDR4x 高温65℃常压老化重启】华天 LPDDR4x 24Gb Z2BMx2 Prime 1866MHz LPDDR4x模式 高温常压老化出现重启（1pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-230": {
+        "url": "http://jira.longsys.com/browse/LPDDR-230",
+        "create_date": "2020-7-7",
+        "type": "故障",
+        "summary": "【LPDDR4x 高温65℃常压老化黑屏】华天 LPDDR4x 24Gb Z2BMx2 Prime 1866MHz LPDDR4x模式 高温常压老化出现黑屏（1pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-231": {
+        "url": "http://jira.longsys.com/browse/LPDDR-231",
+        "create_date": "2020-7-7",
+        "type": "故障",
+        "summary": "【LPDDR4x 低温-30℃高压老化黑屏】华天LPDDR4x 24Gb Z2BMx2 Prime 1866MHz LPDDR4x模式 低温高压老化出现黑屏（4pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-233": {
+        "url": "http://jira.longsys.com/browse/LPDDR-233",
+        "create_date": "2020-7-7",
+        "type": "故障",
+        "summary": "【LPDDR4x 高温65℃常压老化BIN2】华天 LPDDR4x 24Gb Z2BMx2 Prime 1866MHz LPDDR4x模式 高温常压老化出现BIN2（2pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-234": {
+        "url": "http://jira.longsys.com/browse/LPDDR-234",
+        "create_date": "2020-7-7",
+        "type": "故障",
+        "summary": "【LPDDR4x 高温65℃常压老化重启】华天 LPDDR4x 24Gb Z2BMx2 Prime 1866MHz LPDDR4模式 高温常压老化出现重启（1pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-235": {
+        "url": "http://jira.longsys.com/browse/LPDDR-235",
+        "create_date": "2020-7-7",
+        "type": "故障",
+        "summary": "【LPDDR4x 高温65℃低压老化BIN2】华天 LPDDR4x 24Gb Z2BMx2 Prime 1866MHz LPDDR4x模式 高温低压老化出现BIN2（4pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-237": {
+        "url": "http://jira.longsys.com/browse/LPDDR-237",
+        "create_date": "2020-4-30",
+        "type": "故障",
+        "summary": "【Z21Mx2 冷启动异常】华天 Z21Mx2 Prime 1.8GHz低温-30°C冷启动 100% fail",
+        "status": "已完成"
+    },
+    "LPDDR-238": {
+        "url": "http://jira.longsys.com/browse/LPDDR-238",
+        "create_date": "2020-7-7",
+        "type": "故障",
+        "summary": "【LPDDR4x 高温65℃低压老化黑屏】华天LPDDR4x 24Gb Z2BMx2 Prime 1866MHz LPDDR4模式 高温低压老化出现黑屏（1pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-239": {
+        "url": "http://jira.longsys.com/browse/LPDDR-239",
+        "create_date": "2020-7-7",
+        "type": "故障",
+        "summary": "【LPDDR4x 高温65℃常压老化黑屏】华天 LPDDR4x 24Gb Z2BMx2 Prime 1866MHz LPDDR4模式 高温常压老化出现黑屏（3pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-240": {
+        "url": "http://jira.longsys.com/browse/LPDDR-240",
+        "create_date": "2020-7-7",
+        "type": "故障",
+        "summary": "【LPDDR4x 高温65℃常压老化BIN2】华天 LPDDR4x 24Gb Z2BMx2 Prime 1866MHz LPDDR4模式 高温常压老化出现BIN2（1pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-241": {
+        "url": "http://jira.longsys.com/browse/LPDDR-241",
+        "create_date": "2020-7-7",
+        "type": "故障",
+        "summary": "【LPDDR4x 高温65℃低压老化重启】华天 LPDDR4x 24Gb Z2BMx2 Prime 1866MHz LPDDR4x模式 高温低压老化出现重启（2pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-242": {
+        "url": "http://jira.longsys.com/browse/LPDDR-242",
+        "create_date": "2020-7-7",
+        "type": "故障",
+        "summary": "【eMCP4x 高温65℃老化BIN2】OSE eMCP4x 32GB+24Gb Z2BMx2 Prime 1866MHz LP4X模式高温低压65℃ testdram老化BIN2",
+        "status": "已完成"
+    },
+    "LPDDR-243": {
+        "url": "http://jira.longsys.com/browse/LPDDR-243",
+        "create_date": "2020-7-7",
+        "type": "故障",
+        "summary": "【eMCP4x 低温高压-30℃老化BIN2】OSE eMCP4x 64GB+24Gb Z2BMx2 Prime 1866MHz LP4X模式低温高压-30℃ testdram老化BIN2",
+        "status": "已完成"
+    },
+    "LPDDR-244": {
+        "url": "http://jira.longsys.com/browse/LPDDR-244",
+        "create_date": "2020-7-7",
+        "type": "故障",
+        "summary": "【eMCP4x 高温常压65℃老化BIN2】OSE eMCP4x 32GB+24Gb Z2BMx2 Prime 1866MHz LP4X模式高温常压65℃ testdram老化BIN2",
+        "status": "已完成"
+    },
+    "LPDDR-245": {
+        "url": "http://jira.longsys.com/browse/LPDDR-245",
+        "create_date": "2020-6-28",
+        "type": "故障",
+        "summary": "【eMCP4x 低温常压-30℃老化BIN2】OSE eMCP4x 64GB+24Gb Z2BMx2 Prime 1866MHz LP4X模式低温常压-30℃ testdram老化BIN2",
+        "status": "已完成"
+    },
+    "LPDDR-246": {
+        "url": "http://jira.longsys.com/browse/LPDDR-246",
+        "create_date": "2020-7-7",
+        "type": "故障",
+        "summary": "【eMCP4x 高温65℃低压老化BIN2】OSE eMCP4x 32GB+24Gb Z2BMx2 Prime 1866MHz LP4模式高温低压65℃ testdram老化BIN2",
+        "status": "已完成"
+    },
+    "LPDDR-247": {
+        "url": "http://jira.longsys.com/browse/LPDDR-247",
+        "create_date": "2020-7-7",
+        "type": "故障",
+        "summary": "【eMCP4x 高温65℃低压老化BIN2】OSE eMCP4x 64GB+24Gb Z2BMx2 Prime 1866MHz LP4模式高温低压65℃ testdram老化BIN2",
+        "status": "已完成"
+    },
+    "LPDDR-248": {
+        "url": "http://jira.longsys.com/browse/LPDDR-248",
+        "create_date": "2020-7-7",
+        "type": "故障",
+        "summary": "【eMCP4x 高温65℃低压老化BIN2】OSE eMCP4x 64GB+24Gb Z2BMx2 Prime 1866MHz LP4X模式高温低压65℃ testdram老化BIN2",
+        "status": "已完成"
+    },
+    "LPDDR-251": {
+        "url": "http://jira.longsys.com/browse/LPDDR-251",
+        "create_date": "2020-11-16",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0010A1085 LPDDR4X 48Gb Z2BMx4",
+        "status": "已完成"
+    },
+    "LPDDR-252": {
+        "url": "http://jira.longsys.com/browse/LPDDR-252",
+        "create_date": "2020-7-29",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0010A0997 LPDDR4X 12Gb（KYEC)搭配P60_V1.0.07量产测试出现init_dram_timeout（3pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-253": {
+        "url": "http://jira.longsys.com/browse/LPDDR-253",
+        "create_date": "2020-7-28",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0010A0997 LPDDR4X 12Gb（KYEC)搭配P60_V1.0.07量产测试出现pattern fail（8pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-254": {
+        "url": "http://jira.longsys.com/browse/LPDDR-254",
+        "create_date": "2020-7-28",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0010A0997 LPDDR4X 12Gb（KYEC)搭配P60_V1.0.07量产测试出现set_n_vdd2_timeout（1pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-255": {
+        "url": "http://jira.longsys.com/browse/LPDDR-255",
+        "create_date": "2021-2-22",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0010A0458 eMCP4X 32GB+16Gb (OSE)搭配P60_V1.0.22量产测试出现init_timeout &pl_type 1 错误",
+        "status": "已完成"
+    },
+    "LPDDR-256": {
+        "url": "http://jira.longsys.com/browse/LPDDR-256",
+        "create_date": "2020-7-20",
+        "type": "故障",
+        "summary": "【LPDDR4 低温-30℃高压冷启动】Payton eMCP 32GB+16Gb CXTMx2 1866MHz LPDDR4模式 低温高压冷启动无法开机（2pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-257": {
+        "url": "http://jira.longsys.com/browse/LPDDR-257",
+        "create_date": "2020-8-9",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0011A0296 eMCP4X 32GB+16Gb（Payton)搭配P60_V1.0.22量产测试出现get_pl_version_timeout（1pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-258": {
+        "url": "http://jira.longsys.com/browse/LPDDR-258",
+        "create_date": "2020-8-4",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0011A0296 eMCP4X 32GB+16Gb（Payton)搭配P60_V1.0.22量产测试出现pattern fail（type1）",
+        "status": "已完成"
+    },
+    "LPDDR-259": {
+        "url": "http://jira.longsys.com/browse/LPDDR-259",
+        "create_date": "2020-8-9",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0011A0296 eMCP4X 32GB+16Gb（Payton)搭配P60_V1.0.22量产测试出现init_timeout（8pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-260": {
+        "url": "http://jira.longsys.com/browse/LPDDR-260",
+        "create_date": "2021-2-23",
+        "type": "故障",
+        "summary": "【常温下1800MHz高压无法开机问题】ZJC0011A0458样机验证验证Fail。",
+        "status": "已完成"
+    },
+    "LPDDR-261": {
+        "url": "http://jira.longsys.com/browse/LPDDR-261",
+        "create_date": "2020-7-20",
+        "type": "故障",
+        "summary": "【LPDDR4X 低温-30℃高压冷启动】Payton eMCP 32GB+16Gb CXTMx2 1866MHz LPDDR4X模式 低温高压冷启动无法开机（3pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-262": {
+        "url": "http://jira.longsys.com/browse/LPDDR-262",
+        "create_date": "2020-8-9",
+        "type": "故障",
+        "summary": "【LPDDR4 高温65℃低压老化BIN2】Payton eMCP 32GB+16Gb CXTMx2 1866MHz LPDDR4模式 高温低压老化出现BIN2（7pcs）",
+        "status": "已完成"
+    },
+    "LPDDR-263": {
+        "url": "http://jira.longsys.com/browse/LPDDR-263",
+        "create_date": "2020-12-28",
+        "type": "故障",
+        "summary": "【不良品分析】ZJC0011A0364 uMCP4x 128GB+32Gb Z32Mx2量产不良品分析",
+        "status": "已完成"
+    },
+    "LPDDR-266": {
+        "url": "http://jira.longsys.com/browse/LPDDR-266",
+        "create_date": "2021-3-23",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0010A0486 eMCP4X 64GB+32Gb (OSE)搭配P60_V1.0.22量产测试3pcs 出现lk&pl错误",
+        "status": "已完成"
+    },
+    "LPDDR-267": {
+        "url": "http://jira.longsys.com/browse/LPDDR-267",
+        "create_date": "2020-12-25",
+        "type": "故障",
+        "summary": "【低温-30℃ 高压变频Burnln测试异常】OSE eMCP4x 64GB+32Gb Z32Mx2 Prime 高压-30℃ 变频Burnln 无法测试",
+        "status": "已完成"
+    },
+    "LPDDR-268": {
+        "url": "http://jira.longsys.com/browse/LPDDR-268",
+        "create_date": "2020-12-25",
+        "type": "故障",
+        "summary": "【低温-30℃ 填充测试异常】OSE eMCP4x 64GB+32Gb Z32Mx2 Prime 高压-30℃ 随机填充 无法测试",
+        "status": "已完成"
+    },
+    "LPDDR-269": {
+        "url": "http://jira.longsys.com/browse/LPDDR-269",
+        "create_date": "2020-12-24",
+        "type": "故障",
+        "summary": "【不良品分析】eMCP4x 64GB+32Gb Z32Mx2 OSE送样样品1pcs不良&1pcs功耗偏大样品分析",
+        "status": "已完成"
+    },
+    "LPDDR-270": {
+        "url": "http://jira.longsys.com/browse/LPDDR-270",
+        "create_date": "2020-12-10",
+        "type": "故障",
+        "summary": "【不良品分析】ZJC0011A0338 eMCP4x 64GB+32Gb Z32Mx2过炉后不良品分析",
+        "status": "已完成"
+    },
+    "LPDDR-272": {
+        "url": "http://jira.longsys.com/browse/LPDDR-272",
+        "create_date": "2020-12-25",
+        "type": "故障",
+        "summary": "【低温-30℃ 填充测试异常】OSE eMCP4x 64GB+32Gb Z32Mx2 PrimeLP4模式 高压-30℃ 随机填充&FFFF填充无法测试",
+        "status": "已完成"
+    },
+    "LPDDR-273": {
+        "url": "http://jira.longsys.com/browse/LPDDR-273",
+        "create_date": "2020-12-25",
+        "type": "故障",
+        "summary": "【低温-30℃ 填充&变频Burnln测试异常】OSE eMCP4x 64GB+32Gb Z32Mx2 Prime 高压-30℃ 填充、变频Burnln 无法测试",
+        "status": "已完成"
+    },
+    "LPDDR-275": {
+        "url": "http://jira.longsys.com/browse/LPDDR-275",
+        "create_date": "2021-5-25",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0011A0504 eMCP4 16GB+8Gb (OSE)搭配P60_V1.0.22过炉后良率测试出现pl_type6&lk_type4 错误",
+        "status": "已完成"
+    },
+    "LPDDR-276": {
+        "url": "http://jira.longsys.com/browse/LPDDR-276",
+        "create_date": "2021-3-22",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0010A0421 eMCP4X 32GB+24Gb (OSE)搭配P60_V1.0.22量产测试出现lk_type4 &pl_type0&VCC2_too_max 错误",
+        "status": "已完成"
+    },
+    "LPDDR-277": {
+        "url": "http://jira.longsys.com/browse/LPDDR-277",
+        "create_date": "2020-9-27",
+        "type": "故障",
+        "summary": "【验证离线授权工具V2.1.1.0 】工具标题与版本号不符合",
+        "status": "已完成"
+    },
+    "LPDDR-278": {
+        "url": "http://jira.longsys.com/browse/LPDDR-278",
+        "create_date": "2020-7-20",
+        "type": "故障",
+        "summary": "【离线授权工具V2.1.0.0登陆状态显示异常】",
+        "status": "已完成"
+    },
+    "LPDDR-279": {
+        "url": "http://jira.longsys.com/browse/LPDDR-279",
+        "create_date": "2020-6-26",
+        "type": "故障",
+        "summary": "【MPTool脚本不支持32Gb产品的LK_tpe测试】V0.4.07脚本不支持32Gb产品的高1Gb地址的LK_type测试",
+        "status": "已完成"
+    },
+    "LPDDR-280": {
+        "url": "http://jira.longsys.com/browse/LPDDR-280",
+        "create_date": "2020-6-26",
+        "type": "故障",
+        "summary": "【MPTool脚本设置动态调压时，AP端供电跟随调压】",
+        "status": "已完成"
+    },
+    "LPDDR-281": {
+        "url": "http://jira.longsys.com/browse/LPDDR-281",
+        "create_date": "2020-6-26",
+        "type": "故障",
+        "summary": "【MPTool脚本PL交换片选功能异常】设置交换片选进行量产测试时，测试功能不生效",
+        "status": "已完成"
+    },
+    "LPDDR-282": {
+        "url": "http://jira.longsys.com/browse/LPDDR-282",
+        "create_date": "2020-9-27",
+        "type": "故障",
+        "summary": "【QC_V1.0.05脚本问题】VDD2_step_down、VDD2_step_up的值没有作限制",
+        "status": "已完成"
+    },
+    "LPDDR-283": {
+        "url": "http://jira.longsys.com/browse/LPDDR-283",
+        "create_date": "2019-11-22",
+        "type": "故障",
+        "summary": "【电流板固件V2.5.2动态电压调节功能缺陷】设置VDD2为动态电压时，VDDQ电压实测1.006V",
+        "status": "已完成"
+    },
+    "LPDDR-284": {
+        "url": "http://jira.longsys.com/browse/LPDDR-284",
+        "create_date": "2020-5-7",
+        "type": "故障",
+        "summary": "【电流板V2.0采集VCC1的平均电流为0uA】搭配电流板V2.0进行MPTool量产测试，log记录VCC1的各状态平均电流保持为0uA",
+        "status": "已完成"
+    },
+    "LPDDR-286": {
+        "url": "http://jira.longsys.com/browse/LPDDR-286",
+        "create_date": "2019-12-13",
+        "type": "故障",
+        "summary": "【电流板固件V2.8.2_191203无法设置AP_VDD2】",
+        "status": "已完成"
+    },
+    "LPDDR-287": {
+        "url": "http://jira.longsys.com/browse/LPDDR-287",
+        "create_date": "2019-8-27",
+        "type": "故障",
+        "summary": "【工具搭配异常】MPTool_V1.2.3.1+V0.3.09.sc脚本使用win10系统PC测试发生测试进度卡死问题",
+        "status": "已完成"
+    },
+    "LPDDR-288": {
+        "url": "http://jira.longsys.com/browse/LPDDR-288",
+        "create_date": "2019-11-14",
+        "type": "故障",
+        "summary": "【量产测试recovery pattern11-16异常】不同容量良品进行recovery pattern11-16测试时长一致，且无测试进度，直接PASS",
+        "status": "已完成"
+    },
+    "LPDDR-289": {
+        "url": "http://jira.longsys.com/browse/LPDDR-289",
+        "create_date": "2019-10-25",
+        "type": "故障",
+        "summary": "【MPTool_V1.2.3.5量产测试异常】MPTool_V1.2.3.5进行量产测试，测架概率性无法识别",
+        "status": "已完成"
+    },
+    "LPDDR-290": {
+        "url": "http://jira.longsys.com/browse/LPDDR-290",
+        "create_date": "2019-9-11",
+        "type": "故障",
+        "summary": "【量产不良】MPTool_V1.2.3.1无法使用Ukey进行离线测试",
+        "status": "已完成"
+    },
+    "LPDDR-291": {
+        "url": "http://jira.longsys.com/browse/LPDDR-291",
+        "create_date": "2019-10-17",
+        "type": "故障",
+        "summary": "【MPTool_V1.2.3.5端口映射异常】MPTool_V1.2.3.5端口映射结果与实际port口不匹配",
+        "status": "已完成"
+    },
+    "LPDDR-292": {
+        "url": "http://jira.longsys.com/browse/LPDDR-292",
+        "create_date": "2020-4-2",
+        "type": "故障",
+        "summary": "【DTS_BLOCK地址监控无效】MPTool_V0.4.07脚本对DTS_BLOCK的地址没有设置监控功能",
+        "status": "已完成"
+    },
+    "LPDDR-293": {
+        "url": "http://jira.longsys.com/browse/LPDDR-293",
+        "create_date": "2019-9-20",
+        "type": "故障",
+        "summary": "【老化不良】M6_BIB核心板LPDDR4模式下VDDQ实测值比设定值偏高",
+        "status": "已完成"
+    },
+    "LPDDR-294": {
+        "url": "http://jira.longsys.com/browse/LPDDR-294",
+        "create_date": "2019-8-12",
+        "type": "故障",
+        "summary": "【老化不良】高温老化时出现黑屏",
+        "status": "已完成"
+    },
+    "LPDDR-295": {
+        "url": "http://jira.longsys.com/browse/LPDDR-295",
+        "create_date": "2020-7-27",
+        "type": "故障",
+        "summary": "【验证离线授权工具V2.1.1.0】登录失败状态下，登陆按钮和提示信息显示异常",
+        "status": "已完成"
+    },
+    "LPDDR-296": {
+        "url": "http://jira.longsys.com/browse/LPDDR-296",
+        "create_date": "2020-9-27",
+        "type": "故障",
+        "summary": "【验证离线授权工具V2.1.1.0 】已被占用的ukey不该显示在查找列表",
+        "status": "已完成"
+    },
+    "LPDDR-297": {
+        "url": "http://jira.longsys.com/browse/LPDDR-297",
+        "create_date": "2020-10-14",
+        "type": "故障",
+        "summary": "【MPTool窗体缩小后显示文字堆叠】MPTool V1.3.0.13窗体缩小后显示文字堆叠",
+        "status": "已完成"
+    },
+    "LPDDR-298": {
+        "url": "http://jira.longsys.com/browse/LPDDR-298",
+        "create_date": "2019-9-24",
+        "type": "故障",
+        "summary": "【老化不良】ATE_P60测试架老化出现重启、bin2异常",
+        "status": "已完成"
+    },
+    "LPDDR-299": {
+        "url": "http://jira.longsys.com/browse/LPDDR-299",
+        "create_date": "2019-8-12",
+        "type": "故障",
+        "summary": "【老化不良】部分测架OTG无法使用",
+        "status": "已完成"
+    },
+    "LPDDR-300": {
+        "url": "http://jira.longsys.com/browse/LPDDR-300",
+        "create_date": "2019-8-5",
+        "type": "故障",
+        "summary": "【脚本问题】V0305版本FT2测试，勾选交换片选，测试报错",
+        "status": "已完成"
+    },
+    "LPDDR-301": {
+        "url": "http://jira.longsys.com/browse/LPDDR-301",
+        "create_date": "2019-9-24",
+        "type": "故障",
+        "summary": "【老化不良】P60测试架卡槽无法识别SD卡",
+        "status": "已完成"
+    },
+    "LPDDR-302": {
+        "url": "http://jira.longsys.com/browse/LPDDR-302",
+        "create_date": "2019-8-13",
+        "type": "故障",
+        "summary": "【FT2连续无法开机】同一测架出现电流超标Fail后，后面连续Fail",
+        "status": "已完成"
+    },
+    "LPDDR-303": {
+        "url": "http://jira.longsys.com/browse/LPDDR-303",
+        "create_date": "2021-7-19",
+        "type": "故障",
+        "summary": "【POP 量产不良】ZJC0010A1348 Z11Lx4 32Gbit 556ball 量产测试CD通道1pcs fail，降频测试均FAIL，错误信息均一致",
+        "status": "已完成"
+    },
+    "LPDDR-304": {
+        "url": "http://jira.longsys.com/browse/LPDDR-304",
+        "create_date": "2021-7-18",
+        "type": "故障",
+        "summary": "【老化不良】 ZJC0010A1367 Z31Mx2 冷启动1800MHz测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-305": {
+        "url": "http://jira.longsys.com/browse/LPDDR-305",
+        "create_date": "2021-7-18",
+        "type": "故障",
+        "summary": "【老化不良】 ZJC0010A1367 Z31Mx2 1800MHz 高压测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-307": {
+        "url": "http://jira.longsys.com/browse/LPDDR-307",
+        "create_date": "2019-8-19",
+        "type": "故障",
+        "summary": "【老化不良】屏幕概率性无法显示",
+        "status": "已完成"
+    },
+    "LPDDR-308": {
+        "url": "http://jira.longsys.com/browse/LPDDR-308",
+        "create_date": "2019-8-5",
+        "type": "故障",
+        "summary": "【生产异常】海存云量产版本生产大概率卡死在100%进度",
+        "status": "已完成"
+    },
+    "LPDDR-309": {
+        "url": "http://jira.longsys.com/browse/LPDDR-309",
+        "create_date": "2019-10-24",
+        "type": "故障",
+        "summary": "【电流板固件差异】使用V2.0.0&V2.2.0&V2.3.3量产测试VDD1电流差异较大",
+        "status": "已完成"
+    },
+    "LPDDR-310": {
+        "url": "http://jira.longsys.com/browse/LPDDR-310",
+        "create_date": "2020-2-27",
+        "type": "故障",
+        "summary": "【电流板固件差异】使用电流板V2.5.2&V2.8.2进行功能测试时电流存在较大差异",
+        "status": "已完成"
+    },
+    "LPDDR-311": {
+        "url": "http://jira.longsys.com/browse/LPDDR-311",
+        "create_date": "2020-8-14",
+        "type": "故障",
+        "summary": "【老化不良】 IDF0001A0089 LPDDR3 8Gbit 高温低压Testdram 出现黑屏",
+        "status": "已完成"
+    },
+    "LPDDR-312": {
+        "url": "http://jira.longsys.com/browse/LPDDR-312",
+        "create_date": "2020-8-13",
+        "type": "故障",
+        "summary": "【老化不良】IDF0001A0089 LPDDR3 8Gbit 高温常压Testdram 黑屏",
+        "status": "已完成"
+    },
+    "LPDDR-314": {
+        "url": "http://jira.longsys.com/browse/LPDDR-314",
+        "create_date": "2019-11-21",
+        "type": "故障",
+        "summary": "【不良品分析】pattern不良(样机测试) ZJC0010A0612 Z10N×4(4P wafer) 200ball LPDDR4X 16Gb",
+        "status": "已完成"
+    },
+    "LPDDR-315": {
+        "url": "http://jira.longsys.com/browse/LPDDR-315",
+        "create_date": "2019-9-3",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0010A0370 DHZ10NDHAPP-4PE0Fx4 (4p wafer) 200ball LPDDR4X 16Gb样品不良品分析",
+        "status": "已完成"
+    },
+    "LPDDR-317": {
+        "url": "http://jira.longsys.com/browse/LPDDR-317",
+        "create_date": "2019-9-3",
+        "type": "故障",
+        "summary": "【不良品分析】pattern&开机不良(样机测试) ZJC0010A0270 Z0AQx4 1P 200ball LPDDR4X 24Gb",
+        "status": "已完成"
+    },
+    "LPDDR-318": {
+        "url": "http://jira.longsys.com/browse/LPDDR-318",
+        "create_date": "2019-11-27",
+        "type": "故障",
+        "summary": "【脚本差异】使用Script_V0.2.05&Scrpt_V0.3.05搭配不同电流板固件测试Z11Mx4 LPDDR4X 32Gb存在差异",
+        "status": "已完成"
+    },
+    "LPDDR-319": {
+        "url": "http://jira.longsys.com/browse/LPDDR-319",
+        "create_date": "2019-11-1",
+        "type": "故障",
+        "summary": "【不良品分析】pattern不良(样机测试) ZJC0010A0369 Z10N×4(4P wafer) 200ball LPDDR4X 16Gb",
+        "status": "已完成"
+    },
+    "LPDDR-320": {
+        "url": "http://jira.longsys.com/browse/LPDDR-320",
+        "create_date": "2019-9-4",
+        "type": "故障",
+        "summary": "【不良品分析】pattern不良(样机测试) ZJC0010A0369 Z10N×4(4P wafer) 200ball LPDDR4X 16Gb",
+        "status": "已完成"
+    },
+    "LPDDR-321": {
+        "url": "http://jira.longsys.com/browse/LPDDR-321",
+        "create_date": "2019-9-6",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0010A0417 WF5Z11NNNNAF-PCE0Fx2 (prime wafer) 200ball LPDDR4X 16Gb",
+        "status": "已完成"
+    },
+    "LPDDR-322": {
+        "url": "http://jira.longsys.com/browse/LPDDR-322",
+        "create_date": "2019-9-5",
+        "type": "故障",
+        "summary": "【不良品分析】pattern不良(样机测试) ZJC0010A0418 Z11Nx2 1P 200ball LPDDR4X 16Gb",
+        "status": "已完成"
+    },
+    "LPDDR-323": {
+        "url": "http://jira.longsys.com/browse/LPDDR-323",
+        "create_date": "2020-11-30",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0011A0401 ePOP3 8GB+4Gb",
+        "status": "已完成"
+    },
+    "LPDDR-325": {
+        "url": "http://jira.longsys.com/browse/LPDDR-325",
+        "create_date": "2020-2-27",
+        "type": "故障",
+        "summary": "【不良品分析】过炉后写电流偏大（样机测试）ZJC0011A0157 ePOP3 8GB+4Gb不良品分析",
+        "status": "已完成"
+    },
+    "LPDDR-326": {
+        "url": "http://jira.longsys.com/browse/LPDDR-326",
+        "create_date": "2020-8-19",
+        "type": "故障",
+        "summary": "【过炉后不良品分析】pattern不良(样机测试) ZJC0011A0193 ePOP3 8GB+4Gb不良品分析",
+        "status": "已完成"
+    },
+    "LPDDR-327": {
+        "url": "http://jira.longsys.com/browse/LPDDR-327",
+        "create_date": "2020-2-28",
+        "type": "故障",
+        "summary": "【不良品分析】写电流不稳定（样机测试）ZJC0011A0157 ePOP3 8GB+4Gb不良品分析",
+        "status": "已完成"
+    },
+    "LPDDR-328": {
+        "url": "http://jira.longsys.com/browse/LPDDR-328",
+        "create_date": "2022-3-31",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C0253 LPDDR4 Z01Mx3 24Gb 1pcs 常温常压、高温常压过炉前LK地址报错",
+        "status": "已完成"
+    },
+    "LPDDR-329": {
+        "url": "http://jira.longsys.com/browse/LPDDR-329",
+        "create_date": "2020-8-19",
+        "type": "故障",
+        "summary": "【不良品分析】pattern不良(样机测试) ZJC0011A0168 ePOP3 8GB+8Gb不良品分析",
+        "status": "已完成"
+    },
+    "LPDDR-330": {
+        "url": "http://jira.longsys.com/browse/LPDDR-330",
+        "create_date": "2020-7-22",
+        "type": "故障",
+        "summary": "【不良品分析】pattern不良（样机测试）ZJC0011A0128 ePOP3 8GB+8Gb不良品分析",
+        "status": "已完成"
+    },
+    "LPDDR-331": {
+        "url": "http://jira.longsys.com/browse/LPDDR-331",
+        "create_date": "2020-8-19",
+        "type": "故障",
+        "summary": "【不良品分析】开机不良（样机测试）ZJC0011A0128 ePOP3 8GB+8Gb不良品分析",
+        "status": "已完成"
+    },
+    "LPDDR-332": {
+        "url": "http://jira.longsys.com/browse/LPDDR-332",
+        "create_date": "2020-3-17",
+        "type": "故障",
+        "summary": "【不良品分析】pattern不良（样机测试）ZJC0011A0128 ePOP3 8GB+8Gb不良品分析",
+        "status": "已完成"
+    },
+    "LPDDR-333": {
+        "url": "http://jira.longsys.com/browse/LPDDR-333",
+        "create_date": "2019-9-19",
+        "type": "故障",
+        "summary": "【不良品分析】 pattern不良(样机测试)V91Mx1 LPDDR3 178ball 8Gb",
+        "status": "已完成"
+    },
+    "LPDDR-334": {
+        "url": "http://jira.longsys.com/browse/LPDDR-334",
+        "create_date": "2019-9-19",
+        "type": "故障",
+        "summary": "【不良品分析】 pattern不良(样机测试)V01Mx1 LPDDR3 178ball 8Gb",
+        "status": "已完成"
+    },
+    "LPDDR-335": {
+        "url": "http://jira.longsys.com/browse/LPDDR-335",
+        "create_date": "2020-1-9",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0011A0117 eMCP3 Nanya A die 16GB+8Gb样品搭配P25_221ball测架测试常温视频（933MHz）卡Logo",
+        "status": "已完成"
+    },
+    "LPDDR-336": {
+        "url": "http://jira.longsys.com/browse/LPDDR-336",
+        "create_date": "2019-10-15",
+        "type": "故障",
+        "summary": "【不良品分析】pattern不良(样机测试) IDF0001A0031(外购) LPDDR4 200ball 8Gb",
+        "status": "已完成"
+    },
+    "LPDDR-337": {
+        "url": "http://jira.longsys.com/browse/LPDDR-337",
+        "create_date": "2019-12-12",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0011A0094 ePOP3 32GB+8Gb样品搭配P25_ATE_136ball测架测试低温Testdram（933MHz）报BIN2",
+        "status": "已完成"
+    },
+    "LPDDR-338": {
+        "url": "http://jira.longsys.com/browse/LPDDR-338",
+        "create_date": "2020-2-27",
+        "type": "故障",
+        "summary": "【样品差异分析】相同资源的ePOP3和eMCP3在写电流一致性上差异较大",
+        "status": "已完成"
+    },
+    "LPDDR-339": {
+        "url": "http://jira.longsys.com/browse/LPDDR-339",
+        "create_date": "2020-7-15",
+        "type": "故障",
+        "summary": "【量产测试LK_V2.0.13 LVDS功能异常】使用良品量产测试LK_Type LVDS功能异常报错",
+        "status": "已完成"
+    },
+    "LPDDR-340": {
+        "url": "http://jira.longsys.com/browse/LPDDR-340",
+        "create_date": "2020-6-24",
+        "type": "故障",
+        "summary": "【量产异常】LPDDR3 4Gb小容量样品测试开机存在异常",
+        "status": "已完成"
+    },
+    "LPDDR-341": {
+        "url": "http://jira.longsys.com/browse/LPDDR-341",
+        "create_date": "2019-9-27",
+        "type": "故障",
+        "summary": "【P25平台测试异常】8735平台测试的不良品在P25平台无法100%检测出来",
+        "status": "已完成"
+    },
+    "LPDDR-342": {
+        "url": "http://jira.longsys.com/browse/LPDDR-342",
+        "create_date": "2020-7-17",
+        "type": "故障",
+        "summary": "【使用电流板固件V2.9.02_200106量产测试LK_V2.0.13 LVDS功能不生效】",
+        "status": "已完成"
+    },
+    "LPDDR-343": {
+        "url": "http://jira.longsys.com/browse/LPDDR-343",
+        "create_date": "2021-7-21",
+        "type": "故障",
+        "summary": "ZJC0010A0578 P25测试架测过炉前FT2出现功耗偏大样品",
+        "status": "已完成"
+    },
+    "LPDDR-344": {
+        "url": "http://jira.longsys.com/browse/LPDDR-344",
+        "create_date": "2020-10-21",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0011A0103 eMCP3 3208 常温常压Reboot 黑屏",
+        "status": "已完成"
+    },
+    "LPDDR-345": {
+        "url": "http://jira.longsys.com/browse/LPDDR-345",
+        "create_date": "2020-10-21",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0011A0103 eMCP3 3208 常温常压视频 重启",
+        "status": "已完成"
+    },
+    "LPDDR-346": {
+        "url": "http://jira.longsys.com/browse/LPDDR-346",
+        "create_date": "2020-10-21",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0011A0103 eMCP3 3208 常温常压Monkey 卡死",
+        "status": "已完成"
+    },
+    "LPDDR-347": {
+        "url": "http://jira.longsys.com/browse/LPDDR-347",
+        "create_date": "2020-10-30",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0011A0103 eMCP3 3208 高温低压Testdram BIN2",
+        "status": "已完成"
+    },
+    "LPDDR-348": {
+        "url": "http://jira.longsys.com/browse/LPDDR-348",
+        "create_date": "2020-6-28",
+        "type": "故障",
+        "summary": "【老化不良】 ePOP3 0404 ZJC0011A0204 高温低压recovery出现黑屏",
+        "status": "已完成"
+    },
+    "LPDDR-349": {
+        "url": "http://jira.longsys.com/browse/LPDDR-349",
+        "create_date": "2020-6-28",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0011A0265 eMCP3 0808高温常压Testdram 黑屏",
+        "status": "已完成"
+    },
+    "LPDDR-350": {
+        "url": "http://jira.longsys.com/browse/LPDDR-350",
+        "create_date": "2020-6-28",
+        "type": "故障",
+        "summary": "【老化测试】ePOP3 0404 ZJC0011A0204常温常压reboot黑屏",
+        "status": "已完成"
+    },
+    "LPDDR-351": {
+        "url": "http://jira.longsys.com/browse/LPDDR-351",
+        "create_date": "2020-6-30",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0011A0265 eMCP3 0808高温低压Testdram 黑屏",
+        "status": "已完成"
+    },
+    "LPDDR-352": {
+        "url": "http://jira.longsys.com/browse/LPDDR-352",
+        "create_date": "2020-6-28",
+        "type": "故障",
+        "summary": "【老化测试】ePOP3 0808 ZJC0011A0214 低温高压视频 自动重启",
+        "status": "已完成"
+    },
+    "LPDDR-353": {
+        "url": "http://jira.longsys.com/browse/LPDDR-353",
+        "create_date": "2020-5-30",
+        "type": "故障",
+        "summary": "【量产不良】ePOP3 0808 ZJC0011A0214 390pcs中出现13pcs不良品",
+        "status": "已完成"
+    },
+    "LPDDR-354": {
+        "url": "http://jira.longsys.com/browse/LPDDR-354",
+        "create_date": "2020-6-30",
+        "type": "故障",
+        "summary": "【老化测试】ePOP3 0808 ZJC0011A0214 常温常压testdram BIN2",
+        "status": "已完成"
+    },
+    "LPDDR-355": {
+        "url": "http://jira.longsys.com/browse/LPDDR-355",
+        "create_date": "2020-9-5",
+        "type": "故障",
+        "summary": "【老化不良】 ZJC0011A0214 ePOP3 0808 高温低压Testdram 出现黑屏",
+        "status": "已完成"
+    },
+    "LPDDR-356": {
+        "url": "http://jira.longsys.com/browse/LPDDR-356",
+        "create_date": "2020-7-20",
+        "type": "故障",
+        "summary": "【老化测试】ePOP3 0808 ZJC0011A0214 高温低压testdram黑屏",
+        "status": "已完成"
+    },
+    "LPDDR-357": {
+        "url": "http://jira.longsys.com/browse/LPDDR-357",
+        "create_date": "2020-8-13",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0011A0203 ePOP3 0804 高温低压Recovery 黑屏",
+        "status": "已完成"
+    },
+    "LPDDR-358": {
+        "url": "http://jira.longsys.com/browse/LPDDR-358",
+        "create_date": "2020-8-13",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0011A0203 ePOP3 0804 高温高压Recovery BIN4",
+        "status": "已完成"
+    },
+    "LPDDR-359": {
+        "url": "http://jira.longsys.com/browse/LPDDR-359",
+        "create_date": "2021-2-3",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0011A0420 ZJC0011A0420 SM2736AD+K9GDGD8U0D-W000000+NK6CL256M32AKX-H1(KGD WAFER) eMCP3 16GB+8Gb",
+        "status": "已完成"
+    },
+    "LPDDR-360": {
+        "url": "http://jira.longsys.com/browse/LPDDR-360",
+        "create_date": "2020-8-12",
+        "type": "故障",
+        "summary": "【老化异常】ZJC0011A0192 ePOP 0804 1pcs高温低压recovery老化报BIN4",
+        "status": "已完成"
+    },
+    "LPDDR-361": {
+        "url": "http://jira.longsys.com/browse/LPDDR-361",
+        "create_date": "2019-8-21",
+        "type": "故障",
+        "summary": "【preloader测试异常】MPTool搭配支持多容量资源的preloader_V2.0.03存在不同资源样品可交叉测试的情况",
+        "status": "已完成"
+    },
+    "LPDDR-362": {
+        "url": "http://jira.longsys.com/browse/LPDDR-362",
+        "create_date": "2019-8-16",
+        "type": "故障",
+        "summary": "【测试工具异常】电流板因无法卡出异常大电流样品造成socket及样品表面过温融化",
+        "status": "已完成"
+    },
+    "LPDDR-363": {
+        "url": "http://jira.longsys.com/browse/LPDDR-363",
+        "create_date": "2019-8-9",
+        "type": "故障",
+        "summary": "【不良品平台筛选差异】MT8735筛出的LPDDR3 16Gb不良品使用P25平台测试无法筛出",
+        "status": "已完成"
+    },
+    "LPDDR-365": {
+        "url": "http://jira.longsys.com/browse/LPDDR-365",
+        "create_date": "2020-6-28",
+        "type": "故障",
+        "summary": "【测架低良率】ePOP3 P25测试架验收良率较低",
+        "status": "已完成"
+    },
+    "LPDDR-366": {
+        "url": "http://jira.longsys.com/browse/LPDDR-366",
+        "create_date": "2022-3-21",
+        "type": "故障",
+        "summary": "LPDDR3 8Gbit 過爐後測試 fail 1 ea",
+        "status": "已完成"
+    },
+    "LPDDR-367": {
+        "url": "http://jira.longsys.com/browse/LPDDR-367",
+        "create_date": "2020-8-1",
+        "type": "故障",
+        "summary": "【不良品分析】ZJC0010X0009 LPDDR3 8Gbit 13pcs pattern 不良",
+        "status": "已完成"
+    },
+    "LPDDR-368": {
+        "url": "http://jira.longsys.com/browse/LPDDR-368",
+        "create_date": "2020-8-1",
+        "type": "故障",
+        "summary": "【不良品分析】ZJC0010X0009 LPDDR3 8Gbit 1pcs 开机不良",
+        "status": "已完成"
+    },
+    "LPDDR-369": {
+        "url": "http://jira.longsys.com/browse/LPDDR-369",
+        "create_date": "2021-4-19",
+        "type": "故障",
+        "summary": "【量产不良】ZCJ0011A0489 eMCP3 16GB+8Gb Nanya A Die 1pcs FT1不良",
+        "status": "已完成"
+    },
+    "LPDDR-370": {
+        "url": "http://jira.longsys.com/browse/LPDDR-370",
+        "create_date": "2020-8-13",
+        "type": "故障",
+        "summary": "【量产不良】LPDDR3 8Gbit IDF0001A0089 测试100pcs 1pcs 开机不良",
+        "status": "已完成"
+    },
+    "LPDDR-371": {
+        "url": "http://jira.longsys.com/browse/LPDDR-371",
+        "create_date": "2019-12-17",
+        "type": "故障",
+        "summary": "【不良品分析】pattern不良(样机测试) ZJC0011A0103 eMCP3 221ball 32GB+8Gb（背崩）",
+        "status": "已完成"
+    },
+    "LPDDR-373": {
+        "url": "http://jira.longsys.com/browse/LPDDR-373",
+        "create_date": "2020-8-26",
+        "type": "故障",
+        "summary": "【不良品分析】pattern不良(样机测试) ZJC0011A0103 eMCP3 221ball 32GB+8Gb",
+        "status": "已完成"
+    },
+    "LPDDR-374": {
+        "url": "http://jira.longsys.com/browse/LPDDR-374",
+        "create_date": "2020-3-30",
+        "type": "故障",
+        "summary": "【不良品分析】ICD0426E0679 V01Mx1 LPDDR3 4Gb 老化不良样品分析（中山）",
+        "status": "已完成"
+    },
+    "LPDDR-375": {
+        "url": "http://jira.longsys.com/browse/LPDDR-375",
+        "create_date": "2020-7-8",
+        "type": "故障",
+        "summary": "【量产不良】eMCP3 0808 ZJC0011A0265 量产测试270pcs中16pcs不良品",
+        "status": "已完成"
+    },
+    "LPDDR-376": {
+        "url": "http://jira.longsys.com/browse/LPDDR-376",
+        "create_date": "2019-12-27",
+        "type": "故障",
+        "summary": "【不良品分析】pattern不良(样机测试) ZJC0011A0117 eMCP3 221ball 16GB+8Gb",
+        "status": "已完成"
+    },
+    "LPDDR-377": {
+        "url": "http://jira.longsys.com/browse/LPDDR-377",
+        "create_date": "2020-8-4",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0011A0067 eMCP3 16GB+8Gb（Nanya)搭配MT8735_V0.0.09量产测试出现pattern fail（type6）",
+        "status": "已完成"
+    },
+    "LPDDR-378": {
+        "url": "http://jira.longsys.com/browse/LPDDR-378",
+        "create_date": "2020-3-24",
+        "type": "故障",
+        "summary": "【不良品分析】pattern不良(样机测试) ZJC0011A0151 eMCP3 221ball 16GB+8Gb nanya-a-die",
+        "status": "已完成"
+    },
+    "LPDDR-379": {
+        "url": "http://jira.longsys.com/browse/LPDDR-379",
+        "create_date": "2020-3-10",
+        "type": "故障",
+        "summary": "【不良品分析】pattern不良(样机测试) ZJC0011A0077 eMCP3 221ball 16GB+8Gb",
+        "status": "已完成"
+    },
+    "LPDDR-380": {
+        "url": "http://jira.longsys.com/browse/LPDDR-380",
+        "create_date": "2019-11-22",
+        "type": "故障",
+        "summary": "【不良品分析】pattern不良(样机测试) ZJC0011A0118 eMCP3 221ball 16GB+16Gb",
+        "status": "已完成"
+    },
+    "LPDDR-381": {
+        "url": "http://jira.longsys.com/browse/LPDDR-381",
+        "create_date": "2020-2-27",
+        "type": "故障",
+        "summary": "【过炉后不良品分析】pattern不良(样机测试) ZJC0011A0158 eMCP3 221ball 16GB+16Gb nanya-a-die",
+        "status": "已完成"
+    },
+    "LPDDR-382": {
+        "url": "http://jira.longsys.com/browse/LPDDR-382",
+        "create_date": "2019-11-18",
+        "type": "故障",
+        "summary": "【不良品分析】pattern不良(样机测试) WHP0006D0729 221ball eMCP3 16GB+4Gb",
+        "status": "已完成"
+    },
+    "LPDDR-383": {
+        "url": "http://jira.longsys.com/browse/LPDDR-383",
+        "create_date": "2019-11-22",
+        "type": "故障",
+        "summary": "【不良品分析】pattern不良(样机测试) WHP0006D0729 221ball eMCP3 16GB+4Gb",
+        "status": "已完成"
+    },
+    "LPDDR-384": {
+        "url": "http://jira.longsys.com/browse/LPDDR-384",
+        "create_date": "2020-8-10",
+        "type": "故障",
+        "summary": "【不良品分析】开机不良（样机测试）H9JQ17ABJTBCUR-KUM eMCP3 2GB+16GB",
+        "status": "已完成"
+    },
+    "LPDDR-385": {
+        "url": "http://jira.longsys.com/browse/LPDDR-385",
+        "create_date": "2020-8-10",
+        "type": "故障",
+        "summary": "【不良品分析】开机不良（样机测试）16EMCP16-ML3GM610 eMCP3 2GB+16GB",
+        "status": "已完成"
+    },
+    "LPDDR-386": {
+        "url": "http://jira.longsys.com/browse/LPDDR-386",
+        "create_date": "2019-9-29",
+        "type": "故障",
+        "summary": "【不良品分析】开机不良（样机测试）TFPCB3SAA-NBD eMCP 2GB+32GB",
+        "status": "已完成"
+    },
+    "LPDDR-387": {
+        "url": "http://jira.longsys.com/browse/LPDDR-387",
+        "create_date": "2022-3-23",
+        "type": "客诉",
+        "summary": "嵌入式eMCP3208 天珑无法开机",
+        "status": "已完成"
+    },
+    "LPDDR-388": {
+        "url": "http://jira.longsys.com/browse/LPDDR-388",
+        "create_date": "2020-9-3",
+        "type": "客诉",
+        "summary": "华勤3224 eMCP Z2BM 在高通4250平台开关机测试dump问题",
+        "status": "已完成"
+    },
+    "LPDDR-389": {
+        "url": "http://jira.longsys.com/browse/LPDDR-389",
+        "create_date": "2020-8-19",
+        "type": "客诉",
+        "summary": "康佳MT6762搭配nanya 3216 eMCP无法下载",
+        "status": "已完成"
+    },
+    "LPDDR-391": {
+        "url": "http://jira.longsys.com/browse/LPDDR-391",
+        "create_date": "2021-11-5",
+        "type": "客诉",
+        "summary": "客户一联物联使用EMCP8+4出现死机",
+        "status": "已完成"
+    },
+    "LPDDR-393": {
+        "url": "http://jira.longsys.com/browse/LPDDR-393",
+        "create_date": "2021-6-2",
+        "type": "客诉",
+        "summary": "中诺4350搭配Z32M（eMCP 64+32）高温测试出现死机",
+        "status": "已完成"
+    },
+    "LPDDR-394": {
+        "url": "http://jira.longsys.com/browse/LPDDR-394",
+        "create_date": "2021-6-29",
+        "type": "客诉",
+        "summary": "INSTRA360, 安霸平台，产品运动相机，选用FEPRB3216-58A1926，无法升级，不良率7%",
+        "status": "已完成"
+    },
+    "LPDDR-395": {
+        "url": "http://jira.longsys.com/browse/LPDDR-395",
+        "create_date": "2020-5-22",
+        "type": "客诉",
+        "summary": "天珑K550项目 SC9832E+NCEPNCCM4-1608 休眠唤醒测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-396": {
+        "url": "http://jira.longsys.com/browse/LPDDR-396",
+        "create_date": "2021-9-13",
+        "type": "客诉",
+        "summary": "品网FLXC2004G-30不良品单体分析",
+        "status": "已完成"
+    },
+    "LPDDR-397": {
+        "url": "http://jira.longsys.com/browse/LPDDR-397",
+        "create_date": "2021-12-16",
+        "type": "客诉",
+        "summary": "天珑FLXC4006G-20压力测试Fail",
+        "status": "已完成"
+    },
+    "LPDDR-398": {
+        "url": "http://jira.longsys.com/browse/LPDDR-398",
+        "create_date": "2021-12-16",
+        "type": "客诉",
+        "summary": "中兴Z32M 外购封装片量产不良",
+        "status": "已完成"
+    },
+    "LPDDR-399": {
+        "url": "http://jira.longsys.com/browse/LPDDR-399",
+        "create_date": "2021-12-20",
+        "type": "客诉",
+        "summary": "酷赛LPDDR4X 4GB物料生产测试异常",
+        "status": "已完成"
+    },
+    "LPDDR-400": {
+        "url": "http://jira.longsys.com/browse/LPDDR-400",
+        "create_date": "2022-2-28",
+        "type": "客诉",
+        "summary": "天珑Z3B 3GB在MT6761平台待机功耗测试有部分机器电流超标",
+        "status": "已完成"
+    },
+    "LPDDR-401": {
+        "url": "http://jira.longsys.com/browse/LPDDR-401",
+        "create_date": "2021-12-14",
+        "type": "客诉",
+        "summary": "蚂蚁NCLDXC2MF00AG32在MT6785平台出现重启",
+        "status": "已完成"
+    },
+    "LPDDR-402": {
+        "url": "http://jira.longsys.com/browse/LPDDR-402",
+        "create_date": "2021-12-9",
+        "type": "客诉",
+        "summary": "中兴Z3BM新项目导入不良分析",
+        "status": "已完成"
+    },
+    "LPDDR-403": {
+        "url": "http://jira.longsys.com/browse/LPDDR-403",
+        "create_date": "2021-12-22",
+        "type": "客诉",
+        "summary": "易连汇通，MT8766平台,NCLDXC1MJ512M32 2GDDR花屏死机问题",
+        "status": "已完成"
+    },
+    "LPDDR-404": {
+        "url": "http://jira.longsys.com/browse/LPDDR-404",
+        "create_date": "2021-11-10",
+        "type": "客诉",
+        "summary": "感臻FL4C4002G-D9",
+        "status": "已完成"
+    },
+    "LPDDR-406": {
+        "url": "http://jira.longsys.com/browse/LPDDR-406",
+        "create_date": "2022-1-6",
+        "type": "客诉",
+        "summary": "禾苗Lava Z3 A25项目FLXC2003G-49性能差异",
+        "status": "已完成"
+    },
+    "LPDDR-407": {
+        "url": "http://jira.longsys.com/browse/LPDDR-407",
+        "create_date": "2021-12-30",
+        "type": "客诉",
+        "summary": "客户一联物联使用EMCP8+4出现死机",
+        "status": "已完成"
+    },
+    "LPDDR-408": {
+        "url": "http://jira.longsys.com/browse/LPDDR-408",
+        "create_date": "2021-8-27",
+        "type": "客诉",
+        "summary": "字节跳动 Z10N 2GB售后不良分析",
+        "status": "已完成"
+    },
+    "LPDDR-410": {
+        "url": "http://jira.longsys.com/browse/LPDDR-410",
+        "create_date": "2021-11-25",
+        "type": "客诉",
+        "summary": "禾苗6516项目MDXC1016G-M2 重启 apk 测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-412": {
+        "url": "http://jira.longsys.com/browse/LPDDR-412",
+        "create_date": "2021-9-16",
+        "type": "客诉",
+        "summary": "百能达8168+Z11L 2GB出现100%休眠无法唤醒异常",
+        "status": "已完成"
+    },
+    "LPDDR-413": {
+        "url": "http://jira.longsys.com/browse/LPDDR-413",
+        "create_date": "2021-12-30",
+        "type": "客诉",
+        "summary": "昕思达 3GB(Z2B)出现死机",
+        "status": "已完成"
+    },
+    "LPDDR-414": {
+        "url": "http://jira.longsys.com/browse/LPDDR-414",
+        "create_date": "2021-11-10",
+        "type": "客诉",
+        "summary": "天珑使用Z0AQ 3GB出现下载中断、无法校准等问题",
+        "status": "已完成"
+    },
+    "LPDDR-415": {
+        "url": "http://jira.longsys.com/browse/LPDDR-415",
+        "create_date": "2021-12-31",
+        "type": "客诉",
+        "summary": "天珑 3DV6 32GB RPMB读写数据不一致",
+        "status": "已完成"
+    },
+    "LPDDR-416": {
+        "url": "http://jira.longsys.com/browse/LPDDR-416",
+        "create_date": "2022-1-7",
+        "type": "客诉",
+        "summary": "视壮验证LPDDR4 2GB出现开机重启",
+        "status": "已完成"
+    },
+    "LPDDR-417": {
+        "url": "http://jira.longsys.com/browse/LPDDR-417",
+        "create_date": "2021-11-29",
+        "type": "客诉",
+        "summary": "FLXC2004G-30盖面物料出现播放视频重启",
+        "status": "已完成"
+    },
+    "LPDDR-418": {
+        "url": "http://jira.longsys.com/browse/LPDDR-418",
+        "create_date": "2022-1-13",
+        "type": "客诉",
+        "summary": "【嵌入式】亿道 Z20M 16Gb intel_Geminilake 不开机",
+        "status": "已完成"
+    },
+    "LPDDR-419": {
+        "url": "http://jira.longsys.com/browse/LPDDR-419",
+        "create_date": "2021-9-2",
+        "type": "客诉",
+        "summary": "芯加元 EMMC 16GB不良问题",
+        "status": "已完成"
+    },
+    "LPDDR-420": {
+        "url": "http://jira.longsys.com/browse/LPDDR-420",
+        "create_date": "2022-3-18",
+        "type": "客诉",
+        "summary": "QNAP Systems Alder lake平台1600MHz SPD文件需求，解决RMT和初始化失败问题",
+        "status": "已完成"
+    },
+    "LPDDR-421": {
+        "url": "http://jira.longsys.com/browse/LPDDR-421",
+        "create_date": "2021-10-18",
+        "type": "客诉",
+        "summary": "中诺FEPRF6432-58A1930量产出现1片无法开机",
+        "status": "已完成"
+    },
+    "LPDDR-422": {
+        "url": "http://jira.longsys.com/browse/LPDDR-422",
+        "create_date": "2022-1-7",
+        "type": "子任务",
+        "summary": "昕思达 3GB(Z2B)充电过程中出现死机",
+        "status": "已完成"
+    },
+    "LPDDR-423": {
+        "url": "http://jira.longsys.com/browse/LPDDR-423",
+        "create_date": "2022-3-8",
+        "type": "客诉",
+        "summary": "国光电子NCLD3B1128M32（LPDDR3）DDR压测bit-flip",
+        "status": "已完成"
+    },
+    "LPDDR-424": {
+        "url": "http://jira.longsys.com/browse/LPDDR-424",
+        "create_date": "2022-2-25",
+        "type": "客诉",
+        "summary": "氢联科技 FL4C4002G-D9 贴片后无法开机",
+        "status": "已完成"
+    },
+    "LPDDR-425": {
+        "url": "http://jira.longsys.com/browse/LPDDR-425",
+        "create_date": "2022-3-14",
+        "type": "客诉",
+        "summary": "【DRAM】禾苗6GB Z2BM 终端客诉不良",
+        "status": "已完成"
+    },
+    "LPDDR-426": {
+        "url": "http://jira.longsys.com/browse/LPDDR-426",
+        "create_date": "2021-9-15",
+        "type": "客诉",
+        "summary": "百度MT8768V平台FLXC2004G-30 OCM10X位翻转",
+        "status": "已完成"
+    },
+    "LPDDR-427": {
+        "url": "http://jira.longsys.com/browse/LPDDR-427",
+        "create_date": "2022-1-21",
+        "type": "客诉",
+        "summary": "【LPDDR4X】Z2BM 麦博韦尔 UMS9230 滚筒测试异常",
+        "status": "已完成"
+    },
+    "LPDDR-428": {
+        "url": "http://jira.longsys.com/browse/LPDDR-428",
+        "create_date": "2022-2-25",
+        "type": "客诉",
+        "summary": "嵌入式DRAM Z42天珑 MT6765平台不联机",
+        "status": "已完成"
+    },
+    "LPDDR-429": {
+        "url": "http://jira.longsys.com/browse/LPDDR-429",
+        "create_date": "2021-10-26",
+        "type": "客诉",
+        "summary": "禾苗PD6511WT 售后不良FLXC2004G-30",
+        "status": "已完成"
+    },
+    "LPDDR-431": {
+        "url": "http://jira.longsys.com/browse/LPDDR-431",
+        "create_date": "2022-3-15",
+        "type": "客诉",
+        "summary": "【嵌入式DRAM】天和致远k4F4 eMCP4颗粒分析",
+        "status": "已完成"
+    },
+    "LPDDR-433": {
+        "url": "http://jira.longsys.com/browse/LPDDR-433",
+        "create_date": "2022-3-29",
+        "type": "客诉",
+        "summary": "【DRAM】禾苗6519项目Z2BM NCLDXC1MF768M32单体异常问题",
+        "status": "已完成"
+    },
+    "LPDDR-434": {
+        "url": "http://jira.longsys.com/browse/LPDDR-434",
+        "create_date": "2022-2-28",
+        "type": "客诉",
+        "summary": "FLXC2004G-N1,在M客户产线使用6765平台测试时，出现1pcs user版本不开机的现象",
+        "status": "已完成"
+    },
+    "LPDDR-435": {
+        "url": "http://jira.longsys.com/browse/LPDDR-435",
+        "create_date": "2021-10-25",
+        "type": "客诉",
+        "summary": "禾苗6510 MDXC1024G-M3 2036批次量产不良",
+        "status": "已完成"
+    },
+    "LPDDR-436": {
+        "url": "http://jira.longsys.com/browse/LPDDR-436",
+        "create_date": "2021-5-24",
+        "type": "客诉",
+        "summary": "禾苗HVE10D项目FL4C2001G-D9 无法开机问题",
+        "status": "已完成"
+    },
+    "LPDDR-437": {
+        "url": "http://jira.longsys.com/browse/LPDDR-437",
+        "create_date": "2021-6-4",
+        "type": "客诉",
+        "summary": "禾苗MT8788 FLXC2002G-26 闪屏关机问题",
+        "status": "已完成"
+    },
+    "LPDDR-438": {
+        "url": "http://jira.longsys.com/browse/LPDDR-438",
+        "create_date": "2021-5-8",
+        "type": "客诉",
+        "summary": "禾苗MT8788 FLXC2002G-26 无法开机问题",
+        "status": "已完成"
+    },
+    "LPDDR-439": {
+        "url": "http://jira.longsys.com/browse/LPDDR-439",
+        "create_date": "2021-3-25",
+        "type": "客诉",
+        "summary": "商米K2 POS机 NCLDXC1MC512M32 概率性开机卡动画",
+        "status": "已完成"
+    },
+    "LPDDR-440": {
+        "url": "http://jira.longsys.com/browse/LPDDR-440",
+        "create_date": "2020-9-1",
+        "type": "客诉",
+        "summary": "鼎维尔 CCM4-0804产品在MT6580随机写性能差、MT6739平台概率性烧录异常",
+        "status": "已完成"
+    },
+    "LPDDR-441": {
+        "url": "http://jira.longsys.com/browse/LPDDR-441",
+        "create_date": "2021-6-12",
+        "type": "客诉",
+        "summary": "易连汇通，MT6771平台，FLXC2004G-30，客户反馈有客诉，现象概率性重启",
+        "status": "已完成"
+    },
+    "LPDDR-442": {
+        "url": "http://jira.longsys.com/browse/LPDDR-442",
+        "create_date": "2021-7-27",
+        "type": "客诉",
+        "summary": "天珑LPDDR4X 3GB NCLDXC2ME768M32不良分析",
+        "status": "已完成"
+    },
+    "LPDDR-443": {
+        "url": "http://jira.longsys.com/browse/LPDDR-443",
+        "create_date": "2021-5-13",
+        "type": "客诉",
+        "summary": "禾苗PD6511M售后不良FLXC2004G-30 单体异常问题",
+        "status": "已完成"
+    },
+    "LPDDR-444": {
+        "url": "http://jira.longsys.com/browse/LPDDR-444",
+        "create_date": "2021-6-9",
+        "type": "客诉",
+        "summary": "浩然盈科使用我司Z32资源4GB LPDDR4X，重启",
+        "status": "已完成"
+    },
+    "LPDDR-446": {
+        "url": "http://jira.longsys.com/browse/LPDDR-446",
+        "create_date": "2020-5-11",
+        "type": "客诉",
+        "summary": "快易典 MT8163V+KSI eMMC+B2512M32",
+        "status": "已完成"
+    },
+    "LPDDR-447": {
+        "url": "http://jira.longsys.com/browse/LPDDR-447",
+        "create_date": "2020-7-28",
+        "type": "客诉",
+        "summary": "中兴A3（P932F50）机器搭配hynix 8Gb资源 reboot测试出现卡死情况",
+        "status": "已完成"
+    },
+    "LPDDR-448": {
+        "url": "http://jira.longsys.com/browse/LPDDR-448",
+        "create_date": "2020-7-1",
+        "type": "客诉",
+        "summary": "6771平台UMCP4可烧录开机重启",
+        "status": "已完成"
+    },
+    "LPDDR-449": {
+        "url": "http://jira.longsys.com/browse/LPDDR-449",
+        "create_date": "2020-12-22",
+        "type": "客诉",
+        "summary": "天珑 V830 待机电流过大问题",
+        "status": "已完成"
+    },
+    "LPDDR-451": {
+        "url": "http://jira.longsys.com/browse/LPDDR-451",
+        "create_date": "2020-5-12",
+        "type": "客诉",
+        "summary": "禾苗生产4k有17pcs出现概率性重启",
+        "status": "已完成"
+    },
+    "LPDDR-453": {
+        "url": "http://jira.longsys.com/browse/LPDDR-453",
+        "create_date": "2020-7-16",
+        "type": "客诉",
+        "summary": "禾苗FEPNB1616-58KR124在高通SDM450平台可下载无法开机问题",
+        "status": "已完成"
+    },
+    "LPDDR-454": {
+        "url": "http://jira.longsys.com/browse/LPDDR-454",
+        "create_date": "2020-5-16",
+        "type": "客诉",
+        "summary": "麦博韦尔 VP571项目 NCLD3B1256M32 重启问题",
+        "status": "已完成"
+    },
+    "LPDDR-455": {
+        "url": "http://jira.longsys.com/browse/LPDDR-455",
+        "create_date": "2020-6-29",
+        "type": "客诉",
+        "summary": "中兴产线PDI检查（32台）发现一台故障机，经展锐分析DDR scan，DDR有问题",
+        "status": "已完成"
+    },
+    "LPDDR-456": {
+        "url": "http://jira.longsys.com/browse/LPDDR-456",
+        "create_date": "2020-6-30",
+        "type": "客诉",
+        "summary": "高通8953搭配LP3 2GB贴转板后无法开机无法测试si",
+        "status": "已完成"
+    },
+    "LPDDR-457": {
+        "url": "http://jira.longsys.com/browse/LPDDR-457",
+        "create_date": "2021-5-11",
+        "type": "客诉",
+        "summary": "禾苗MDXC1016G-M2老化fail，客户APK老化测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-458": {
+        "url": "http://jira.longsys.com/browse/LPDDR-458",
+        "create_date": "2021-3-1",
+        "type": "客诉",
+        "summary": "隆科MDXC2024G-M4无法正常烧录",
+        "status": "已完成"
+    },
+    "LPDDR-459": {
+        "url": "http://jira.longsys.com/browse/LPDDR-459",
+        "create_date": "2021-3-9",
+        "type": "客诉",
+        "summary": "禾苗E5331N FL3B1001G-39 老化测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-461": {
+        "url": "http://jira.longsys.com/browse/LPDDR-461",
+        "create_date": "2020-10-28",
+        "type": "客诉",
+        "summary": "MTK平台验证：1GB LPDDR4 Z10N资源在MTK6761平台开机进入安卓logo界面黑屏",
+        "status": "已完成"
+    },
+    "LPDDR-462": {
+        "url": "http://jira.longsys.com/browse/LPDDR-462",
+        "create_date": "2020-5-25",
+        "type": "客诉",
+        "summary": "沸石智能 在 MT6580上面使用 外购SS256M32V01MD1LPF-125PT 该颗物料在终端客户装机有出现开机界面自动重启或开机开logo的不良现象",
+        "status": "已完成"
+    },
+    "LPDDR-463": {
+        "url": "http://jira.longsys.com/browse/LPDDR-463",
+        "create_date": "2021-8-24",
+        "type": "客诉",
+        "summary": "感臻LPDDR4X 2GB FL4C4002G-D9主频1200M不稳定",
+        "status": "已完成"
+    },
+    "LPDDR-464": {
+        "url": "http://jira.longsys.com/browse/LPDDR-464",
+        "create_date": "2021-8-13",
+        "type": "客诉",
+        "summary": "禾苗JLQ平台 FL4C2001G-D9 低温压测reboot卡死问题",
+        "status": "已完成"
+    },
+    "LPDDR-465": {
+        "url": "http://jira.longsys.com/browse/LPDDR-465",
+        "create_date": "2021-4-14",
+        "type": "客诉",
+        "summary": "商米 POS机 NCLDXC1MC512M32 开机提示输入密码无法进入系统",
+        "status": "已完成"
+    },
+    "LPDDR-466": {
+        "url": "http://jira.longsys.com/browse/LPDDR-466",
+        "create_date": "2021-4-19",
+        "type": "客诉",
+        "summary": "禾苗6108项目 MDXC1016G-M2 单体异常问题",
+        "status": "已完成"
+    },
+    "LPDDR-467": {
+        "url": "http://jira.longsys.com/browse/LPDDR-467",
+        "create_date": "2021-3-16",
+        "type": "客诉",
+        "summary": "禾苗E6005N项目MDXC1016G-M2待机功耗偏高问题",
+        "status": "已完成"
+    },
+    "LPDDR-468": {
+        "url": "http://jira.longsys.com/browse/LPDDR-468",
+        "create_date": "2021-8-17",
+        "type": "客诉",
+        "summary": "华勤SP3115 NCLDXC1MJ512M32 黄屏重启问题",
+        "status": "已完成"
+    },
+    "LPDDR-469": {
+        "url": "http://jira.longsys.com/browse/LPDDR-469",
+        "create_date": "2021-8-19",
+        "type": "客诉",
+        "summary": "华勤SA5800 FLXC2002G-26 开机重启问题",
+        "status": "已完成"
+    },
+    "LPDDR-470": {
+        "url": "http://jira.longsys.com/browse/LPDDR-470",
+        "create_date": "2021-9-8",
+        "type": "子任务",
+        "summary": "华勤SP3115 NCLDXC1MJ512M32 黄屏重启问题",
+        "status": "已完成"
+    },
+    "LPDDR-471": {
+        "url": "http://jira.longsys.com/browse/LPDDR-471",
+        "create_date": "2021-9-26",
+        "type": "子任务",
+        "summary": "客诉-华勤SA5800",
+        "status": "已完成"
+    },
+    "LPDDR-472": {
+        "url": "http://jira.longsys.com/browse/LPDDR-472",
+        "create_date": "2020-5-25",
+        "type": "客诉",
+        "summary": "沸石_MT6580调试2psc V91M 视频老化高温重启",
+        "status": "已完成"
+    },
+    "LPDDR-474": {
+        "url": "http://jira.longsys.com/browse/LPDDR-474",
+        "create_date": "2020-8-24",
+        "type": "客诉",
+        "summary": "禾苗E6005N项目 SC9863A 搭配MDXC1024G-M3待机电流超标",
+        "status": "已完成"
+    },
+    "LPDDR-475": {
+        "url": "http://jira.longsys.com/browse/LPDDR-475",
+        "create_date": "2021-2-1",
+        "type": "客诉",
+        "summary": "隆科MDXC2024G-M4(Z0AQ）在MT8183上自动重启",
+        "status": "已完成"
+    },
+    "LPDDR-476": {
+        "url": "http://jira.longsys.com/browse/LPDDR-476",
+        "create_date": "2021-8-4",
+        "type": "客诉",
+        "summary": "天珑FORESEE FLXC2004G-30不良",
+        "status": "已完成"
+    },
+    "LPDDR-477": {
+        "url": "http://jira.longsys.com/browse/LPDDR-477",
+        "create_date": "2021-5-27",
+        "type": "客诉",
+        "summary": "FLXC4004-26,在RK3568平台上，开机重启，老化重启",
+        "status": "已完成"
+    },
+    "LPDDR-478": {
+        "url": "http://jira.longsys.com/browse/LPDDR-478",
+        "create_date": "2020-5-26",
+        "type": "客诉",
+        "summary": "隆科Z0AQ 3GB在MT8183V（MT6771）开机重启或开机进入输密码界面",
+        "status": "已完成"
+    },
+    "LPDDR-479": {
+        "url": "http://jira.longsys.com/browse/LPDDR-479",
+        "create_date": "2020-9-29",
+        "type": "客诉",
+        "summary": "华勤MT6761+NCLDXC1MF768M32下载fail",
+        "status": "已完成"
+    },
+    "LPDDR-480": {
+        "url": "http://jira.longsys.com/browse/LPDDR-480",
+        "create_date": "2021-7-7",
+        "type": "客诉",
+        "summary": "禾苗MT8788 FLXC2002G-26 低温-20℃关机问题",
+        "status": "已完成"
+    },
+    "LPDDR-481": {
+        "url": "http://jira.longsys.com/browse/LPDDR-481",
+        "create_date": "2021-4-7",
+        "type": "客诉",
+        "summary": "天珑T610搭配3GB LP4X（NCLDXC2ME768M32)）能正常烧录，不能正常开机",
+        "status": "已完成"
+    },
+    "LPDDR-482": {
+        "url": "http://jira.longsys.com/browse/LPDDR-482",
+        "create_date": "2021-5-20",
+        "type": "客诉",
+        "summary": "天珑FLXC2004G-30（Z32M）在MT6765平台高温65度测试卡死",
+        "status": "已完成"
+    },
+    "LPDDR-484": {
+        "url": "http://jira.longsys.com/browse/LPDDR-484",
+        "create_date": "2020-10-30",
+        "type": "客诉",
+        "summary": "天珑V380样机测试，SC7731E+NCLD3B1256M32出现卡屏，待机重启问题",
+        "status": "已完成"
+    },
+    "LPDDR-485": {
+        "url": "http://jira.longsys.com/browse/LPDDR-485",
+        "create_date": "2021-6-22",
+        "type": "客诉",
+        "summary": "天和致远 FEPNA1608-58KR124 开机卡log",
+        "status": "已完成"
+    },
+    "LPDDR-487": {
+        "url": "http://jira.longsys.com/browse/LPDDR-487",
+        "create_date": "2021-3-18",
+        "type": "客诉",
+        "summary": "迈迪杰 NCLDXC2MG512M32 容量识别减半",
+        "status": "已完成"
+    },
+    "LPDDR-490": {
+        "url": "http://jira.longsys.com/browse/LPDDR-490",
+        "create_date": "2021-6-29",
+        "type": "客诉",
+        "summary": "车载客户极鑫，平台AMLOGIC， 贴上FLXC2002G-26死机",
+        "status": "已完成"
+    },
+    "LPDDR-491": {
+        "url": "http://jira.longsys.com/browse/LPDDR-491",
+        "create_date": "2021-4-12",
+        "type": "客诉",
+        "summary": "蚂蚁智能无法烧录",
+        "status": "已完成"
+    },
+    "LPDDR-492": {
+        "url": "http://jira.longsys.com/browse/LPDDR-492",
+        "create_date": "2021-7-27",
+        "type": "客诉",
+        "summary": "优利麦克验证LPDDR4X 4GB无法下载",
+        "status": "已完成"
+    },
+    "LPDDR-493": {
+        "url": "http://jira.longsys.com/browse/LPDDR-493",
+        "create_date": "2020-10-22",
+        "type": "客诉",
+        "summary": "欣联使用FLXC2004G-30搭配SC9863A平台无法过70℃以上高温老化",
+        "status": "已完成"
+    },
+    "LPDDR-495": {
+        "url": "http://jira.longsys.com/browse/LPDDR-495",
+        "create_date": "2020-12-22",
+        "type": "客诉",
+        "summary": "九州华科 NCLDXC1MC512M32 重启",
+        "status": "已完成"
+    },
+    "LPDDR-497": {
+        "url": "http://jira.longsys.com/browse/LPDDR-497",
+        "create_date": "2021-9-1",
+        "type": "客诉",
+        "summary": "闻泰FEPRF6432-58A1930产线生产100%无法开机",
+        "status": "已完成"
+    },
+    "LPDDR-499": {
+        "url": "http://jira.longsys.com/browse/LPDDR-499",
+        "create_date": "2022-1-13",
+        "type": "客诉",
+        "summary": "沃特沃德外购Z32 4GB+ISOCOM EMMC 128GB客诉",
+        "status": "已完成"
+    },
+    "LPDDR-501": {
+        "url": "http://jira.longsys.com/browse/LPDDR-501",
+        "create_date": "2021-5-27",
+        "type": "客诉",
+        "summary": "沃特沃德外购EMCP客诉",
+        "status": "已完成"
+    },
+    "LPDDR-502": {
+        "url": "http://jira.longsys.com/browse/LPDDR-502",
+        "create_date": "2021-10-22",
+        "type": "客诉",
+        "summary": "LPDDR4x 3GB造成客戶手機當機 Phone hang - very slow loading",
+        "status": "已完成"
+    },
+    "LPDDR-503": {
+        "url": "http://jira.longsys.com/browse/LPDDR-503",
+        "create_date": "2021-12-24",
+        "type": "客诉",
+        "summary": "壓力測試MD5 fail",
+        "status": "已完成"
+    },
+    "LPDDR-504": {
+        "url": "http://jira.longsys.com/browse/LPDDR-504",
+        "create_date": "2021-6-1",
+        "type": "客诉",
+        "summary": "NCLDXC1MG256M32 read VOH幅度问题",
+        "status": "已完成"
+    },
+    "LPDDR-505": {
+        "url": "http://jira.longsys.com/browse/LPDDR-505",
+        "create_date": "2021-11-17",
+        "type": "客诉",
+        "summary": "闻泰T606跌落测试机器出现花屏",
+        "status": "已完成"
+    },
+    "LPDDR-506": {
+        "url": "http://jira.longsys.com/browse/LPDDR-506",
+        "create_date": "2020-11-16",
+        "type": "客诉",
+        "summary": "闻泰4GB Z32M整机待机电流偏大",
+        "status": "已完成"
+    },
+    "LPDDR-507": {
+        "url": "http://jira.longsys.com/browse/LPDDR-507",
+        "create_date": "2020-9-16",
+        "type": "客诉",
+        "summary": "佳润鑫",
+        "status": "已完成"
+    },
+    "LPDDR-508": {
+        "url": "http://jira.longsys.com/browse/LPDDR-508",
+        "create_date": "2020-4-27",
+        "type": "客诉",
+        "summary": "闻泰MT6762 NCLDXC1MF768M32+NCLDXC1MC512M32 时序兼容问题",
+        "status": "已完成"
+    },
+    "LPDDR-509": {
+        "url": "http://jira.longsys.com/browse/LPDDR-509",
+        "create_date": "2020-6-30",
+        "type": "客诉",
+        "summary": "易景 7731e平台搭配V01M 2GB LP3出现开机定屏、自动重启",
+        "status": "已完成"
+    },
+    "LPDDR-510": {
+        "url": "http://jira.longsys.com/browse/LPDDR-510",
+        "create_date": "2021-12-21",
+        "type": "客诉",
+        "summary": "立臻NCLDXC1MF768M32压力测试不过",
+        "status": "已完成"
+    },
+    "LPDDR-511": {
+        "url": "http://jira.longsys.com/browse/LPDDR-511",
+        "create_date": "2021-1-20",
+        "type": "客诉",
+        "summary": "传音_NCLDXC1MC512M32_不开机",
+        "status": "已完成"
+    },
+    "LPDDR-512": {
+        "url": "http://jira.longsys.com/browse/LPDDR-512",
+        "create_date": "2021-5-27",
+        "type": "客诉",
+        "summary": "闻泰MT6762+Z2BM随机重启",
+        "status": "已完成"
+    },
+    "LPDDR-513": {
+        "url": "http://jira.longsys.com/browse/LPDDR-513",
+        "create_date": "2021-11-8",
+        "type": "客诉",
+        "summary": "四维智联Flashtool测试memorytest 固定地址Fail",
+        "status": "已完成"
+    },
+    "LPDDR-514": {
+        "url": "http://jira.longsys.com/browse/LPDDR-514",
+        "create_date": "2020-4-18",
+        "type": "客诉",
+        "summary": "易景SA501 8Gb LPDDR3 孟加拉组装 定屏+重启 问题",
+        "status": "已完成"
+    },
+    "LPDDR-515": {
+        "url": "http://jira.longsys.com/browse/LPDDR-515",
+        "create_date": "2020-11-10",
+        "type": "客诉",
+        "summary": "杭途Amlogic A311D使用FLXC2004G-30只能识别2GB容量",
+        "status": "已完成"
+    },
+    "LPDDR-516": {
+        "url": "http://jira.longsys.com/browse/LPDDR-516",
+        "create_date": "2021-3-9",
+        "type": "客诉",
+        "summary": "FL4C2001G-D9 1GB LPDDR4 在展讯平台9863A测试Fail",
+        "status": "已完成"
+    },
+    "LPDDR-517": {
+        "url": "http://jira.longsys.com/browse/LPDDR-517",
+        "create_date": "2021-11-8",
+        "type": "客诉",
+        "summary": "海信使用Z31M贴片后无法开机",
+        "status": "已完成"
+    },
+    "LPDDR-518": {
+        "url": "http://jira.longsys.com/browse/LPDDR-518",
+        "create_date": "2021-4-22",
+        "type": "客诉",
+        "summary": "龙旗NCLDXC1MG256M32单板温冲测试不开机",
+        "status": "已完成"
+    },
+    "LPDDR-519": {
+        "url": "http://jira.longsys.com/browse/LPDDR-519",
+        "create_date": "2020-6-4",
+        "type": "客诉",
+        "summary": "传音L6501_开机重启",
+        "status": "已完成"
+    },
+    "LPDDR-520": {
+        "url": "http://jira.longsys.com/browse/LPDDR-520",
+        "create_date": "2021-3-10",
+        "type": "客诉",
+        "summary": "传音_NCLDXC1MF768M32_Dram test fail",
+        "status": "已完成"
+    },
+    "LPDDR-521": {
+        "url": "http://jira.longsys.com/browse/LPDDR-521",
+        "create_date": "2021-12-22",
+        "type": "客诉",
+        "summary": "FLXC2002G-N2在RK3399上眼图测试有问题",
+        "status": "已完成"
+    },
+    "LPDDR-522": {
+        "url": "http://jira.longsys.com/browse/LPDDR-522",
+        "create_date": "2022-1-5",
+        "type": "客诉",
+        "summary": "威聯通LPDDR4x FLXC2004G-N1 無法BOOT",
+        "status": "已完成"
+    },
+    "LPDDR-523": {
+        "url": "http://jira.longsys.com/browse/LPDDR-523",
+        "create_date": "2021-11-18",
+        "type": "客诉",
+        "summary": "LPDDR4x 2GB 展銳降頻233MHZ issue",
+        "status": "已完成"
+    },
+    "LPDDR-524": {
+        "url": "http://jira.longsys.com/browse/LPDDR-524",
+        "create_date": "2020-11-5",
+        "type": "客诉",
+        "summary": "易景SA501 NCLD3B1256M32 终端客诉问题",
+        "status": "已完成"
+    },
+    "LPDDR-525": {
+        "url": "http://jira.longsys.com/browse/LPDDR-525",
+        "create_date": "2020-6-8",
+        "type": "客诉",
+        "summary": "沃特沃德LPDDR3 1GB（HY-外购）高温70度测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-526": {
+        "url": "http://jira.longsys.com/browse/LPDDR-526",
+        "create_date": "2022-1-1",
+        "type": "客诉",
+        "summary": "讯龙使用MLXW2002G-47无法刷机",
+        "status": "已完成"
+    },
+    "LPDDR-527": {
+        "url": "http://jira.longsys.com/browse/LPDDR-527",
+        "create_date": "2020-12-21",
+        "type": "客诉",
+        "summary": "TCL_Transformer_FLXC2004G-30_Robust测试失败",
+        "status": "已完成"
+    },
+    "LPDDR-528": {
+        "url": "http://jira.longsys.com/browse/LPDDR-528",
+        "create_date": "2021-9-8",
+        "type": "客诉",
+        "summary": "九联 FLXC4004G-N2 调试异常，反馈无法烧录",
+        "status": "已完成"
+    },
+    "LPDDR-529": {
+        "url": "http://jira.longsys.com/browse/LPDDR-529",
+        "create_date": "2021-3-15",
+        "type": "客诉",
+        "summary": "闻泰 MT6765平台Z32M手机在做休眠唤醒压力测试，出现会出现概率性重启",
+        "status": "已完成"
+    },
+    "LPDDR-530": {
+        "url": "http://jira.longsys.com/browse/LPDDR-530",
+        "create_date": "2021-12-2",
+        "type": "客诉",
+        "summary": "创维LPDDR4X 1GB物料NCLDXC1MG256M32出现机器老化重启",
+        "status": "已完成"
+    },
+    "LPDDR-531": {
+        "url": "http://jira.longsys.com/browse/LPDDR-531",
+        "create_date": "2020-12-17",
+        "type": "客诉",
+        "summary": "传音L6501_NCLDXC1MC512M32休眠电流超标",
+        "status": "已完成"
+    },
+    "LPDDR-532": {
+        "url": "http://jira.longsys.com/browse/LPDDR-532",
+        "create_date": "2021-8-24",
+        "type": "客诉",
+        "summary": "恒晨，MT8167平台，死机重启",
+        "status": "已完成"
+    },
+    "LPDDR-533": {
+        "url": "http://jira.longsys.com/browse/LPDDR-533",
+        "create_date": "2021-3-24",
+        "type": "客诉",
+        "summary": "锐伟FEPRF6432-58A1930 无法开机问题",
+        "status": "已完成"
+    },
+    "LPDDR-534": {
+        "url": "http://jira.longsys.com/browse/LPDDR-534",
+        "create_date": "2022-1-5",
+        "type": "客诉",
+        "summary": "嵌入式DRAM MLXW2002G-47 雍慧时序问题",
+        "status": "已完成"
+    },
+    "LPDDR-535": {
+        "url": "http://jira.longsys.com/browse/LPDDR-535",
+        "create_date": "2020-11-26",
+        "type": "客诉",
+        "summary": "闻泰T99651 NCLDXC1MC512M32终端开机丢失OS问题",
+        "status": "已完成"
+    },
+    "LPDDR-536": {
+        "url": "http://jira.longsys.com/browse/LPDDR-536",
+        "create_date": "2021-8-23",
+        "type": "客诉",
+        "summary": "NCLDXC1MF768M32在T310出现固定地址报错",
+        "status": "已完成"
+    },
+    "LPDDR-537": {
+        "url": "http://jira.longsys.com/browse/LPDDR-537",
+        "create_date": "2022-1-7",
+        "type": "客诉",
+        "summary": "深圳思凯联科技有限公司客户煲机测试后，发现播放视频会死机，DDR报错。 附件是相关的LOG。不良比例较高35%，烦请帮忙安排FAE分析一下。",
+        "status": "已完成"
+    },
+    "LPDDR-538": {
+        "url": "http://jira.longsys.com/browse/LPDDR-538",
+        "create_date": "2021-8-24",
+        "type": "客诉",
+        "summary": "NCLDXC1MF768M32在9863上测试高温DDR SCAN报错",
+        "status": "已完成"
+    },
+    "LPDDR-539": {
+        "url": "http://jira.longsys.com/browse/LPDDR-539",
+        "create_date": "2021-7-26",
+        "type": "客诉",
+        "summary": "TCL 手机项目LPDDR4X 3GB客退不良品分析",
+        "status": "已完成"
+    },
+    "LPDDR-540": {
+        "url": "http://jira.longsys.com/browse/LPDDR-540",
+        "create_date": "2021-9-8",
+        "type": "客诉",
+        "summary": "TCL Prague项目FLXC2004G-30 自动重启问题",
+        "status": "已完成"
+    },
+    "LPDDR-541": {
+        "url": "http://jira.longsys.com/browse/LPDDR-541",
+        "create_date": "2021-11-8",
+        "type": "客诉",
+        "summary": "TCL在MT6739平台使用NCLD3B1256M32，reboot测试概率性无法开机",
+        "status": "已完成"
+    },
+    "LPDDR-542": {
+        "url": "http://jira.longsys.com/browse/LPDDR-542",
+        "create_date": "2021-12-6",
+        "type": "子任务",
+        "summary": "FLXC2002G-N2在RK3399上硬件眼图测试有问题",
+        "status": "已完成"
+    },
+    "LPDDR-543": {
+        "url": "http://jira.longsys.com/browse/LPDDR-543",
+        "create_date": "2022-3-7",
+        "type": "客诉",
+        "summary": "【嵌入式DRAM】威强电 FLXC2002G-N2 SPD",
+        "status": "已完成"
+    },
+    "LPDDR-544": {
+        "url": "http://jira.longsys.com/browse/LPDDR-544",
+        "create_date": "2021-9-13",
+        "type": "客诉",
+        "summary": "闻泰T19655 FLXC4006G-20 展锐T606无法开机问题",
+        "status": "已完成"
+    },
+    "LPDDR-545": {
+        "url": "http://jira.longsys.com/browse/LPDDR-545",
+        "create_date": "2022-3-23",
+        "type": "客诉",
+        "summary": "【DRAM】 展锐7520平台 FLXC2004G-30 Z32M+1P颗粒不良",
+        "status": "已完成"
+    },
+    "LPDDR-547": {
+        "url": "http://jira.longsys.com/browse/LPDDR-547",
+        "create_date": "2022-3-18",
+        "type": "客诉",
+        "summary": "JSP平台 N1-4G：1600MHz 1466.5MHz 1200MHz SPD需求",
+        "status": "已完成"
+    },
+    "LPDDR-548": {
+        "url": "http://jira.longsys.com/browse/LPDDR-548",
+        "create_date": "2022-4-2",
+        "type": "客诉",
+        "summary": "中诺M6101项目出现一台反复重启机器",
+        "status": "已完成"
+    },
+    "LPDDR-549": {
+        "url": "http://jira.longsys.com/browse/LPDDR-549",
+        "create_date": "2022-4-7",
+        "type": "客诉",
+        "summary": "百度健身镜项目MT8768V平台FLXC2004G-30售后不良",
+        "status": "已完成"
+    },
+    "LPDDR-550": {
+        "url": "http://jira.longsys.com/browse/LPDDR-550",
+        "create_date": "2022-1-10",
+        "type": "客诉",
+        "summary": "嵌入式eMMC NCEMAD9D-16G雍慧市场返修率达10%",
+        "status": "已完成"
+    },
+    "LPDDR-551": {
+        "url": "http://jira.longsys.com/browse/LPDDR-551",
+        "create_date": "2022-4-8",
+        "type": "客诉",
+        "summary": "【DRAM】华勤MT8766V FLXC2003G-49 Z3BM跌落测试 疑似虚焊",
+        "status": "已完成"
+    },
+    "LPDDR-552": {
+        "url": "http://jira.longsys.com/browse/LPDDR-552",
+        "create_date": "2022-5-25",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0011S0022 LPDDR4X Z42Mx2 64GB+32Gb 2pcs 常温常压、高温常压过炉前初始化不良",
+        "status": "已完成"
+    },
+    "LPDDR-553": {
+        "url": "http://jira.longsys.com/browse/LPDDR-553",
+        "create_date": "2022-4-18",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C0255 LPDDR4X 24Gb 5pcs 功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-558": {
+        "url": "http://jira.longsys.com/browse/LPDDR-558",
+        "create_date": "2022-4-15",
+        "type": "客诉",
+        "summary": "立臻NCLDXC1MF768M32+UIS7862量产不良1%",
+        "status": "已完成"
+    },
+    "LPDDR-559": {
+        "url": "http://jira.longsys.com/browse/LPDDR-559",
+        "create_date": "2022-4-20",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C0323 LPDDR4X Z42N 32Gb 5pcs 常温常压、高温常压过炉前初始化不良",
+        "status": "已完成"
+    },
+    "LPDDR-560": {
+        "url": "http://jira.longsys.com/browse/LPDDR-560",
+        "create_date": "2022-5-9",
+        "type": "故障",
+        "summary": "【老化低温测试降频1600】ZJC0010C0286 LPDDR4X Z42N 32Gb 7pcs 老化低温测试降频1600 4+4X模式",
+        "status": "已完成"
+    },
+    "LPDDR-561": {
+        "url": "http://jira.longsys.com/browse/LPDDR-561",
+        "create_date": "2022-4-21",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0011S0027 eMCP4X Z42Mx2 64GB+32Gb 2pcs 常温常压功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-562": {
+        "url": "http://jira.longsys.com/browse/LPDDR-562",
+        "create_date": "2022-4-22",
+        "type": "故障",
+        "summary": "【功能测试不良】Z2BM LPDDR4X 24Gb（万年芯） 137pcs 功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-563": {
+        "url": "http://jira.longsys.com/browse/LPDDR-563",
+        "create_date": "2022-4-24",
+        "type": "客诉",
+        "summary": "FLXC2004G-30,在客户鼎微出现客诉，不良现象重启卡死",
+        "status": "已完成"
+    },
+    "LPDDR-565": {
+        "url": "http://jira.longsys.com/browse/LPDDR-565",
+        "create_date": "2022-5-11",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4】商米RK3399平台Z21M资源接双屏老化死机、重启",
+        "status": "已完成"
+    },
+    "LPDDR-568": {
+        "url": "http://jira.longsys.com/browse/LPDDR-568",
+        "create_date": "2022-5-11",
+        "type": "故障",
+        "summary": "【老化不良】Z2BM LPDDR4X 24Gb（万年芯） 1600MHz 低温高压testdram不良",
+        "status": "已完成"
+    },
+    "LPDDR-569": {
+        "url": "http://jira.longsys.com/browse/LPDDR-569",
+        "create_date": "2022-5-13",
+        "type": "故障",
+        "summary": "【功能测试不良】IDF0001A0617 LPDDR4X Z42M 32Gb 1pcs 常温常压、高温常压过炉前初始化不良",
+        "status": "已完成"
+    },
+    "LPDDR-570": {
+        "url": "http://jira.longsys.com/browse/LPDDR-570",
+        "create_date": "2022-5-16",
+        "type": "故障",
+        "summary": "【量产不良】ZJC0011S0026 8GB+4Gb ePOP3 1ps 过炉前良率,过炉后良率不良",
+        "status": "已完成"
+    },
+    "LPDDR-571": {
+        "url": "http://jira.longsys.com/browse/LPDDR-571",
+        "create_date": "2022-5-19",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010C0184 Z2BM LPDDR4X 24Gb 高温常压testdram",
+        "status": "已完成"
+    },
+    "LPDDR-574": {
+        "url": "http://jira.longsys.com/browse/LPDDR-574",
+        "create_date": "2022-5-26",
+        "type": "故障",
+        "summary": "【老化低温测试不良】IDF0001A0260 LPDDR4X 外购Z3BM 24Gb 1pcs 老化低温高压随机填充4X",
+        "status": "已完成"
+    },
+    "LPDDR-575": {
+        "url": "http://jira.longsys.com/browse/LPDDR-575",
+        "create_date": "2022-5-20",
+        "type": "客诉",
+        "summary": "客户易连汇通,网课机项目，FLXC2004G-30，售后不良",
+        "status": "已完成"
+    },
+    "LPDDR-576": {
+        "url": "http://jira.longsys.com/browse/LPDDR-576",
+        "create_date": "2022-6-22",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0011S0025 8GB+8Gb ePOP3 1ps 低温高压reboot不良",
+        "status": "已完成"
+    },
+    "LPDDR-577": {
+        "url": "http://jira.longsys.com/browse/LPDDR-577",
+        "create_date": "2022-5-23",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0011S0057 eMCP4X Z42Mx2 128GB+32Gb 2pcs 常温常压，高温常压功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-578": {
+        "url": "http://jira.longsys.com/browse/LPDDR-578",
+        "create_date": "2022-5-24",
+        "type": "故障",
+        "summary": "过炉前功能测试不良-ZJC0010C0309 Z01M LPDDR4 24Gbit",
+        "status": "已完成"
+    },
+    "LPDDR-579": {
+        "url": "http://jira.longsys.com/browse/LPDDR-579",
+        "create_date": "2022-5-28",
+        "type": "故障",
+        "summary": "【良率不良】ZJC0011S0025 8GB+8Gb ePOP3 1ps 良率不良",
+        "status": "已完成"
+    },
+    "LPDDR-580": {
+        "url": "http://jira.longsys.com/browse/LPDDR-580",
+        "create_date": "2022-5-25",
+        "type": "故障",
+        "summary": "【老化低温测试不良】ZJC0010C0323 LPDDR4X Z42N 32Gb 1pcs 老化低温高压视频4X",
+        "status": "已完成"
+    },
+    "LPDDR-581": {
+        "url": "http://jira.longsys.com/browse/LPDDR-581",
+        "create_date": "2022-5-25",
+        "type": "故障",
+        "summary": "【老化高温测试不良】ZJC0010C0208 LPDDR4X Z32+Z31M 48Gb 1pcs 老化高温低压视频4X",
+        "status": "已完成"
+    },
+    "LPDDR-582": {
+        "url": "http://jira.longsys.com/browse/LPDDR-582",
+        "create_date": "2022-5-30",
+        "type": "故障",
+        "summary": "【老化不良】Z42M IDF0001A0617 LPDDR4X 32Gb 1866MHz 低温高压Reboot测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-583": {
+        "url": "http://jira.longsys.com/browse/LPDDR-583",
+        "create_date": "2022-5-30",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4X】华勤MT8766平台Z21M资源VOH澄清",
+        "status": "已完成"
+    },
+    "LPDDR-584": {
+        "url": "http://jira.longsys.com/browse/LPDDR-584",
+        "create_date": "2022-6-9",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0011S0063 eMCP4x Z42Mx2 64GB+32Gb 2pcs 常温常压、高温常压过炉前功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-586": {
+        "url": "http://jira.longsys.com/browse/LPDDR-586",
+        "create_date": "2022-6-8",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4X】百度R818平台Z20M资源老化测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-587": {
+        "url": "http://jira.longsys.com/browse/LPDDR-587",
+        "create_date": "2022-6-11",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR3】天珑老化测试，DDR Fail不开机、不下载",
+        "status": "已完成"
+    },
+    "LPDDR-588": {
+        "url": "http://jira.longsys.com/browse/LPDDR-588",
+        "create_date": "2022-6-13",
+        "type": "客诉",
+        "summary": "【嵌入式DRAM】Z42M(1P+Prime) 麦博韦尔 T606 开机卡logo",
+        "status": "已完成"
+    },
+    "LPDDR-589": {
+        "url": "http://jira.longsys.com/browse/LPDDR-589",
+        "create_date": "2022-6-21",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4】商米CT541项目RK3399平台Z42M资源老化卡logo、CPU老化fail及眼图差",
+        "status": "已完成"
+    },
+    "LPDDR-590": {
+        "url": "http://jira.longsys.com/browse/LPDDR-590",
+        "create_date": "2022-6-24",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4X】禾苗G35平台MDXC1016G-M2试产反复重启",
+        "status": "已完成"
+    },
+    "LPDDR-591": {
+        "url": "http://jira.longsys.com/browse/LPDDR-591",
+        "create_date": "2022-6-29",
+        "type": "故障",
+        "summary": "过炉前功能测试不良-ZJC0010C0444 Z11N+Z10M LPDDR4X 24Gb",
+        "status": "已完成"
+    },
+    "LPDDR-592": {
+        "url": "http://jira.longsys.com/browse/LPDDR-592",
+        "create_date": "2022-6-22",
+        "type": "故障",
+        "summary": "【老化不良】IDF0001A0260 Z3BM LPDDR4X 24Gb（第二批）1866MHz 低温高压testdram 4X不良",
+        "status": "已完成"
+    },
+    "LPDDR-593": {
+        "url": "http://jira.longsys.com/browse/LPDDR-593",
+        "create_date": "2022-6-22",
+        "type": "故障",
+        "summary": "【老化不良】IDF0001A0260 Z3BM LPDDR4X 24Gb（第二批）1866MHz 低温高压变频不良",
+        "status": "已完成"
+    },
+    "LPDDR-595": {
+        "url": "http://jira.longsys.com/browse/LPDDR-595",
+        "create_date": "2022-6-27",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4X】芯发威达Japerlake平台Z21N资源RMT测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-596": {
+        "url": "http://jira.longsys.com/browse/LPDDR-596",
+        "create_date": "2022-6-27",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C0125 Z11L LPDDR4X 16Gbit 过炉前 常温常压功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-597": {
+        "url": "http://jira.longsys.com/browse/LPDDR-597",
+        "create_date": "2022-6-28",
+        "type": "故障",
+        "summary": "【功能良率测试】-ZJC0010C0471 Z32M+Z31M LPDDR4X 48Gbit 1866MHz 过炉前常温常压常温电流异常不良",
+        "status": "已完成"
+    },
+    "LPDDR-598": {
+        "url": "http://jira.longsys.com/browse/LPDDR-598",
+        "create_date": "2022-6-28",
+        "type": "故障",
+        "summary": "【功能良率测试】-ZJC0010C0471 Z32M+Z31M LPDDR4X 48Gbit 1866MHz 过炉前常温常压功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-599": {
+        "url": "http://jira.longsys.com/browse/LPDDR-599",
+        "create_date": "2022-6-30",
+        "type": "生产不良",
+        "summary": "测试字段模板和子任务功能",
+        "status": "已完成"
+    },
+    "LPDDR-602": {
+        "url": "http://jira.longsys.com/browse/LPDDR-602",
+        "create_date": "2022-7-1",
+        "type": "生产不良",
+        "summary": "验证生产异常的子任务功能",
+        "status": "已完成"
+    },
+    "LPDDR-603": {
+        "url": "http://jira.longsys.com/browse/LPDDR-603",
+        "create_date": "2022-7-1",
+        "type": "故障",
+        "summary": "【老化不良】IDF0001A0260 Z3BM LPDDR4X 24Gb（第三批）1866MHz 低温高压testdram4X 不良",
+        "status": "已完成"
+    },
+    "LPDDR-604": {
+        "url": "http://jira.longsys.com/browse/LPDDR-604",
+        "create_date": "2022-7-1",
+        "type": "故障",
+        "summary": "【老化不良】IDF0001A0260 Z3BM LPDDR4X 24Gb（第三批）1866MHz 低温高压Reboot（4模式） 不良",
+        "status": "已完成"
+    },
+    "LPDDR-605": {
+        "url": "http://jira.longsys.com/browse/LPDDR-605",
+        "create_date": "2022-7-1",
+        "type": "故障",
+        "summary": "【老化不良】IDF0001A0260 Z3BM LPDDR4X 24Gb（第三批）1866MHz 低温高压变频（4模式）不良",
+        "status": "已完成"
+    },
+    "LPDDR-606": {
+        "url": "http://jira.longsys.com/browse/LPDDR-606",
+        "create_date": "2022-7-11",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4X】洪都98215项目FLXC4006G-20有1pcs下载不良",
+        "status": "已完成"
+    },
+    "LPDDR-607": {
+        "url": "http://jira.longsys.com/browse/LPDDR-607",
+        "create_date": "2022-7-6",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4x】FLXC4003G-50 MT6761平台客户售后出现死机卡死问题",
+        "status": "已完成"
+    },
+    "LPDDR-608": {
+        "url": "http://jira.longsys.com/browse/LPDDR-608",
+        "create_date": "2022-7-7",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0011S0051 Epop4X 32GB+16Gb 1pcs 常温常压、高温常压功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-609": {
+        "url": "http://jira.longsys.com/browse/LPDDR-609",
+        "create_date": "2022-7-12",
+        "type": "客诉",
+        "summary": "禾苗FLXC2002G-C4可下载不能开机，开机电流卡在100mA左右",
+        "status": "已完成"
+    },
+    "LPDDR-610": {
+        "url": "http://jira.longsys.com/browse/LPDDR-610",
+        "create_date": "2022-7-11",
+        "type": "客诉",
+        "summary": "【LPDDR】NCLDXC2MG512N32 SC9863A组装IQC抽检发现工厂模式报错不良超标异常",
+        "status": "已完成"
+    },
+    "LPDDR-611": {
+        "url": "http://jira.longsys.com/browse/LPDDR-611",
+        "create_date": "2022-7-11",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4X】商米CT541项目RK3399平台FLXC1002G-N1 DDR老化失败",
+        "status": "已完成"
+    },
+    "LPDDR-612": {
+        "url": "http://jira.longsys.com/browse/LPDDR-612",
+        "create_date": "2022-7-12",
+        "type": "生产不良",
+        "summary": "外购uMCP DRAM端测试报错mr8值不匹配",
+        "status": "已完成"
+    },
+    "LPDDR-613": {
+        "url": "http://jira.longsys.com/browse/LPDDR-613",
+        "create_date": "2022-07-18",
+        "type": "客诉",
+        "summary": "【LPDDR】FLXC2004G-N1（Z42M）MT6765平台，客户反馈4台机器是DDR 测试异常",
+        "status": "已完成"
+    },
+    "LPDDR-614": {
+        "url": "http://jira.longsys.com/browse/LPDDR-614",
+        "create_date": "2022-07-15",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4X】优利麦克MT6877平台FLXC4003G-50时序适配",
+        "status": "已完成"
+    },
+    "LPDDR-615": {
+        "url": "http://jira.longsys.com/browse/LPDDR-615",
+        "create_date": "2022-07-15",
+        "type": "生产不良",
+        "summary": "EPOP4X DRAM端测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-616": {
+        "url": "http://jira.longsys.com/browse/LPDDR-616",
+        "create_date": "2022-07-16",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4X】振曜Allwinner B810平台FLXC2004G-N1休眠唤醒fail",
+        "status": "已完成"
+    },
+    "LPDDR-618": {
+        "url": "http://jira.longsys.com/browse/LPDDR-618",
+        "create_date": "2022-07-19",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0011S0023 Emcp4X Z42Mx2 64GB+32Gb 5pcs 常温常压、高温常压过炉前功能测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-619": {
+        "url": "http://jira.longsys.com/browse/LPDDR-619",
+        "create_date": "2022-07-19",
+        "type": "生产不良",
+        "summary": "LPDDR4X 24Gbit物料，ZIP22061569_ LWB22061349功能报错异常",
+        "status": "已完成"
+    },
+    "LPDDR-620": {
+        "url": "http://jira.longsys.com/browse/LPDDR-620",
+        "create_date": "2022-07-19",
+        "type": "生产不良",
+        "summary": "品质功能抽检LPDDR4X 32Gbit物料，ZIP22061295_ LWB22061247功能报错异常",
+        "status": "已完成"
+    },
+    "LPDDR-621": {
+        "url": "http://jira.longsys.com/browse/LPDDR-621",
+        "create_date": "2022-07-25",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4】百度X8S项目FL4C2001G-D9 DDR老化测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-622": {
+        "url": "http://jira.longsys.com/browse/LPDDR-622",
+        "create_date": "2022-07-25",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4x】NCLDXC1M512M32 全志R818平台 烧录成功上电后90%板子启动阶段挂掉",
+        "status": "已完成"
+    },
+    "LPDDR-625": {
+        "url": "http://jira.longsys.com/browse/LPDDR-625",
+        "create_date": "2022-07-26",
+        "type": "故障",
+        "summary": "【良率不良】ZJC0011S0101 eMCP3 32GB+8Gb 1ps 过炉前良率不良",
+        "status": "已完成"
+    },
+    "LPDDR-626": {
+        "url": "http://jira.longsys.com/browse/LPDDR-626",
+        "create_date": "2022-07-26",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4X】Supermemory MT6877T平台Z42M资源时序适配",
+        "status": "已完成"
+    },
+    "LPDDR-627": {
+        "url": "http://jira.longsys.com/browse/LPDDR-627",
+        "create_date": "2022-07-26",
+        "type": "生产不良",
+        "summary": "EPOP4X DRAM端直通不良",
+        "status": "已完成"
+    },
+    "LPDDR-628": {
+        "url": "http://jira.longsys.com/browse/LPDDR-628",
+        "create_date": "2022-07-27",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010C0291_LPDDR3 8Gbit 低温高压reboot,高温低压reboot",
+        "status": "已完成"
+    },
+    "LPDDR-629": {
+        "url": "http://jira.longsys.com/browse/LPDDR-629",
+        "create_date": "2022-07-27",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010C0444 Z11N+Z10M LPDDR4X 24Gb 1866MHz 低温高压testdram（4x模式）不良",
+        "status": "已完成"
+    },
+    "LPDDR-630": {
+        "url": "http://jira.longsys.com/browse/LPDDR-630",
+        "create_date": "2022-07-27",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010C0444 Z11N+Z10M LPDDR4X 24Gb 1866MHz 低温高压变频（4x模式）不良",
+        "status": "已完成"
+    },
+    "LPDDR-631": {
+        "url": "http://jira.longsys.com/browse/LPDDR-631",
+        "create_date": "2022-07-28",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C00415 Z42N LPDDR4X 32Gb 3pcs 过炉前常温常压、高温常压测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-632": {
+        "url": "http://jira.longsys.com/browse/LPDDR-632",
+        "create_date": "220422",
+        "type": "客诉",
+        "summary": "FLXC2004G-30， 在车载客户鼎微出现客诉，平台展锐 7862，客诉现象卡死重启",
+        "status": "已完成"
+    },
+    "LPDDR-633": {
+        "url": "http://jira.longsys.com/browse/LPDDR-633",
+        "create_date": "2022-07-01",
+        "type": "客诉",
+        "summary": "SAM E 小S 1Gx8 UDIMM 8GB 3200客诉",
+        "status": "已完成"
+    },
+    "LPDDR-634": {
+        "url": "http://jira.longsys.com/browse/LPDDR-634",
+        "create_date": "2022-07-01",
+        "type": "客诉",
+        "summary": "SAM E 小S 1Gx8 UDIMM 8GB 3200客诉",
+        "status": "已完成"
+    },
+    "LPDDR-635": {
+        "url": "http://jira.longsys.com/browse/LPDDR-635",
+        "create_date": "2022-08-01",
+        "type": "生产不良",
+        "summary": "NTTF LPDDR4X_Z42N 32Gbit ORT过炉验证后测试fail 1-77ea---工单LTJ22061546",
+        "status": "已完成"
+    },
+    "LPDDR-636": {
+        "url": "http://jira.longsys.com/browse/LPDDR-636",
+        "create_date": "2022-08-01",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010C0471 Z32M+Z31M LPDDR4X 48Gb 1866MHz 低温高压testdram（4模式）1pcs 不良",
+        "status": "已完成"
+    },
+    "LPDDR-637": {
+        "url": "http://jira.longsys.com/browse/LPDDR-637",
+        "create_date": "2022-08-01",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010C0471 Z32M+Z31M LPDDR4X 48Gb 1866MHz 低温高压testdram（4X模式）1pcs 不良",
+        "status": "已完成"
+    },
+    "LPDDR-638": {
+        "url": "http://jira.longsys.com/browse/LPDDR-638",
+        "create_date": "2022-08-03",
+        "type": "客诉",
+        "summary": "【嵌入式DRAM】Z42M 江元 MT8788 下载失败",
+        "status": "已完成"
+    },
+    "LPDDR-639": {
+        "url": "http://jira.longsys.com/browse/LPDDR-639",
+        "create_date": "2022-08-04",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4X】特品Z21Mx2在SC9863A平台只能跑331MHz",
+        "status": "已完成"
+    },
+    "LPDDR-640": {
+        "url": "http://jira.longsys.com/browse/LPDDR-640",
+        "create_date": "2022-08-08",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C00336 Z42N LPDDR4X 32Gb 3pcs 过炉前常温常压、高温常压测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-641": {
+        "url": "http://jira.longsys.com/browse/LPDDR-641",
+        "create_date": "2022-08-08",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4】感臻S905Y4平台Z31Mx2压力测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-642": {
+        "url": "http://jira.longsys.com/browse/LPDDR-642",
+        "create_date": "2022-08-09",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4X】洪都T19681项目FLXC2004G-N1待机电流偏大",
+        "status": "已完成"
+    },
+    "LPDDR-643": {
+        "url": "http://jira.longsys.com/browse/LPDDR-643",
+        "create_date": "2022-08-11",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C00590 Z42N+Z41P LPDDR4X 48Gb 3pcs 过炉前常温常压、高温常压测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-644": {
+        "url": "http://jira.longsys.com/browse/LPDDR-644",
+        "create_date": "2022-08-11",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C00545 Z42N+Z41P LPDDR4X 32Gb 1pcs 过炉前常温常压、高温常压测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-645": {
+        "url": "http://jira.longsys.com/browse/LPDDR-645",
+        "create_date": "2022-08-11",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C00521 Z42N LPDDR4X 64Gb 10pcs 过炉前常温常压、高温常压测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-646": {
+        "url": "http://jira.longsys.com/browse/LPDDR-646",
+        "create_date": "2022-08-12",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4】视壮S905Y4+K4F4 量产不良率高（70-3007）",
+        "status": "已完成"
+    },
+    "LPDDR-647": {
+        "url": "http://jira.longsys.com/browse/LPDDR-647",
+        "create_date": "2022-08-12",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C00589 Z42N+Z41P LPDDR4X 48Gb 4pcs 过炉前常温常压、高温常压测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-648": {
+        "url": "http://jira.longsys.com/browse/LPDDR-648",
+        "create_date": "2022-08-12",
+        "type": "故障",
+        "summary": "【功耗异常】ZJC0010C00589 Z42N+Z41P LPDDR4X 48Gb 5pcs 功耗过高",
+        "status": "已完成"
+    },
+    "LPDDR-649": {
+        "url": "http://jira.longsys.com/browse/LPDDR-649",
+        "create_date": "2022-08-15",
+        "type": "故障",
+        "summary": "【功耗异常】ZJC0010C00590 Z42N+Z41P LPDDR4X 48Gb 6pcs 功耗偏高",
+        "status": "已完成"
+    },
+    "LPDDR-650": {
+        "url": "http://jira.longsys.com/browse/LPDDR-650",
+        "create_date": "2022-08-15",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4】华曦达S905Y2平台FLXC2002G-N2极限频率测试fail",
+        "status": "已完成"
+    },
+    "LPDDR-651": {
+        "url": "http://jira.longsys.com/browse/LPDDR-651",
+        "create_date": "2022-08-18",
+        "type": "客诉",
+        "summary": "【LPDDR4x】商米-CT541主板-FLXC1002G-N1老化不良，上电开机电流不正常，开机卡log死机。",
+        "status": "已完成"
+    },
+    "LPDDR-653": {
+        "url": "http://jira.longsys.com/browse/LPDDR-653",
+        "create_date": "2022-08-25",
+        "type": "FA分析需求管理",
+        "summary": "ZJC0010C0589-ZJC0010C0590 Z42Nx2+Z41Px2 LPDDR4X 48Gb 电流功耗异常",
+        "status": "已完成"
+    },
+    "LPDDR-654": {
+        "url": "http://jira.longsys.com/browse/LPDDR-654",
+        "create_date": "2022-08-25",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4X】展锐T7520平台FLXC2004G-30 Monkey+reboot+sleep测试sysdump",
+        "status": "已完成"
+    },
+    "LPDDR-655": {
+        "url": "http://jira.longsys.com/browse/LPDDR-655",
+        "create_date": "2022-08-26",
+        "type": "客诉",
+        "summary": "客户学之友，使用NCLD3B2256M32出现报错现象，不良率5%-7%",
+        "status": "已完成"
+    },
+    "LPDDR-656": {
+        "url": "http://jira.longsys.com/browse/LPDDR-656",
+        "create_date": "2022-08-30",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4X】泽迪MT6762平台FLXC4006G-20容量识别只有4GB且重启",
+        "status": "已完成"
+    },
+    "LPDDR-657": {
+        "url": "http://jira.longsys.com/browse/LPDDR-657",
+        "create_date": "2022-08-30",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR3】学之友RK3326平台NCLD3B2256M32跑Stressapptest发生bit-flip",
+        "status": "已完成"
+    },
+    "LPDDR-658": {
+        "url": "http://jira.longsys.com/browse/LPDDR-658",
+        "create_date": "2022-08-31",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0026C0003 N21L LPDDR4X 16Gb 1pcs 过炉前常温常压、高温常压测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-659": {
+        "url": "http://jira.longsys.com/browse/LPDDR-659",
+        "create_date": "2022-09-01",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0026C0004 N21L32Gb 1pcs 过炉前常温常压、高温常压测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-660": {
+        "url": "http://jira.longsys.com/browse/LPDDR-660",
+        "create_date": "2022-09-08",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4X】优利麦克MTK6877平台FLXC4003G-50 反复重启",
+        "status": "已完成"
+    },
+    "LPDDR-661": {
+        "url": "http://jira.longsys.com/browse/LPDDR-661",
+        "create_date": "2022-09-05",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4X】芯发威达Intel EHL平台FLXC2002G-N2开机过程MRC retraining",
+        "status": "已完成"
+    },
+    "LPDDR-662": {
+        "url": "http://jira.longsys.com/browse/LPDDR-662",
+        "create_date": "2022-09-08",
+        "type": "客诉",
+        "summary": "紫旗，产品车载后装，平台RK3399，测试DDR NCLDXC1MJ512M32 时会报错",
+        "status": "已完成"
+    },
+    "LPDDR-663": {
+        "url": "http://jira.longsys.com/browse/LPDDR-663",
+        "create_date": "2022-09-09",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4X】禾苗展讯T610平台FLXC4004G-C4无法开机",
+        "status": "已完成"
+    },
+    "LPDDR-664": {
+        "url": "http://jira.longsys.com/browse/LPDDR-664",
+        "create_date": "2022-09-09",
+        "type": "故障",
+        "summary": "LNPO22071892 (驗證工單 LTJ22072193) LPDDR4X 32Gbit 過爐後 QC Tool 測試 fail 4 ea (fail rate 4-77=5.2%)",
+        "status": "已完成"
+    },
+    "LPDDR-665": {
+        "url": "http://jira.longsys.com/browse/LPDDR-665",
+        "create_date": "2022-09-09",
+        "type": "故障",
+        "summary": "LPDDR4X 16Gbit 過爐後 QCTool 測試 fail 2 ea",
+        "status": "已完成"
+    },
+    "LPDDR-666": {
+        "url": "http://jira.longsys.com/browse/LPDDR-666",
+        "create_date": "2022-09-13",
+        "type": "客诉",
+        "summary": "【LPDDR4X 】长安客退机 DDR不良分析",
+        "status": "已完成"
+    },
+    "LPDDR-667": {
+        "url": "http://jira.longsys.com/browse/LPDDR-667",
+        "create_date": "2022-09-14",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4X】闻泰-SC9863平台-FLXC2004G-N1-FLXC4004G-C4-FLXC4006G-20-死机重启",
+        "status": "已完成"
+    },
+    "LPDDR-668": {
+        "url": "http://jira.longsys.com/browse/LPDDR-668",
+        "create_date": "2022-09-14",
+        "type": "FA分析需求管理",
+        "summary": "ZJC0026C0004 N21L32Gb 1pcs 过炉前常温常压、高温常压测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-669": {
+        "url": "http://jira.longsys.com/browse/LPDDR-669",
+        "create_date": "2022-09-14",
+        "type": "生产不良",
+        "summary": "U8EB 1Px2 MR8值不匹配占比高",
+        "status": "已完成"
+    },
+    "LPDDR-670": {
+        "url": "http://jira.longsys.com/browse/LPDDR-670",
+        "create_date": "2022-09-14",
+        "type": "客诉",
+        "summary": "【嵌入式eMCP】天和致远 FEPNA3208-58A1924 RK3566 休眠功耗偏高",
+        "status": "已完成"
+    },
+    "LPDDR-671": {
+        "url": "http://jira.longsys.com/browse/LPDDR-671",
+        "create_date": "2022-09-14",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010A0286 LPDDR4X Z42N 1PCS常温常压测试pass，常温高压fail",
+        "status": "已完成"
+    },
+    "LPDDR-672": {
+        "url": "http://jira.longsys.com/browse/LPDDR-672",
+        "create_date": "2022-09-16",
+        "type": "FA分析需求管理",
+        "summary": "【嵌入式LPDDR4X】优利麦克MTK6877平台FLXC4003G-50 反复重启",
+        "status": "已完成"
+    },
+    "LPDDR-673": {
+        "url": "http://jira.longsys.com/browse/LPDDR-673",
+        "create_date": "2022-09-16",
+        "type": "FA分析需求管理",
+        "summary": "【嵌入式LPDDR4X】禾苗展讯T610平台FLXC4004G-C4无法开机",
+        "status": "已完成"
+    },
+    "LPDDR-674": {
+        "url": "http://jira.longsys.com/browse/LPDDR-674",
+        "create_date": "2022-09-21",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4X】百度平板MT8768平台FLXC4004G-26 售后机器不开机分析",
+        "status": "已完成"
+    },
+    "LPDDR-675": {
+        "url": "http://jira.longsys.com/browse/LPDDR-675",
+        "create_date": "2022-09-22",
+        "type": "生产不良",
+        "summary": "LCS22090288_eMCP64+32_ZJC0011S0163_AHGBx1+Z42Mx2测试低良率",
+        "status": "已完成"
+    },
+    "LPDDR-676": {
+        "url": "http://jira.longsys.com/browse/LPDDR-676",
+        "create_date": "2022-09-22",
+        "type": "生产不良",
+        "summary": "LCS22090289_eMCP 128+32_ZJC0011S0168_AHGBx2+Z42Mx2测试低良率",
+        "status": "已完成"
+    },
+    "LPDDR-677": {
+        "url": "http://jira.longsys.com/browse/LPDDR-677",
+        "create_date": "2022-09-22",
+        "type": "故障",
+        "summary": "【功能测试】ZJC0026C0004 N21L 32GB NJHT",
+        "status": "已完成"
+    },
+    "LPDDR-678": {
+        "url": "http://jira.longsys.com/browse/LPDDR-678",
+        "create_date": "2022-09-23",
+        "type": "生产不良",
+        "summary": "ZFC22090742_LCS22090649 Z42N 1Px2 高压测试低良率分析BIN4：9.6%（3507-36514）",
+        "status": "已完成"
+    },
+    "LPDDR-679": {
+        "url": "http://jira.longsys.com/browse/LPDDR-679",
+        "create_date": "2022-09-26",
+        "type": "故障",
+        "summary": "【功能测试不良】IDF0001A0260 Z3BM LPDDR4X 24Gbpcs 12pcs过炉前常温常压、高温常压测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-680": {
+        "url": "http://jira.longsys.com/browse/LPDDR-680",
+        "create_date": "2022-09-26",
+        "type": "故障",
+        "summary": "【1200MHz验证】ZJC0010C00589 Z42N+Z41P LPDDR4X 48Gb（1P+4P） 频率1200MHz不良",
+        "status": "已完成"
+    },
+    "LPDDR-681": {
+        "url": "http://jira.longsys.com/browse/LPDDR-681",
+        "create_date": "2022-09-26",
+        "type": "故障",
+        "summary": "【1200MHz验证】ZJC0010C00590 Z42N+Z41P LPDDR4X 48Gb（KGD+4P） 频率1200MHz不良",
+        "status": "已完成"
+    },
+    "LPDDR-682": {
+        "url": "http://jira.longsys.com/browse/LPDDR-682",
+        "create_date": "2022-10-08",
+        "type": "故障",
+        "summary": "【过炉后功能测试不良】ZJC0010C00521 Z42N LPDDR4X 64Gb 3pcs 过炉后测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-683": {
+        "url": "http://jira.longsys.com/browse/LPDDR-683",
+        "create_date": "2022-10-08",
+        "type": "客诉",
+        "summary": "学之友，NCLD3B2256M32 , 平台 RK 3326 配置32-64EMMC +1GB，客户反馈有1%不良，",
+        "status": "已完成"
+    },
+    "LPDDR-684": {
+        "url": "http://jira.longsys.com/browse/LPDDR-684",
+        "create_date": "2022-10-08",
+        "type": "故障",
+        "summary": "【老化不良】ZJC0010C00521 Z42N LPDDR4X 64Gb 2133MHz 高温低压游戏1pcs 测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-685": {
+        "url": "http://jira.longsys.com/browse/LPDDR-685",
+        "create_date": "2022-07-12",
+        "type": "客诉",
+        "summary": "禾苗FLXC2002G-C4可下载不能开机，开机电流卡在100mA左右",
+        "status": "已完成"
+    },
+    "LPDDR-686": {
+        "url": "http://jira.longsys.com/browse/LPDDR-686",
+        "create_date": "2022-10-09",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4X】百度平台MT8768平台FLXC2004G-30 Z32M 15pcs不开机老化不良",
+        "status": "已完成"
+    },
+    "LPDDR-687": {
+        "url": "http://jira.longsys.com/browse/LPDDR-687",
+        "create_date": "2022-10-09",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR】Z42M&U8EB 闻泰9863平台 产线测试自动关机死机异常",
+        "status": "已完成"
+    },
+    "LPDDR-688": {
+        "url": "http://jira.longsys.com/browse/LPDDR-688",
+        "create_date": "2022-10-11",
+        "type": "故障",
+        "summary": "【功能良率测试】-ZJC0010C0626 Z41P LPDDR4X 16Gbit 1866MHz 过炉前功能良率测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-689": {
+        "url": "http://jira.longsys.com/browse/LPDDR-689",
+        "create_date": "2022-10-12",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4X】展锐-ums9620-FLXC2004G-N1(Z42Mx2)-固定地址读写数据错误",
+        "status": "已完成"
+    },
+    "LPDDR-690": {
+        "url": "http://jira.longsys.com/browse/LPDDR-690",
+        "create_date": "2022-10-13",
+        "type": "FA分析需求管理",
+        "summary": "ZJC0010C0626 Z41P LPDDR4X 16Gbit 1pcs样品初始化不良",
+        "status": "已完成"
+    },
+    "LPDDR-691": {
+        "url": "http://jira.longsys.com/browse/LPDDR-691",
+        "create_date": "2022-10-18",
+        "type": "故障",
+        "summary": "【过炉前样品功耗异常】-ZJC0010C0626 Z41P LPDDR4X 16Gbit 1866MHz 过炉前样品功耗异常",
+        "status": "已完成"
+    },
+    "LPDDR-693": {
+        "url": "http://jira.longsys.com/browse/LPDDR-693",
+        "create_date": "2022-10-21",
+        "type": "客诉",
+        "summary": "【嵌入式DRAM】Z11+Z10 3GB 酷赛 MT6761 开机卡logo重启",
+        "status": "已完成"
+    },
+    "LPDDR-694": {
+        "url": "http://jira.longsys.com/browse/LPDDR-694",
+        "create_date": "2022-10-21",
+        "type": "生产不良",
+        "summary": "LCS22091385_uMCP64+32_ZJC0011S0170_AHGBx1+Z42Mx2测试低良率",
+        "status": "已完成"
+    },
+    "LPDDR-695": {
+        "url": "http://jira.longsys.com/browse/LPDDR-695",
+        "create_date": "2022-10-21",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR】 科大讯飞- 展讯UDS710平台-FLXC2004G-N1(Z42Mx2)OTA升级不进系统异常分析",
+        "status": "已完成"
+    },
+    "LPDDR-696": {
+        "url": "http://jira.longsys.com/browse/LPDDR-696",
+        "create_date": "2022-10-22",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR4】天波NCLDXC1MG256M32+905Y2 平台不能跑高频",
+        "status": "已完成"
+    },
+    "LPDDR-697": {
+        "url": "http://jira.longsys.com/browse/LPDDR-697",
+        "create_date": "2022-10-24",
+        "type": "生产不良",
+        "summary": "NJHT LPDDR4X,32Gbit,Z32M,1Px2, ORT SMT过炉验证后测试出现1-77颗bin4---工单LTJ22090245（LPL22090242）",
+        "status": "已完成"
+    },
+    "LPDDR-698": {
+        "url": "http://jira.longsys.com/browse/LPDDR-698",
+        "create_date": "2022-10-25",
+        "type": "故障",
+        "summary": "【功能测试不良】ZJC0010C0003 LPDDR4X N21L 16Gb 1pcs 常温常压、高温常压过炉前不良",
+        "status": "已完成"
+    },
+    "LPDDR-699": {
+        "url": "http://jira.longsys.com/browse/LPDDR-699",
+        "create_date": "2022-10-26",
+        "type": "FA分析需求管理",
+        "summary": "【老化不良】ZJC0010C00521 Z42N LPDDR4X 64Gb 2133MHz 高温低压游戏1pcs 测试不良",
+        "status": "已完成"
+    },
+    "LPDDR-700": {
+        "url": "http://jira.longsys.com/browse/LPDDR-700",
+        "create_date": "2022-10-27",
+        "type": "故障",
+        "summary": "【老化前功能测试不良】ZJC0010C0004 LPDDR4X N21L 32Gb 3pcs 老化前良率不良",
+        "status": "已完成"
+    },
+    "LPDDR-701": {
+        "url": "http://jira.longsys.com/browse/LPDDR-701",
+        "create_date": "2022-10-27",
+        "type": "客诉",
+        "summary": "【嵌入式DRAM】Z42M斯普瑞特MTK平台良率过低",
+        "status": "已办结"
+    },
+    "LPDDR-702": {
+        "url": "http://jira.longsys.com/browse/LPDDR-702",
+        "create_date": "2022-10-28",
+        "type": "客诉",
+        "summary": "【嵌入式LPDDR3】学之友-RK3326-NCLD3B2256M32(V01Mx2)-不开机不烧录",
+        "status": "已办结"
+    },
+    "LPDDR-703": {
+        "url": "http://jira.longsys.com/browse/LPDDR-703",
+        "create_date": "2022-10-27",
+        "type": "FA分析需求管理",
+        "summary": "【嵌入式LPDDR】U8BE 闻泰9863平台 死机重启问题",
+        "status": "待指派"
+    },
+    "LPDDR-704": {
+        "url": "http://jira.longsys.com/browse/LPDDR-704",
+        "create_date": "2022-10-28",
+        "type": "FA分析需求管理",
+        "summary": "[FA需求] 酷赛 MT6761 FLXC4003G-50 客诉颗粒",
+        "status": "取消"
+    },
+    "LPDDR-705": {
+        "url": "http://jira.longsys.com/browse/LPDDR-705",
+        "create_date": "2022-10-28",
+        "type": "FA分析需求管理",
+        "summary": "【功能测试不良】IDF0001A0260 Z3BM LPDDR4X 24Gbpcs 12pcs过炉前常温常压、高温常压测试不良，1pcs出现初始化不良",
+        "status": "验收中"
+    },
+    "LPDDR-706": {
+        "url": "http://jira.longsys.com/browse/LPDDR-706",
+        "create_date": "2022-11-07",
+        "type": "故障",
+        "summary": "FLXC4004G-W6-HFMG N21Lx4 颗粒异常分析",
+        "status": "已解决"
+    },
+    "LPDDR-707": {
+        "url": "http://jira.longsys.com/browse/LPDDR-707",
+        "create_date": "2022-11-07",
+        "type": "FA分析需求管理",
+        "summary": "FLXC4004G-W6-HFMG N21Lx4 颗粒异常分析",
+        "status": "研发工程师负责人审批中"
+    },
+    "LPDDR-708": {
+        "url": "http://jira.longsys.com/browse/LPDDR-708",
+        "create_date": " 2022-11-10",
+        "type": " 客诉",
+        "summary": " 【嵌入式LPDDR4-4X】Z31M 鸿宇新 展讯9863 开机进不了系统",
+        "status": "已办结"
+    },
+    "LPDDR-709": {
+        "url": "http://jira.longsys.com/browse/LPDDR-709",
+        "create_date": " 2022-11-11",
+        "type": " 客诉",
+        "summary": " 【嵌入式LPDDR4】新国都-MT8175-FL4C2001G-D9(K4F4x2)-冷热冲击试验后发现不开机不停重启",
+        "status": "已办结"
+    },
+    "LPDDR-710": {
+        "url": "http://jira.longsys.com/browse/LPDDR-710",
+        "create_date": " 2022-11-11",
+        "type": " 故障",
+        "summary": " 【老化不良】IDF0001A0260 LPDDR4X Z3BM 24Gb（第4批） 低温高压testdram4x 2pcs 测试不良",
+        "status": "已办结"
+    },
+    "LPDDR-711": {
+        "url": "http://jira.longsys.com/browse/LPDDR-711",
+        "create_date": " 2022-11-11",
+        "type": " 故障",
+        "summary": " 【老化不良】IDF0001A0260 LPDDR4X Z3BM 24Gb（第4批） 低温常压testdram4x 1pcs 测试",
+        "status": "已办结"
+    },
+    "LPDDR-712": {
+        "url": "http://jira.longsys.com/browse/LPDDR-712",
+        "create_date": " 2022-11-11",
+        "type": " 故障",
+        "summary": " 【老化不良】IDF0001A0260 LPDDR4X Z3BM 24Gb（第4批） 低温高压testdram4模式 2pcs 测试不良",
+        "status": "已办结"
+    },
+    "LPDDR-713": {
+        "url": "http://jira.longsys.com/browse/LPDDR-713",
+        "create_date": " 2022-11-11",
+        "type": " FA分析需求管理",
+        "summary": " 【FA分析需求】ZJC0010C00521 Z42N LPDDR4X 64Gb 3pcs 过炉前测试不良",
+        "status": "验收中"
+    },
+    "LPDDR-714": {
+        "url": "http://jira.longsys.com/browse/LPDDR-714",
+        "create_date": " 2022-11-14",
+        "type": " 生产不良",
+        "summary": " EPOP4X DRAM端试产不良品分析",
+        "status": "已解决"
+    },
+    "LPDDR-715": {
+        "url": "http://jira.longsys.com/browse/LPDDR-715",
+        "create_date": " 2022-11-15",
+        "type": " 故障",
+        "summary": " 【功能测试不良】ZJC0010C00667 Z41P LPDDR4X 16Gb 2pcs测试不良",
+        "status": "已办结"
+    },
+    "LPDDR-716": {
+        "url": "http://jira.longsys.com/browse/LPDDR-716",
+        "create_date": " 2022-11-15",
+        "type": " 故障",
+        "summary": " 【功能测试不良】ZJC0026C0006 Y31M LPDDR5 32Gb 4pcs测试不良（315Ball）",
+        "status": "进行中"
+    },
+    "LPDDR-717": {
+        "url": "http://jira.longsys.com/browse/LPDDR-717",
+        "create_date": " 2022-11-15",
+        "type": " FA分析需求管理",
+        "summary": " 【功能测试不良】ZJC0026C0006 Y31M LPDDR5 32Gb 4pcs测试不良，其中1cps疑似电源引脚出现短路",
+        "status": "验收中"
+    },
+    "LPDDR-718": {
+        "url": "http://jira.longsys.com/browse/LPDDR-718",
+        "create_date": " 2022-11-16",
+        "type": " 故障",
+        "summary": " 【功能测试不良】ZJC0026S0004 N2ALx4 LPDDR4X 24Gb 6pcs测试不良",
+        "status": "已办结"
+    },
+    "LPDDR-719": {
+        "url": "http://jira.longsys.com/browse/LPDDR-719",
+        "create_date": " 2022-11-23",
+        "type": " 客诉",
+        "summary": " 【嵌入式LPDDR4X】凤凰光学-全志A133-NCLDXC1MG256M32(Z20Mx2)-换贴我司LPDDR4X系统无法正常运行",
+        "status": "已办结"
+    },
+    "LPDDR-720": {
+        "url": "http://jira.longsys.com/browse/LPDDR-720",
+        "create_date": " 2022-11-21",
+        "type": " 故障",
+        "summary": " 【早期失效不良】ZJC0011S0130 Z42N Epop4x 16Gb 高温高压老化-良率 1pcs不良",
+        "status": "已办结"
+    },
+    "LPDDR-721": {
+        "url": "http://jira.longsys.com/browse/LPDDR-721",
+        "create_date": " 2022-11-21",
+        "type": " 客诉",
+        "summary": " 【ePOP4x】锦州-高通5100-FAPEA3216-58C29N3(Z42Nx1)-SMT后烧录fail",
+        "status": "已完成"
+    },
+    "LPDDR-722": {
+        "url": "http://jira.longsys.com/browse/LPDDR-722",
+        "create_date": " 2022-11-21",
+        "type": " 生产不良",
+        "summary": " 中山订单eMCP4x 2730+V6+Z42M",
+        "status": "待办"
+    },
+    "LPDDR-723": {
+        "url": "http://jira.longsys.com/browse/LPDDR-723",
+        "create_date": " 2022-11-23",
+        "type": " 客诉",
+        "summary": " 【嵌入式LPDDR4X】智物通讯-MT8175-NCLDXC1MG256M32(Z10Nx2)-无法烧录",
+        "status": "已办结"
+    },
+    "LPDDR-724": {
+        "url": "http://jira.longsys.com/browse/LPDDR-724",
+        "create_date": " 2022-11-24",
+        "type": " 故障",
+        "summary": " 【功耗异常】ZJC0010C00667 Z41P LPDDR4X 16Gb 20pcs功耗异常",
+        "status": "已办结"
+    },
+    "LPDDR-725": {
+        "url": "http://jira.longsys.com/browse/LPDDR-725",
+        "create_date": " 2022-11-24",
+        "type": " FA分析需求管理",
+        "summary": " 【嵌入式LPDDR4X】禾苗展讯T610平台FLXC4004G-C4无法开机",
+        "status": "待指派"
+    },
+    "LPDDR-726": {
+        "url": "http://jira.longsys.com/browse/LPDDR-726",
+        "create_date": " 2022-11-25",
+        "type": " FA分析需求管理",
+        "summary": " 1pcs良品SAT存在空洞异常，分析良品是否存在相同异常",
+        "status": "待指派"
+    },
+    "LPDDR-727": {
+        "url": "http://jira.longsys.com/browse/LPDDR-727",
+        "create_date": " 2022-12-02",
+        "type": " 客诉",
+        "summary": " 龙旗-USM9230-FLXC2002G-C4(U8EAx2)-下载报错",
+        "status": "已办结"
+    },
+    "LPDDR-728": {
+        "url": "http://jira.longsys.com/browse/LPDDR-728",
+        "create_date": " 2022-11-29",
+        "type": " 客诉",
+        "summary": " 【嵌入式LPDDR4X】华勤-MTK8766-NCLDXC1MG256M32(Z20Mx2)-ETT测试后机器开机很慢，重启后出现花屏",
+        "status": "已办结"
+    },
+    "LPDDR-729": {
+        "url": "http://jira.longsys.com/browse/LPDDR-729",
+        "create_date": " 2022-12-06",
+        "type": " 故障",
+        "summary": " 南京华天_LFCC22101244_ZJC0026C0003_LPDDR4X_16Gbit_N21Lx2 QC tool可靠性前读点初始化失败分析",
+        "status": "已办结"
+    },
+    "LPDDR-730": {
+        "url": "http://jira.longsys.com/browse/LPDDR-730",
+        "create_date": " 2022-12-01",
+        "type": " 客诉",
+        "summary": " 【嵌入式DRAM】Z3BM 富士康 MT6761 DDR压测报fail",
+        "status": "已办结"
+    },
+    "LPDDR-731": {
+        "url": "http://jira.longsys.com/browse/LPDDR-731",
+        "create_date": " 2022-12-05",
+        "type": " FA分析需求管理",
+        "summary": " ZJC0010C0667 Z41P LPDDR4X 16Gb 2pcs测试不良",
+        "status": "验收中"
+    },
+    "LPDDR-732": {
+        "url": "http://jira.longsys.com/browse/LPDDR-732",
+        "create_date": " 2022-12-08",
+        "type": " 客诉",
+        "summary": " 【嵌入式LPDDR4】 Z42M CVTE（品网科技） 恢复出厂设置，定屏在开机logo界面",
+        "status": "已办结"
+    },
+    "LPDDR-733": {
+        "url": "http://jira.longsys.com/browse/LPDDR-733",
+        "create_date": " 2022-12-08",
+        "type": " 故障",
+        "summary": " 【功能测试不良】ZJC0010C0705 Z41Nx2 16Gb LPDDR4X 1pcs测试不良",
+        "status": "已办结"
+    },
+    "LPDDR-734": {
+        "url": "http://jira.longsys.com/browse/LPDDR-734",
+        "create_date": " 2022-12-09",
+        "type": " 客诉",
+        "summary": " 【嵌入式LPDDR】华勤-MT6769-FLXC2004G-N1(Z42M KGDx2) - 机器死机",
+        "status": "已办结"
+    },
+    "LPDDR-735": {
+        "url": "http://jira.longsys.com/browse/LPDDR-735",
+        "create_date": " 2022-12-09",
+        "type": " 客诉",
+        "summary": " 【嵌入式LPDDR4X】BOE-RK3566-FLXC2004G-N1-memtest出现位翻转",
+        "status": "已办结"
+    },
+    "LPDDR-736": {
+        "url": "http://jira.longsys.com/browse/LPDDR-736",
+        "create_date": " 2022-12-09",
+        "type": " 客诉",
+        "summary": " 【嵌入式LPDDR4X】掌阅-MT8113-FLXC2002G-N2(Z42Nx1)-65度高温测试后死机、无法开机",
+        "status": "已办结"
+    },
+    "LPDDR-737": {
+        "url": "http://jira.longsys.com/browse/LPDDR-737",
+        "create_date": " 2022-12-09",
+        "type": " 故障",
+        "summary": " 【ADVANTEST平台测试】ZJC0010C0705 Z41Nx2 16Gb LPDDR4x 1pcs测试不良",
+        "status": "已办结"
+    },
+    "LPDDR-738": {
+        "url": "http://jira.longsys.com/browse/LPDDR-738",
+        "create_date": " 2022-12-12",
+        "type": " 客诉",
+        "summary": " 【嵌入式LPDDR】蓝思-MT6761-FLXC2002G-C4(U8EA 1Px2 )- 无法开机",
+        "status": "已办结"
+    },
+    "LPDDR-739": {
+        "url": "http://jira.longsys.com/browse/LPDDR-739",
+        "create_date": " 2022-12-12",
+        "type": " FA分析需求管理",
+        "summary": " 龙旗-USM9230-FLXC2002G-C4(U8EAx2)-下载报错",
+        "status": "验收中"
+    },
+    "LPDDR-740": {
+        "url": "http://jira.longsys.com/browse/LPDDR-740",
+        "create_date": " 2022-12-13",
+        "type": " 生产不良",
+        "summary": " LTJ22101462_LFX22101460_LPDDR4X 6GB_Z42Nx2+Z41Px2过炉Fail",
+        "status": "待办"
+    },
+    "LPDDR-741": {
+        "url": "http://jira.longsys.com/browse/LPDDR-741",
+        "create_date": " 2022-12-14",
+        "type": " 客诉",
+        "summary": " 【嵌入式uMCP】思普力-MT6877V和展讯T606平台-SMVJG9LZZCD9FQKPR-UT-异常无法烧录开机问题",
+        "status": "初步分析"
+    },
+    "LPDDR-742": {
+        "url": "http://jira.longsys.com/browse/LPDDR-742",
+        "create_date": " 2022-12-20",
+        "type": " FA分析需求管理",
+        "summary": " ZJC0010C0705 Z41Nx2 16Gb LPDDR4x 1pcsADV机台测试疑似出现电流倒灌",
+        "status": "验收中"
+    },
+    "LPDDR-743": {
+        "url": "http://jira.longsys.com/browse/LPDDR-743",
+        "create_date": " 2022-12-20",
+        "type": " 故障",
+        "summary": " 【功能测试不良】ZJC0010C0521（第二批） Z42Nx4 LPDDR4X 64Gb 2pcs 过炉前常温常压、高温常压测试不良",
+        "status": "已办结"
+    },
+    "LPDDR-744": {
+        "url": "http://jira.longsys.com/browse/LPDDR-744",
+        "create_date": " 2022-12-23",
+        "type": " 客诉",
+        "summary": " 【嵌入式LPDDR4X】中诺-ums9230-FLXC4006G-20(Z32Mx2+Z31Mx2)-无法加载",
+        "status": "已解决"
+    },
+    "LPDDR-745": {
+        "url": "http://jira.longsys.com/browse/LPDDR-745",
+        "create_date": " 2022-12-30",
+        "type": " 客诉",
+        "summary": " 【嵌入式emcp】Spectek（SMVJ9S9ZZAD9GQFSM-UT） 沃特MT6762 机器重启",
+        "status": "已解决"
+    },
+    "LPDDR-746": {
+        "url": "http://jira.longsys.com/browse/LPDDR-746",
+        "create_date": " 2023-01-04",
+        "type": " 故障",
+        "summary": " 【功能测试不良】ZJC0010C0610 Z2BM LPDDR4X 48Gb 4pcs 过炉前常温常压、高温常压测试不良",
+        "status": "进行中"
+    },
+    "LPDDR-747": {
+        "url": "http://jira.longsys.com/browse/LPDDR-747",
+        "create_date": " 2023-01-04",
+        "type": " 客诉",
+        "summary": " 【嵌入式LPDDR4x】合亿-intel ELKHART-LAKE N6415-FLXC2002G-C4-SPD需求及导入调试",
+        "status": "已办结"
+    },
+    "LPDDR-748": {
+        "url": "http://jira.longsys.com/browse/LPDDR-748",
+        "create_date": " 2023-01-06",
+        "type": " FA分析需求管理",
+        "summary": " ZJC0010C0705 Z41Nx2 16Gb LPDDR4x 1pcsADV机台测试疑似出现电流倒灌",
+        "status": "验收中"
+    },
+    "LPDDR-749": {
+        "url": "http://jira.longsys.com/browse/LPDDR-749",
+        "create_date": " 2023-01-15",
+        "type": " 客诉",
+        "summary": " 【LPDDR4】FLXC2002G-N2(Z31M ) 感臻amlogic S905X4-j 老化测试fail",
+        "status": "初步分析"
+    },
+    "LPDDR-750": {
+        "url": "http://jira.longsys.com/browse/LPDDR-750",
+        "create_date": " 2023-01-16",
+        "type": " FA分析需求管理",
+        "summary": " ZJC0010C0610 Z2BM LPDDR4X 48Gb 4pcs不良品非破坏性分析",
+        "status": "待指派"
+    }
+}
