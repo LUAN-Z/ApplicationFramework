@@ -40,6 +40,9 @@ class WindowsScaleFactorSetting:
             pass
 
     def cal_windows_scaling_factor(self):
+        if os.name != "nt":
+            return 1
+
         try:
             # 调用 Windows API 函数获取缩放比例
             user32 = ctypes.windll.user32

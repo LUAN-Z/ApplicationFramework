@@ -29,6 +29,8 @@
         return MyPlugin()
 """
 
+import ast
+import hashlib
 import importlib.util
 import json
 import sys
@@ -44,7 +46,6 @@ from PyQt5.QtWidgets import (
     QFileDialog,
     QFrame,
     QHBoxLayout,
-    QMessageBox,
     QVBoxLayout,
     QWidget,
 )
@@ -149,23 +150,27 @@ class PluginManager:
         self.unload(plugin_id)
         self.available_plugins.pop(plugin_id, None)
 
-    def discover_from_directory(self, plugin_dir: Path) -> None:
+    def discover_from_directory(self, plugin_dir: Path) -> list:
         """从目录发现插件。
 
         支持两种布局:
         - plugins/foo.py
         - plugins/foo/__init__.py
+
+        返回加载失败的 (路径, 错误) 列表，便于上层提示。
         """
 
+        errors = []
         if not plugin_dir.exists():
-            return
+            return errors
 
         for path in self._iter_plugin_entries(plugin_dir):
             try:
                 plugin = self._load_plugin_from_path(path)
                 self.register(plugin)
-            except Exception:
-                traceback.print_exc()
+            except Exception as exc:
+                errors.append((path, exc))
+        return errors
 
     def register_from_path(self, path: Path) -> ApplicationPlugin:
         plugin_path = self.resolve_plugin_path(path)
@@ -223,13 +228,26 @@ class PluginManager:
                 yield init_file
 
     def _is_plugin_entry(self, path: Path) -> bool:
+        """通过 AST 判断模块是否在顶层导出了 create_plugin 函数。"""
         try:
-            return "create_plugin" in path.read_text(encoding="utf-8")
+            tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
         except Exception:
             return False
+        for node in tree.body:
+            if (
+                isinstance(node, ast.FunctionDef)
+                and node.name == "create_plugin"
+            ):
+                return True
+        return False
+
+    def _module_name_for_path(self, path: Path) -> str:
+        """根据路径生成稳定的模块名（不依赖哈希种子）。"""
+        digest = hashlib.md5(str(path.resolve()).encode("utf-8")).hexdigest()[:12]
+        return f"app_plugin_{digest}_{path.stem}"
 
     def _load_plugin_from_path(self, path: Path) -> ApplicationPlugin:
-        module_name = f"app_plugin_{abs(hash(path.resolve()))}_{path.stem}"
+        module_name = self._module_name_for_path(path)
         spec = importlib.util.spec_from_file_location(module_name, path)
         if spec is None or spec.loader is None:
             raise ImportError(f"无法加载插件: {path}")
@@ -450,13 +468,13 @@ class ApplicationFramework(FluentWindow):
         self.plugin_dir = self._resolve_app_path(plugin_dir)
         self.plugin_config_path = self._resolve_app_path(plugin_config)
         self.user_plugin_paths: Dict[str, Path] = {}
+        self.plugin_load_errors: list = []
 
         # 默认主题色 / 主题模式;真正的值会在 _load_user_plugins() 里从配置覆盖
         self.theme_color = "#0078D4"
         self.theme_mode = ""
         setThemeColor(self.theme_color)
 
-        # self._register_builtin_plugins()
         self._load_user_plugins()
 
         # 应用从配置中读到的主题色 / 主题模式
@@ -642,14 +660,6 @@ class ApplicationFramework(FluentWindow):
             )
 
     def confirm_action(self, title: str, content: str) -> bool:
-        # result = QMessageBox.question(
-        #     self,
-        #     title,
-        #     content,
-        #     QMessageBox.Yes | QMessageBox.No,
-        #     QMessageBox.No,
-        # )
-        # return result == QMessageBox.Yes
         result = MessageConfirmBox(
             parent=self,
             title=title,
@@ -706,15 +716,24 @@ class ApplicationFramework(FluentWindow):
                 plugin_path = self.plugin_manager.resolve_plugin_path(resolved)
                 plugin = self.plugin_manager.register_from_path(plugin_path)
                 self.user_plugin_paths[plugin.info.plugin_id] = plugin_path
-            except Exception:
-                traceback.print_exc()
+            except Exception as exc:
+                self.plugin_load_errors.append(f"{raw_path}: {exc}")
 
     def _load_startup_plugins(self) -> None:
         for plugin_id in list(self.user_plugin_paths.keys()):
             try:
                 self.plugin_manager.load(plugin_id)
-            except Exception:
-                traceback.print_exc()
+            except Exception as exc:
+                self.plugin_load_errors.append(f"{plugin_id}: {exc}")
+
+        if self.plugin_load_errors:
+            InfoBar.error(
+                title="部分插件加载失败",
+                content="; ".join(self.plugin_load_errors[-3:]),
+                parent=self,
+                position=InfoBarPosition.TOP,
+                duration=5000,
+            )
 
     def _navigate_to_open_screen(self) -> None:
         """根据插件配置 open_screen_interface 跳转到对应界面。"""
@@ -758,24 +777,6 @@ class ApplicationFramework(FluentWindow):
             json.dumps(data, ensure_ascii=False, indent=2),
             encoding="utf-8",
         )
-
-    # def _register_builtin_plugins(self) -> None:
-    #     try:
-    #         from cmd_executor import CommandToolPage
-
-    #         self.plugin_manager.register(
-    #             PagePlugin(
-    #                 PluginInfo(
-    #                     plugin_id="command_tool",
-    #                     name="命令执行",
-    #                     description="批量配置并执行命令行工具",
-    #                     icon=FIF.COMMAND_PROMPT,
-    #                 ),
-    #                 CommandToolPage,
-    #             )
-    #         )
-    #     except Exception:
-    #         traceback.print_exc()
 
     def closeEvent(self, event) -> None:
         # 保存当前界面到配置，下次启动自动恢复

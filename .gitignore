@@ -140,3 +140,6 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# 番茄时钟运行时状态
+plugins/pomodoro/pomodoro_state.json

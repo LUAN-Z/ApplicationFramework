@@ -5,7 +5,7 @@
 import os
 from typing import List, Optional
 
-from PyQt5.QtCore import Qt, pyqtSignal, QPoint
+from PyQt5.QtCore import Qt, QPoint
 from PyQt5.QtGui import QDragEnterEvent, QDropEvent
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout,
@@ -16,8 +16,7 @@ from PyQt5.QtWidgets import (
 from qfluentwidgets import (
     PushButton, PrimaryPushButton, LineEdit, TextEdit,
     TableWidget, InfoBar, InfoBarPosition, ComboBox,
-    BodyLabel, StrongBodyLabel, InfoBarIcon, ToolButton,
-    CardWidget, FluentIcon as FIF,
+    BodyLabel, StrongBodyLabel, CardWidget, FluentIcon as FIF,
 )
 
 try:
@@ -39,45 +38,7 @@ except ImportError:
         output_path_in_directory,
     )
 
-class InfoBarWithButton(InfoBar):
-    """ Info bar with confirm and cancel buttons """
-    confirmed = pyqtSignal()
-
-    def __init__(self, icon: InfoBarIcon, title: str, content: str,
-                 duration=1000, position=InfoBarPosition.TOP_RIGHT, parent=None):
-        super().__init__(icon=icon, title=title, content=content, orient=Qt.Vertical,
-                         isClosable=False, duration=duration, position=position, parent=parent)
-
-        # 1. Icon Vertical Center
-        self.hBoxLayout.itemAt(0).setAlignment(Qt.AlignVCenter | Qt.AlignLeft)
-
-        # 2. Make Text Layout Expand
-        # Item 0 is Icon, Item 1 is TextLayout. Set stretch for TextLayout to 1.
-        self.hBoxLayout.setStretch(1, 1)
-
-        # 3. Buttons (Vertical Layout)
-        self.confirmButton = ToolButton(FIF.ACCEPT, self)
-        self.confirmButton.setFixedSize(30, 30)
-
-        self.cancelButton = ToolButton(FIF.CLOSE, self)
-        self.cancelButton.setFixedSize(30, 30)
-
-        self.buttonLayout = QVBoxLayout()
-        self.buttonLayout.setSpacing(5)
-        self.buttonLayout.setContentsMargins(20, 0, 10, 0)
-        self.buttonLayout.addWidget(self.cancelButton)
-        self.buttonLayout.addWidget(self.confirmButton)
-
-        # 4. Add Button Layout to Main Horizontal Layout
-        self.hBoxLayout.addLayout(self.buttonLayout)
-
-        self.cancelButton.clicked.connect(self.close)
-        self.confirmButton.clicked.connect(self.on_confirmButton_clicked)
-        self.show()
-
-    def on_confirmButton_clicked(self):
-        self.confirmed.emit()
-        self.close()
+from customWidget import InfoBarWithButton
 
 class DraggableTableWidget(TableWidget):
     """支持文件拖拽的表格组件"""

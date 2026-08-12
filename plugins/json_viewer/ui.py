@@ -42,6 +42,8 @@ from qfluentwidgets import (
     qconfig,
 )
 
+from customWidget import MessageConfirmBox
+
 # ── 类型着色 ──────────────────────────────────────────────
 # 这些十六进制色在浅色 / 深色主题下都有足够对比度
 COLOR_STRING = QColor("#4CAF50")
@@ -105,11 +107,12 @@ def _max_depth(data: Any, depth: int = 0) -> int:
 
 
 def _format_file_size(size: int) -> str:
+    s = float(size)
     for unit in ("B", "KB", "MB", "GB"):
-        if size < 1024:
-            return f"{size:.1f} {unit}"
-        size /= 1024
-    return f"{size:.1f} TB"
+        if s < 1024:
+            return f"{s:.1f} {unit}"
+        s /= 1024
+    return f"{s:.1f} TB"
 
 
 def _is_url(text: str) -> bool:
@@ -141,6 +144,7 @@ class JsonTreeWidget(TreeWidget):
         self.header().setSectionResizeMode(0, QHeaderView.Interactive)
         self.header().setSectionResizeMode(1, QHeaderView.Interactive)
         self.header().setSectionResizeMode(2, QHeaderView.Interactive)
+        self._key_count = 0
         # self.setColumnWidth(2, 50)
         self.setAlternatingRowColors(True)
         self.setAnimated(True)
@@ -162,6 +166,20 @@ class JsonTreeWidget(TreeWidget):
         # 视图本身也需要同步,viewport() 才是真正绘制行背景的部件
         if self.viewport() is not None:
             self.viewport().setPalette(pal)
+
+    def update_key_header(self, visible_count: int | None = None):
+        """更新第一列 header，显示键数量。
+
+        Args:
+            visible_count: 若提供则显示该数量（搜索场景），
+                           否则显示总键数（加载场景）。
+        """
+        if visible_count is not None:
+            self.setHeaderLabel(f"键({visible_count})")
+        elif self._key_count > 0:
+            self.setHeaderLabel(f"键({self._key_count})")
+        else:
+            self.setHeaderLabel("键")
 
     # 拖拽 ──
 
@@ -208,9 +226,23 @@ class JsonTreeWidget(TreeWidget):
         act_copy_val.triggered.connect(lambda: self._copy_value(item))
         menu.addAction(act_copy_val)
 
-        act_copy_path = QAction("复制键路径", self)
-        act_copy_path.triggered.connect(lambda: self._copy_path(item))
-        menu.addAction(act_copy_path)
+        # 复制路径子菜单
+        path_menu = RoundMenu("复制路径", self)
+        path_menu.setIcon(FIF.LINK.icon())
+
+        act_jsonpath = QAction("JSON Path  $.store.book[0].title", self)
+        act_jsonpath.triggered.connect(lambda: self._copy_path(item, "jsonpath"))
+        path_menu.addAction(act_jsonpath)
+
+        act_jq = QAction("jq  .store.book[0].title", self)
+        act_jq.triggered.connect(lambda: self._copy_path(item, "jq"))
+        path_menu.addAction(act_jq)
+
+        act_python = QAction("Python  data['store']['book'][0]['title']", self)
+        act_python.triggered.connect(lambda: self._copy_path(item, "python"))
+        path_menu.addAction(act_python)
+
+        menu.addMenu(path_menu)
 
         # 如果被编辑过 → 还原
         if item.data(0, Qt.UserRole + 1) is not None:
@@ -241,13 +273,52 @@ class JsonTreeWidget(TreeWidget):
         text = item.text(1) or item.text(0)
         QApplication.clipboard().setText(text)
 
-    def _copy_path(self, item: QTreeWidgetItem):
+    def _copy_path(self, item: QTreeWidgetItem, fmt: str = "jsonpath"):
+        """复制节点路径到剪贴板。
+
+        Args:
+            fmt: 路径格式 — "jsonpath" / "jq" / "python"
+        """
+        # 收集从当前节点到根的键路径（跳过 root 节点）
         parts = []
         cur = item
         while cur:
-            parts.append(cur.text(0))
+            key_info = cur.data(0, Qt.UserRole + 2)
+            if key_info is not None:
+                parts.append(key_info)
             cur = cur.parent()
-        QApplication.clipboard().setText(".".join(reversed(parts)))
+        parts.reverse()
+
+        if not parts:
+            QApplication.clipboard().setText("$" if fmt == "jsonpath" else "." if fmt == "jq" else "data")
+            return
+
+        if fmt == "jsonpath":
+            # $.store.book[0].title
+            path = "$"
+            for p in parts:
+                if isinstance(p, int):
+                    path += f"[{p}]"
+                else:
+                    path += f".{p}"
+        elif fmt == "jq":
+            # .store.book[0].title
+            path = ""
+            for p in parts:
+                if isinstance(p, int):
+                    path += f"[{p}]"
+                else:
+                    path += f".{p}"
+        else:  # python
+            # data['store']['book'][0]['title']
+            path = "data"
+            for p in parts:
+                if isinstance(p, int):
+                    path += f"[{p}]"
+                else:
+                    path += f"['{p}']"
+
+        QApplication.clipboard().setText(path)
 
 
 # ── 主页面 ────────────────────────────────────────────────
@@ -478,6 +549,8 @@ class JsonViewerPage(QWidget):
             self.tree.addTopLevelItem(root)
             root.setExpanded(True)
             self.tree.setColumnWidth(2, 50)
+            self.tree._key_count = root.childCount()
+            self.tree.update_key_header()
         finally:
             self.tree.setAnimated(was_animated)
             self.tree.setUpdatesEnabled(True)
@@ -567,46 +640,60 @@ class JsonViewerPage(QWidget):
     def _on_search(self, keyword: str):
         if not keyword:
             self._restore_all(self.tree.invisibleRootItem())
+            self.tree.update_key_header()
             self.status_label.setText(
                 "搜索结果: 已清除筛选" if self.json_data else "就绪"
             )
             return
 
         keyword = keyword.lower()
-        match_count = self._filter_and_expand(
-            self.tree.invisibleRootItem(), keyword
-        )
+        self._filter_and_expand(self.tree.invisibleRootItem(), keyword)
         self._show_container_context(self.tree.invisibleRootItem())
-        self.status_label.setText(f"搜索结果: 找到 {match_count} 个匹配节点")
+        # 只统计根节点下可见的直接子项数
+        visible_root_children = sum(
+            1 for i in range(self.tree.topLevelItemCount())
+            for root in [self.tree.topLevelItem(i)]
+            for j in range(root.childCount())
+            if not root.child(j).isHidden()
+        )
+        self.tree.update_key_header(visible_root_children)
+        self.status_label.setText(f"搜索结果: 找到 {visible_root_children} 个匹配节点")
 
-    def _filter_and_expand(self, parent: QTreeWidgetItem, keyword: str) -> int:
-        """递归搜索，隐藏不匹配节点，返回当前子树中匹配的节点数。"""
-        total = 0
+    def _filter_and_expand(self, parent: QTreeWidgetItem, keyword: str) -> bool:
+        """递归搜索，隐藏不匹配节点。返回当前子树是否有匹配。"""
+        any_match = False
         for i in range(parent.childCount()):
             child = parent.child(i)
             self._ensure_populated(child)
             subtree_matches = self._filter_and_expand(child, keyword)
 
             key_ok = keyword in child.text(0).lower()
+            # 同时匹配显示文本和原始值，确保长字符串和容器内容也能被搜到
             val_ok = keyword in child.text(1).lower()
-            matched = key_ok or val_ok or subtree_matches > 0
+            raw = child.data(0, Qt.UserRole)
+            if not val_ok and raw is not None:
+                raw_str = str(raw).lower()
+                val_ok = keyword in raw_str
+            directly_matched = key_ok or val_ok
+            matched = directly_matched or subtree_matches
 
             child.setHidden(not matched)
             if matched:
-                p = child
+                any_match = True
+                if directly_matched:
+                    child.setExpanded(True)
+                p = child.parent()
                 while p:
                     p.setExpanded(True)
                     p = p.parent()
-                total += 1
 
-        return total
+        return any_match
 
     def _show_container_context(self, parent: QTreeWidgetItem):
         """补全容器上下文：当容器中有叶子节点命中搜索时，显示该容器所有子节点。"""
         for i in range(parent.childCount()):
             child = parent.child(i)
             if not child.isHidden() and child.childCount() > 0:
-                # 该容器可见且有子节点 → 检查是否包含直接命中的叶子
                 has_matching_leaf = any(
                     not child.child(j).isHidden()
                     and child.child(j).childCount() == 0
@@ -646,8 +733,6 @@ class JsonViewerPage(QWidget):
             self.path_edit.clear()
             return
 
-        from customWidget import MessageConfirmBox
-
         confirmed = MessageConfirmBox(
             parent=self.window(),
             title="确认清除",
@@ -666,6 +751,8 @@ class JsonViewerPage(QWidget):
         self.file_info.setText("")
         self.file_size.setText("")
         self.tree.clear()
+        self.tree._key_count = 0
+        self.tree.update_key_header()
         self.search_edit.clear()
         self.status_label.setText("就绪 — 请打开一个 JSON 文件")
 
@@ -684,7 +771,7 @@ class JsonViewerPage(QWidget):
             )
         except Exception as e:
             InfoBar.error(
-                title="打开失败URL失败",
+                title="打开URL失败",
                 content=str(e),
                 parent=self,
                 position=InfoBarPosition.TOP,
@@ -721,8 +808,8 @@ class JsonViewerPage(QWidget):
     def _on_item_changed(self, item: QTreeWidgetItem, column: int):
         """叶子节点值被编辑后的回调。"""
         raw = item.data(0, Qt.UserRole)
-        # 跳过容器节点（仍可能有 childCount==0 的瞬态）和列号不符
-        if column != 1 or isinstance(raw, (dict, list)) or item.childCount() > 0:
+        # 跳过容器节点和列号不符
+        if column != 1 or isinstance(raw, (dict, list)):
             return
 
         new_text = item.text(1)
@@ -731,16 +818,42 @@ class JsonViewerPage(QWidget):
         if raw is None:
             new_value = None if new_text == "null" else new_text
         elif isinstance(raw, bool):
-            new_value = new_text.lower() in ("true", "1", "yes")
+            if new_text.lower() not in ("true", "false"):
+                self.tree.blockSignals(True)
+                item.setText(1, _value_label(raw))
+                self.tree.blockSignals(False)
+                InfoBar.warning(
+                    title="输入无效",
+                    content="布尔值请输入 true 或 false",
+                    parent=self, position=InfoBarPosition.TOP, duration=2000,
+                )
+                return
+            new_value = new_text.lower() == "true"
         elif isinstance(raw, int):
             try:
                 new_value = int(new_text)
             except ValueError:
+                self.tree.blockSignals(True)
+                item.setText(1, _value_label(raw))
+                self.tree.blockSignals(False)
+                InfoBar.warning(
+                    title="输入无效",
+                    content="请输入整数",
+                    parent=self, position=InfoBarPosition.TOP, duration=2000,
+                )
                 return
         elif isinstance(raw, float):
             try:
                 new_value = float(new_text)
             except ValueError:
+                self.tree.blockSignals(True)
+                item.setText(1, _value_label(raw))
+                self.tree.blockSignals(False)
+                InfoBar.warning(
+                    title="输入无效",
+                    content="请输入数字",
+                    parent=self, position=InfoBarPosition.TOP, duration=2000,
+                )
                 return
         else:
             new_value = new_text
@@ -749,9 +862,13 @@ class JsonViewerPage(QWidget):
         if item.data(0, Qt.UserRole + 1) is None:
             item.setData(0, Qt.UserRole + 1, raw)
 
+        # 更新 UserRole 数据，保持与显示一致
+        item.setData(0, Qt.UserRole, new_value)
+
         # 更新外观
         item.setForeground(1, COLOR_EDITED)
         item.setForeground(2, COLOR_EDITED)
+        item.setText(2, type(new_value).__name__)
         if isinstance(raw, str) or isinstance(new_value, str):
             orig_label = _value_label(raw) if raw is not None else "null"
             cur_label = _value_label(new_value) if new_value is not None else "null"
@@ -822,6 +939,7 @@ class JsonViewerPage(QWidget):
 
         self.tree.blockSignals(True)
         item.setText(1, _value_label(original))
+        item.setText(2, type(original).__name__)
         color = _value_color(original)
         item.setForeground(1, color)
         item.setForeground(2, color)
@@ -829,6 +947,7 @@ class JsonViewerPage(QWidget):
             item.setToolTip(1, original)
         else:
             item.setToolTip(1, "")
+        item.setData(0, Qt.UserRole, original)
         item.setData(0, Qt.UserRole + 1, None)
         self.tree.blockSignals(False)
 
@@ -851,8 +970,6 @@ class JsonViewerPage(QWidget):
             self._save_as()
             return
 
-        from customWidget import MessageConfirmBox
-
         confirmed = MessageConfirmBox(
             parent=self.window(),
             title="确认保存",
@@ -873,7 +990,6 @@ class JsonViewerPage(QWidget):
                 duration=2000,
             )
             # 重新构建树以清除编辑标记
-            self._clear_edit_marks()
             self._build_tree()
         except Exception as e:
             InfoBar.error(
@@ -893,8 +1009,6 @@ class JsonViewerPage(QWidget):
         )
         if not path:
             return
-
-        from customWidget import MessageConfirmBox
 
         confirmed = MessageConfirmBox(
             parent=self.window(),
@@ -919,7 +1033,6 @@ class JsonViewerPage(QWidget):
                 position=InfoBarPosition.TOP,
                 duration=2000,
             )
-            self._clear_edit_marks()
             self._build_tree()
         except Exception as e:
             InfoBar.error(
@@ -929,11 +1042,4 @@ class JsonViewerPage(QWidget):
                 position=InfoBarPosition.TOP,
             )
 
-    def _clear_edit_marks(self):
-        """清除所有节点的编辑标记（递归遍历树）。"""
-        def _walk(item):
-            item.setData(0, Qt.UserRole + 1, None)
-            for i in range(item.childCount()):
-                _walk(item.child(i))
-        for i in range(self.tree.topLevelItemCount()):
-            _walk(self.tree.topLevelItem(i))
+

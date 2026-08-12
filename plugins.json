@@ -1,13 +1,13 @@
 {
   "plugins": [
     "plugins/cmd_executor/__init__.py",
-    "plugins/demo_counter/__init__.py",
-    "plugins/demo_notes/__init__.py",
+    "plugins/pomodoro/__init__.py",
+    "plugins/time_log/__init__.py",
     "plugins/json_viewer/__init__.py",
     "plugins/config_viewer/__init__.py",
     "plugins/todo/__init__.py"
   ],
-  "open_screen_interface": "command_executor",
-  "theme_color": "#d4a963",
-  "theme_mode": "Dark"
+  "open_screen_interface": "time_log",
+  "theme_color": "#7c45d4",
+  "theme_mode": "Light"
 }

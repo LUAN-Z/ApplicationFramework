@@ -3,6 +3,7 @@
 """Command executor plugin runtime logic."""
 
 import os
+import shlex
 import subprocess
 import sys
 from dataclasses import dataclass
@@ -105,6 +106,11 @@ def get_tool_help(tool_path: str, timeout: int = 10) -> str:
     return "该工具没有返回帮助信息"
 
 
+def split_command(command: str) -> list:
+    """将命令字符串安全地拆分为参数列表（不经过 shell 解析）。"""
+    return shlex.split(command, posix=(sys.platform != "win32"))
+
+
 class CommandExecutor(QThread):
     """Run one command in a worker thread."""
 
@@ -124,8 +130,15 @@ class CommandExecutor(QThread):
             if not self._is_running:
                 return
 
+            try:
+                cmd_list = split_command(self.cmd)
+            except ValueError as exc:
+                raise ValueError(f"命令解析失败（请检查引号是否配对）: {exc}") from exc
+            if not cmd_list:
+                raise ValueError("命令为空，请检查命令模板")
+
             self._process = subprocess.Popen(
-                self.cmd,
+                cmd_list,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
                 text=True,
@@ -133,7 +146,7 @@ class CommandExecutor(QThread):
                 errors="replace",
                 cwd=self.cwd,
                 startupinfo=windows_startupinfo(),
-                shell=True,
+                shell=False,
             )
 
             output_lines = []
