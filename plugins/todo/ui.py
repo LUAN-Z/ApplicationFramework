@@ -54,9 +54,10 @@ from qfluentwidgets import (
     TransparentTogglePushButton,
     TransparentToggleToolButton,
     isDarkTheme,
-    qconfig,
     themeColor,
 )
+
+from ApplicationFramework import connect_theme_changed
 
 try:
     from .storage import SYSTEM_LISTS, TodoStore
@@ -1075,7 +1076,7 @@ class TodoPage(QWidget):
         self._wire()
         self._apply_theme_styles()
         # 主题切换实时刷新依赖 isDarkTheme() 的内联样式
-        qconfig.themeChanged.connect(self._apply_theme_styles)
+        connect_theme_changed(self._apply_theme_styles)
         self._refresh_lists()
         self._refresh_tasks()
 

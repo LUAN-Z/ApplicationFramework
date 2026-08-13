@@ -22,11 +22,10 @@ from qfluentwidgets import (
     StrongBodyLabel,
     SwitchButton,
     isDarkTheme,
-    qconfig,
     themeColor,
 )
 
-from ApplicationFramework import ApplicationPlugin, PluginInfo
+from ApplicationFramework import ApplicationPlugin, PluginInfo, connect_theme_changed
 
 
 def _subtle_color() -> str:
@@ -76,7 +75,7 @@ class PomodoroPage(QWidget):
         self._update_display()
 
         # 主题切换时刷新依赖 isDarkTheme()/themeColor() 的样式
-        qconfig.themeChanged.connect(self.refresh_theme_styles)
+        connect_theme_changed(self.refresh_theme_styles)
 
     def _load_state(self):
         try:

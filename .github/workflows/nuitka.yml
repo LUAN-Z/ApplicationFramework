@@ -35,6 +35,24 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
 
+      - name: Set build version
+        id: version
+        shell: pwsh
+        run: |
+          if ("${{ github.ref_type }}" -eq "tag") {
+            $version = "${{ github.ref_name }}" -replace '^v', ''
+          } else {
+            $version = "0.0.${{ github.run_number }}"
+          }
+
+          if ($version -notmatch '^\d+(\.\d+){0,3}$') {
+            $version = "0.0.${{ github.run_number }}"
+          }
+
+          "version=$version" >> $env:GITHUB_OUTPUT
+          "BUILD_VERSION=$version" >> $env:GITHUB_ENV
+          Write-Host "Build version: $version"
+
       - name: Build executable with Nuitka
         uses: Nuitka/Nuitka-Action@main
         with:
@@ -42,7 +60,9 @@ jobs:
           script-name: ApplicationFramework.py
           mode: standalone
           enable-plugins: pyqt5
-          include-package: qfluentwidgets
+          include-package: |
+            qfluentwidgets
+            qfluentwidgets._rc
           include-qt-plugins: |
             platforms
             styles
@@ -51,11 +71,16 @@ jobs:
           include-data-files: plugins.json=plugins.json
           include-raw-dir: plugins=plugins
           windows-console-mode: disable
+          force-stderr-spec: "{PROGRAM_BASE}.err.txt"
+          product-name: ApplicationFramework
+          file-description: ApplicationFramework
+          product-version: ${{ steps.version.outputs.version }}
+          file-version: ${{ steps.version.outputs.version }}
           assume-yes-for-downloads: true
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ApplicationFramework-windows
+          name: ApplicationFramework-${{ steps.version.outputs.version }}-windows
           path: build/ApplicationFramework.dist/**
           include-hidden-files: true

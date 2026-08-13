@@ -36,8 +36,9 @@ from qfluentwidgets import (
     StrongBodyLabel,
     TreeWidget,
     isDarkTheme,
-    qconfig,
 )
+
+from ApplicationFramework import connect_theme_changed
 
 # ── 配色 ────────────────────────────────────────────────
 COLOR_VALUE = QColor("#4CAF50")
@@ -77,7 +78,7 @@ class ConfigTreeWidget(TreeWidget):
         self.customContextMenuRequested.connect(self._show_context_menu)
         # Qt 默认的 AlternateBase 是接近白色的浅灰,深色主题下显得格外刺眼
         self._refresh_alt_palette()
-        qconfig.themeChanged.connect(self._refresh_alt_palette)
+        connect_theme_changed(self._refresh_alt_palette)
 
     def _refresh_alt_palette(self):
         pal = self.palette()
@@ -201,7 +202,7 @@ class ConfigViewerPage(QWidget):
         self._dirty = False
         self._init_ui()
         # 主题切换时重建树,确保前景色 / 编辑标记重新着色
-        qconfig.themeChanged.connect(self._on_theme_changed)
+        connect_theme_changed(self._on_theme_changed)
 
     def _on_theme_changed(self):
         if self.parser is not None:

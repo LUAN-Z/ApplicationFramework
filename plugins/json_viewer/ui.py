@@ -39,9 +39,9 @@ from qfluentwidgets import (
     TreeWidget,
     RoundMenu,
     isDarkTheme,
-    qconfig,
 )
 
+from ApplicationFramework import connect_theme_changed
 from customWidget import MessageConfirmBox
 
 # ── 类型着色 ──────────────────────────────────────────────
@@ -152,7 +152,7 @@ class JsonTreeWidget(TreeWidget):
         self.customContextMenuRequested.connect(self._show_context_menu)
         # Qt 默认的 AlternateBase 是接近白色的浅灰,深色主题下显得格外刺眼
         self._refresh_alt_palette()
-        qconfig.themeChanged.connect(self._refresh_alt_palette)
+        connect_theme_changed(self._refresh_alt_palette)
 
     def _refresh_alt_palette(self):
         pal = self.palette()
@@ -333,7 +333,7 @@ class JsonViewerPage(QWidget):
         self.json_data: Any = None
         self._init_ui()
         # 主题切换时重建树,刷新 setForeground 的缓存颜色
-        qconfig.themeChanged.connect(self._on_theme_changed)
+        connect_theme_changed(self._on_theme_changed)
 
     def _on_theme_changed(self):
         """主题变化时重建树,让 _value_color 的回退色重新计算。"""

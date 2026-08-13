@@ -33,9 +33,12 @@ import ast
 import hashlib
 import importlib.util
 import json
+import os
 import sys
 import traceback
+import weakref
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 from typing import Dict, Iterable, Optional, Type
 
@@ -75,6 +78,51 @@ from Utils import WindowsScaleFactorSetting
 
 if __name__ == "__main__":
     sys.modules.setdefault("ApplicationFramework", sys.modules[__name__])
+
+
+APP_STATE_DIR = Path(os.environ.get("APPDATA") or Path.home()) / "ApplicationFramework"
+CRASH_LOG_PATH = APP_STATE_DIR / "crash.log"
+
+
+def _write_crash_log(title: str, detail: str = "") -> None:
+    try:
+        APP_STATE_DIR.mkdir(parents=True, exist_ok=True)
+        with CRASH_LOG_PATH.open("a", encoding="utf-8") as file:
+            file.write(f"[{datetime.now().isoformat(timespec='seconds')}] {title}\n")
+            if detail:
+                file.write(detail.rstrip() + "\n")
+            file.write("\n")
+    except Exception:
+        pass
+
+
+def _install_exception_hook() -> None:
+    def handle_exception(exc_type, exc_value, exc_traceback):
+        detail = "".join(
+            traceback.format_exception(exc_type, exc_value, exc_traceback)
+        )
+        _write_crash_log("Unhandled exception", detail)
+        traceback.print_exception(exc_type, exc_value, exc_traceback)
+
+    sys.excepthook = handle_exception
+
+
+def connect_theme_changed(callback) -> None:
+    callback_ref = weakref.WeakMethod(callback) if hasattr(callback, "__self__") else None
+
+    def safe_callback(*args, **kwargs):
+        try:
+            target = callback_ref() if callback_ref is not None else callback
+            if target is None:
+                return
+            target()
+        except Exception:
+            _write_crash_log(
+                f"Theme callback failed: {callback!r}",
+                traceback.format_exc(),
+            )
+
+    qconfig.themeChanged.connect(safe_callback)
 
 
 @dataclass(frozen=True)
@@ -464,9 +512,11 @@ class ApplicationFramework(FluentWindow):
         self.resize(1200, 900)
 
         self.app_dir = Path(__file__).resolve().parent
+        self.user_config_dir = APP_STATE_DIR
         self.plugin_manager = PluginManager(self)
         self.plugin_dir = self._resolve_app_path(plugin_dir)
-        self.plugin_config_path = self._resolve_app_path(plugin_config)
+        self.default_plugin_config_path = self._resolve_app_path(plugin_config)
+        self.plugin_config_path = self.user_config_dir / plugin_config
         self.user_plugin_paths: Dict[str, Path] = {}
         self.plugin_load_errors: list = []
 
@@ -527,14 +577,25 @@ class ApplicationFramework(FluentWindow):
 
     def _toggle_theme_and_save(self) -> None:
         """切换主题并把新模式持久化到 plugins.json。"""
-        toggleTheme()
         try:
-            new_mode = qconfig.theme.value
-        except AttributeError:
-            from qfluentwidgets import isDarkTheme
-            new_mode = "dark" if isDarkTheme() else "light"
-        self.theme_mode = new_mode
-        self._save_theme_settings()
+            toggleTheme()
+            try:
+                new_mode = qconfig.theme.value
+            except AttributeError:
+                from qfluentwidgets import isDarkTheme
+                new_mode = "dark" if isDarkTheme() else "light"
+            self.theme_mode = new_mode
+            self._save_theme_settings()
+        except Exception:
+            detail = traceback.format_exc()
+            _write_crash_log("Theme switch failed", detail)
+            InfoBar.error(
+                title="主题切换失败",
+                content=f"错误已写入 {CRASH_LOG_PATH}",
+                parent=self,
+                position=InfoBarPosition.TOP,
+                duration=5000,
+            )
 
     def _open_theme_color_dialog(self) -> None:
         """弹出 ColorDialog 选择主题色,确认后持久化并实时应用。"""
@@ -549,20 +610,24 @@ class ApplicationFramework(FluentWindow):
     def _on_theme_color_changed(self, color: QColor) -> None:
         if not color.isValid():
             return
-        self.theme_color = color.name()
-        setThemeColor(self.theme_color)
-        self._save_theme_settings()
+        try:
+            self.theme_color = color.name()
+            setThemeColor(self.theme_color)
+            self._save_theme_settings()
+        except Exception:
+            detail = traceback.format_exc()
+            _write_crash_log("Theme color change failed", detail)
+            InfoBar.error(
+                title="主题色保存失败",
+                content=f"错误已写入 {CRASH_LOG_PATH}",
+                parent=self,
+                position=InfoBarPosition.TOP,
+                duration=5000,
+            )
 
     def _save_theme_settings(self) -> None:
         """把 theme_color / theme_mode 写回 plugins.json。"""
-        existing: Dict = {}
-        if self.plugin_config_path.exists():
-            try:
-                existing = json.loads(
-                    self.plugin_config_path.read_text(encoding="utf-8")
-                )
-            except Exception:
-                existing = {}
+        existing = self._read_plugin_config()
         existing["theme_color"] = self.theme_color
         existing["theme_mode"] = self.theme_mode
         self.plugin_config_path.parent.mkdir(parents=True, exist_ok=True)
@@ -576,6 +641,24 @@ class ApplicationFramework(FluentWindow):
         if path.is_absolute():
             return path
         return self.app_dir / path
+
+    def _read_plugin_config(self) -> Dict:
+        for config_path in (self.plugin_config_path, self.default_plugin_config_path):
+            if not config_path.exists():
+                continue
+
+            try:
+                data = json.loads(config_path.read_text(encoding="utf-8"))
+            except Exception:
+                _write_crash_log(
+                    f"Failed to read config: {config_path}",
+                    traceback.format_exc(),
+                )
+                continue
+
+            return data if isinstance(data, dict) else {}
+
+        return {}
 
     def add_plugin_widget(self, plugin: ApplicationPlugin, widget: QWidget) -> None:
         info = plugin.info
@@ -689,16 +772,7 @@ class ApplicationFramework(FluentWindow):
         return [Path(file_path) for file_path in file_paths]
 
     def _load_user_plugins(self) -> None:
-        if not self.plugin_config_path.exists():
-            self.open_screen_interface = ""
-            return
-
-        try:
-            data = json.loads(self.plugin_config_path.read_text(encoding="utf-8"))
-        except Exception:
-            traceback.print_exc()
-            self.open_screen_interface = ""
-            return
+        data = self._read_plugin_config()
 
         self.open_screen_interface = data.get("open_screen_interface", "")
 
@@ -750,14 +824,7 @@ class ApplicationFramework(FluentWindow):
         self.navigate_to_widget(self.plugin_center_page)
 
     def _save_user_plugins(self) -> None:
-        existing = {}
-        if self.plugin_config_path.exists():
-            try:
-                existing = json.loads(
-                    self.plugin_config_path.read_text(encoding="utf-8")
-                )
-            except Exception:
-                pass
+        existing = self._read_plugin_config()
 
         data = {
             "plugins": [
@@ -771,8 +838,7 @@ class ApplicationFramework(FluentWindow):
                 self, "theme_mode", existing.get("theme_mode", "")
             ),
         }
-        if self.plugin_config_path.parent != Path("."):
-            self.plugin_config_path.parent.mkdir(parents=True, exist_ok=True)
+        self.plugin_config_path.parent.mkdir(parents=True, exist_ok=True)
         self.plugin_config_path.write_text(
             json.dumps(data, ensure_ascii=False, indent=2),
             encoding="utf-8",
@@ -796,15 +862,9 @@ class ApplicationFramework(FluentWindow):
 
     def _save_open_screen_interface(self, interface_name: str) -> None:
         """将当前界面名称写入 plugins.json 的 open_screen_interface 字段。"""
-        existing = {}
-        if self.plugin_config_path.exists():
-            try:
-                existing = json.loads(
-                    self.plugin_config_path.read_text(encoding="utf-8")
-                )
-            except Exception:
-                pass
+        existing = self._read_plugin_config()
         existing["open_screen_interface"] = interface_name
+        self.plugin_config_path.parent.mkdir(parents=True, exist_ok=True)
         self.plugin_config_path.write_text(
             json.dumps(existing, ensure_ascii=False, indent=2),
             encoding="utf-8",
@@ -812,6 +872,7 @@ class ApplicationFramework(FluentWindow):
 
 
 def main() -> None:
+    _install_exception_hook()
     WindowsScaleFactorSetting()
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
     QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps, True)

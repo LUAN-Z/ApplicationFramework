@@ -47,9 +47,10 @@ from qfluentwidgets import (
     TextEdit,
     TransparentToolButton,
     isDarkTheme,
-    qconfig,
     themeColor,
 )
+
+from ApplicationFramework import connect_theme_changed
 
 try:
     from .storage import TimeLogStore, extract_tags
@@ -746,7 +747,7 @@ class TimeLogPage(QWidget):
 
         self._apply_theme_styles()
         # 监听主题切换,实时刷新依赖 isDarkTheme() 计算的样式
-        qconfig.themeChanged.connect(self._apply_theme_styles)
+        connect_theme_changed(self._apply_theme_styles)
 
         self._build_more_menu()
         self._wire()
