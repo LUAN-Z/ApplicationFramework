@@ -505,7 +505,7 @@ class ApplicationFramework(FluentWindow):
     """
 
     def __init__(
-        self, plugin_dir: str = "plugins", plugin_config: str = "plugins.json"
+        self, plugin_dir: str = "plugins", plugin_config: str = "config/plugins.json"
     ):
         super().__init__()
         self.setWindowTitle("应用框架")
@@ -517,8 +517,12 @@ class ApplicationFramework(FluentWindow):
         self.plugin_dir = self._resolve_app_path(plugin_dir)
         self.default_plugin_config_path = self._resolve_app_path(plugin_config)
         self.plugin_config_path = self.user_config_dir / plugin_config
+        self.legacy_plugin_config_path = self.user_config_dir / Path(plugin_config).name
         self.user_plugin_paths: Dict[str, Path] = {}
+        self.plugin_group_by_id: Dict[str, str] = {}
+        self.plugin_group_order: list[str] = []
         self.plugin_load_errors: list = []
+        self._navigation_group_order: list[str] = []
 
         # 默认主题色 / 主题模式;真正的值会在 _load_user_plugins() 里从配置覆盖
         self.theme_color = "#0078D4"
@@ -636,6 +640,12 @@ class ApplicationFramework(FluentWindow):
             encoding="utf-8",
         )
 
+    def _path_for_plugin_config(self, path: Path) -> str:
+        try:
+            return str(path.resolve().relative_to(self.app_dir)).replace("\\", "/")
+        except ValueError:
+            return str(path)
+
     def _resolve_app_path(self, path: str | Path) -> Path:
         path = Path(path)
         if path.is_absolute():
@@ -643,7 +653,11 @@ class ApplicationFramework(FluentWindow):
         return self.app_dir / path
 
     def _read_plugin_config(self) -> Dict:
-        for config_path in (self.plugin_config_path, self.default_plugin_config_path):
+        for config_path in (
+            self.plugin_config_path,
+            self.legacy_plugin_config_path,
+            self.default_plugin_config_path,
+        ):
             if not config_path.exists():
                 continue
 
@@ -660,9 +674,53 @@ class ApplicationFramework(FluentWindow):
 
         return {}
 
+    def _default_plugin_group_by_path(self) -> Dict[str, str]:
+        try:
+            data = json.loads(
+                self.default_plugin_config_path.read_text(encoding="utf-8")
+            )
+        except Exception:
+            return {}
+
+        mapping: Dict[str, str] = {}
+        for group in data.get("plugin_groups", []):
+            if not isinstance(group, dict):
+                continue
+
+            title = group.get("title", "工具")
+            if not isinstance(title, str) or not title.strip():
+                title = "工具"
+            title = title.strip()
+
+            for raw_path in group.get("plugins", []):
+                if isinstance(raw_path, str) and raw_path.strip():
+                    mapping[self._normalize_plugin_config_path(raw_path)] = title
+        return mapping
+
+    def _normalize_plugin_config_path(self, path: str) -> str:
+        try:
+            resolved = self._resolve_app_path(path).resolve()
+            return str(resolved.relative_to(self.app_dir)).replace("\\", "/")
+        except Exception:
+            return path.replace("\\", "/")
+
     def add_plugin_widget(self, plugin: ApplicationPlugin, widget: QWidget) -> None:
         info = plugin.info
+        self._ensure_plugin_navigation_group(info.plugin_id)
         self.addSubInterface(widget, info.icon, info.name, NavigationItemPosition.TOP)
+
+    def _ensure_plugin_navigation_group(self, plugin_id: str) -> None:
+        group = self._plugin_navigation_group(plugin_id)
+        if group in self._navigation_group_order:
+            return
+
+        if self._navigation_group_order:
+            self.navigationInterface.addSeparator(NavigationItemPosition.TOP)
+        self.navigationInterface.addItemHeader(group, NavigationItemPosition.TOP)
+        self._navigation_group_order.append(group)
+
+    def _plugin_navigation_group(self, plugin_id: str) -> str:
+        return self.plugin_group_by_id.get(plugin_id, "工具")
 
     def remove_plugin_widget(self, widget: QWidget) -> None:
         route_key = widget.objectName()
@@ -714,6 +772,9 @@ class ApplicationFramework(FluentWindow):
                 plugin_path = self.plugin_manager.resolve_plugin_path(path)
                 plugin = self.plugin_manager.register_from_path(plugin_path)
                 self.user_plugin_paths[plugin.info.plugin_id] = plugin_path
+                self.plugin_group_by_id.setdefault(plugin.info.plugin_id, "工具")
+                if "工具" not in self.plugin_group_order:
+                    self.plugin_group_order.append("工具")
                 added_plugins.append(plugin.info.name)
             except Exception as exc:
                 errors.append(f"{path.name}: {exc}")
@@ -760,6 +821,7 @@ class ApplicationFramework(FluentWindow):
 
         self.plugin_manager.unregister(plugin_id)
         self.user_plugin_paths.pop(plugin_id, None)
+        self.plugin_group_by_id.pop(plugin_id, None)
         self._save_user_plugins()
 
     def _select_plugin_paths(self) -> list[Path]:
@@ -784,14 +846,50 @@ class ApplicationFramework(FluentWindow):
         if isinstance(saved_mode, str):
             self.theme_mode = saved_mode.strip()
 
-        for raw_path in data.get("plugins", []):
+        self.plugin_group_by_id.clear()
+        self.plugin_group_order.clear()
+
+        for group_title, raw_path in self._iter_plugin_config_entries(data):
             try:
                 resolved = self._resolve_app_path(raw_path)
                 plugin_path = self.plugin_manager.resolve_plugin_path(resolved)
                 plugin = self.plugin_manager.register_from_path(plugin_path)
                 self.user_plugin_paths[plugin.info.plugin_id] = plugin_path
+                self.plugin_group_by_id[plugin.info.plugin_id] = group_title
+                if group_title not in self.plugin_group_order:
+                    self.plugin_group_order.append(group_title)
             except Exception as exc:
                 self.plugin_load_errors.append(f"{raw_path}: {exc}")
+
+    def _iter_plugin_config_entries(self, data: Dict):
+        groups = data.get("plugin_groups")
+        if isinstance(groups, list):
+            for group in groups:
+                if not isinstance(group, dict):
+                    continue
+
+                title = group.get("title", "工具")
+                if not isinstance(title, str) or not title.strip():
+                    title = "工具"
+                title = title.strip()
+
+                plugins = group.get("plugins", [])
+                if not isinstance(plugins, list):
+                    continue
+
+                for raw_path in plugins:
+                    if isinstance(raw_path, str) and raw_path.strip():
+                        yield title, raw_path
+            return
+
+        default_groups = self._default_plugin_group_by_path()
+        for raw_path in data.get("plugins", []):
+            if isinstance(raw_path, str) and raw_path.strip():
+                group = default_groups.get(
+                    self._normalize_plugin_config_path(raw_path),
+                    "工具",
+                )
+                yield group, raw_path
 
     def _load_startup_plugins(self) -> None:
         for plugin_id in list(self.user_plugin_paths.keys()):
@@ -825,10 +923,24 @@ class ApplicationFramework(FluentWindow):
 
     def _save_user_plugins(self) -> None:
         existing = self._read_plugin_config()
+        grouped_plugins: Dict[str, list[str]] = {}
+        for plugin_id, path in self.user_plugin_paths.items():
+            group = self.plugin_group_by_id.get(plugin_id, "工具")
+            grouped_plugins.setdefault(group, []).append(self._path_for_plugin_config(path))
+
+        group_order = list(self.plugin_group_order)
+        for group in grouped_plugins:
+            if group not in group_order:
+                group_order.append(group)
 
         data = {
-            "plugins": [
-                str(path) for _, path in sorted(self.user_plugin_paths.items())
+            "plugin_groups": [
+                {
+                    "title": group,
+                    "plugins": grouped_plugins.get(group, []),
+                }
+                for group in group_order
+                if grouped_plugins.get(group)
             ],
             "open_screen_interface": existing.get("open_screen_interface", ""),
             "theme_color": getattr(

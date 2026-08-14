@@ -68,7 +68,7 @@ jobs:
             styles
             imageformats
             iconengines
-          include-data-files: plugins.json=plugins.json
+          include-data-files: config/plugins.json=config/plugins.json
           include-raw-dir: plugins=plugins
           windows-console-mode: disable
           force-stderr-spec: "{PROGRAM_BASE}.err.txt"
