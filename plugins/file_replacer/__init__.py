@@ -14,7 +14,7 @@ except ImportError:
 class FileReplacerPlugin(ApplicationPlugin):
     info = PluginInfo(
         plugin_id="file_replacer",
-        name="文件替换",
+        name="文件字段替换",
         description="批量按关键字或行范围替换文件内容",
         version="1.0.0",
         icon=FIF.EDIT,
