@@ -63,11 +63,7 @@ jobs:
           include-package: |
             qfluentwidgets
             qfluentwidgets._rc
-          include-qt-plugins: |
-            platforms
-            styles
-            imageformats
-            iconengines
+          include-qt-plugins: platforms,styles,imageformats,iconengines
           include-data-files: config/plugins.json=config/plugins.json
           include-raw-dir: plugins=plugins
           windows-console-mode: disable
