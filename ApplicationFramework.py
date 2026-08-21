@@ -29,9 +29,7 @@
         return MyPlugin()
 """
 
-import ast
-import hashlib
-import importlib.util
+import importlib
 import json
 import os
 import sys
@@ -42,13 +40,13 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, Iterable, Optional, Type
 
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtGui import QColor, QCursor
 from PyQt5.QtWidgets import (
     QApplication,
-    QFileDialog,
     QFrame,
     QHBoxLayout,
+    QInputDialog,
     QVBoxLayout,
     QWidget,
 )
@@ -57,14 +55,17 @@ from qfluentwidgets import (
     CardWidget,
     ColorDialog,
     FluentWindow,
+    EditableComboBox,
     InfoBar,
     InfoBarPosition,
+    NavigationItemHeader,
     NavigationItemPosition,
     PrimaryPushButton,
     PushButton,
     ScrollArea,
     StrongBodyLabel,
     Theme,
+    TransparentToolButton,
     qconfig,
     setTheme,
     setThemeColor,
@@ -82,6 +83,18 @@ if __name__ == "__main__":
 
 APP_STATE_DIR = Path(os.environ.get("APPDATA") or Path.home()) / "ApplicationFramework"
 CRASH_LOG_PATH = APP_STATE_DIR / "crash.log"
+APP_VERSION = "1.0.0"
+BUILTIN_PLUGIN_MODULES = [
+    "plugins.cmd_executor",
+    "plugins.config_viewer",
+    "plugins.file_replacer",
+    "plugins.json_viewer",
+    "plugins.log_excel_import",
+    "plugins.plugin_scaffolder",
+    "plugins.pomodoro",
+    "plugins.time_log",
+    "plugins.todo",
+]
 
 
 def _write_crash_log(title: str, detail: str = "") -> None:
@@ -178,6 +191,42 @@ class LoadedPlugin:
     widget: QWidget
 
 
+class AboutPage(ScrollArea):
+    """关于页面。"""
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setObjectName("AboutPage")
+        self.setWidgetResizable(True)
+        self.setFrameShape(QFrame.NoFrame)
+        self.setStyleSheet("QScrollArea { background: transparent; border: 0; }")
+
+        self.container = QWidget(self)
+        self.container.setStyleSheet("QWidget { background: transparent; }")
+        layout = QVBoxLayout(self.container)
+        layout.setContentsMargins(24, 20, 24, 20)
+        layout.setSpacing(12)
+
+        layout.addWidget(StrongBodyLabel("关于", self))
+        layout.addWidget(BodyLabel(f"软件版本: {APP_VERSION}", self))
+        layout.addWidget(BodyLabel("主要功能", self))
+
+        features = BodyLabel(
+            "插件管理\n"
+            "插件分组\n"
+            "加载 / 卸载插件\n"
+            "一键全部加载 / 卸载\n"
+            "主题切换与主题色\n"
+            "内置插件随主程序一起编译",
+            self,
+        )
+        features.setWordWrap(True)
+        layout.addWidget(features)
+        layout.addStretch(1)
+
+        self.setWidget(self.container)
+
+
 class PluginManager:
     """负责插件实例的注册、加载和卸载。"""
 
@@ -198,44 +247,19 @@ class PluginManager:
         self.unload(plugin_id)
         self.available_plugins.pop(plugin_id, None)
 
-    def discover_from_directory(self, plugin_dir: Path) -> list:
-        """从目录发现插件。
-
-        支持两种布局:
-        - plugins/foo.py
-        - plugins/foo/__init__.py
-
-        返回加载失败的 (路径, 错误) 列表，便于上层提示。
-        """
+    def discover_builtin_plugins(self, module_names: Iterable[str]) -> list:
+        """从内置模块列表发现插件。"""
 
         errors = []
-        if not plugin_dir.exists():
-            return errors
-
-        for path in self._iter_plugin_entries(plugin_dir):
+        for module_name in module_names:
             try:
-                plugin = self._load_plugin_from_path(path)
+                plugin = self._load_plugin_from_module(module_name)
                 self.register(plugin)
             except Exception as exc:
-                errors.append((path, exc))
+                errors.append((module_name, exc))
         return errors
 
-    def register_from_path(self, path: Path) -> ApplicationPlugin:
-        plugin_path = self.resolve_plugin_path(path)
-        if not plugin_path.exists():
-            raise FileNotFoundError(f"插件不存在: {path}")
-
-        plugin = self._load_plugin_from_path(plugin_path)
-        self.register(plugin)
-        return plugin
-
-    def resolve_plugin_path(self, path: Path) -> Path:
-        plugin_path = path / "__init__.py" if path.is_dir() else path
-        if plugin_path.suffix != ".py":
-            raise ValueError("请选择 .py 插件文件，或包含 __init__.py 的插件目录")
-        return plugin_path.resolve()
-
-    def load(self, plugin_id: str) -> QWidget:
+    def load(self, plugin_id: str, sync_navigation: bool = True) -> QWidget:
         if plugin_id in self.loaded_plugins:
             return self.loaded_plugins[plugin_id].widget
 
@@ -247,9 +271,11 @@ class PluginManager:
         plugin.on_load(self.framework)
 
         self.loaded_plugins[plugin_id] = LoadedPlugin(plugin=plugin, widget=widget)
+        if sync_navigation:
+            self.framework.request_plugin_navigation_sync()
         return widget
 
-    def unload(self, plugin_id: str) -> None:
+    def unload(self, plugin_id: str, sync_navigation: bool = True) -> None:
         loaded = self.loaded_plugins.pop(plugin_id, None)
         if not loaded:
             return
@@ -258,93 +284,23 @@ class PluginManager:
         loaded.widget.close()
         self.framework.remove_plugin_widget(loaded.widget)
         loaded.widget.deleteLater()
+        if sync_navigation:
+            self.framework.request_plugin_navigation_sync()
 
     def is_loaded(self, plugin_id: str) -> bool:
         return plugin_id in self.loaded_plugins
 
-    def _iter_plugin_entries(self, plugin_dir: Path) -> Iterable[Path]:
-        for file_path in plugin_dir.glob("*.py"):
-            if self._is_plugin_entry(file_path):
-                yield file_path
-        for child in plugin_dir.iterdir():
-            init_file = child / "__init__.py"
-            if (
-                child.is_dir()
-                and init_file.exists()
-                and self._is_plugin_entry(init_file)
-            ):
-                yield init_file
-
-    def _is_plugin_entry(self, path: Path) -> bool:
-        """通过 AST 判断模块是否在顶层导出了 create_plugin 函数。"""
-        try:
-            tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
-        except Exception:
-            return False
-        for node in tree.body:
-            if (
-                isinstance(node, ast.FunctionDef)
-                and node.name == "create_plugin"
-            ):
-                return True
-        return False
-
-    def _module_name_for_path(self, path: Path) -> str:
-        """根据路径生成稳定的模块名（不依赖哈希种子）。"""
-        digest = hashlib.md5(str(path.resolve()).encode("utf-8")).hexdigest()[:12]
-        plugin_name = path.parent.name if path.name == "__init__.py" else path.stem
-        return f"app_plugin_{digest}_{plugin_name}"
-
-    def _plugin_dependency_paths(self, path: Path) -> list[Path]:
-        """返回插件可携带的第三方依赖路径。"""
-        plugin_dir = path.parent if path.name == "__init__.py" else path.parent
-        candidates = [
-            plugin_dir,
-            plugin_dir / "vendor",
-            plugin_dir / "deps",
-            plugin_dir.parent / "vendor",
-            plugin_dir.parent / "deps",
-        ]
-        dependency_paths = []
-        for candidate in candidates:
-            resolved = candidate.resolve()
-            if resolved.exists() and resolved not in dependency_paths:
-                dependency_paths.append(resolved)
-        return dependency_paths
-
-    def _prepend_sys_paths(self, paths: Iterable[Path]) -> None:
-        for raw_path in reversed([str(path) for path in paths]):
-            if raw_path in sys.path:
-                continue
-            sys.path.insert(0, raw_path)
-
-    def _load_plugin_from_path(self, path: Path) -> ApplicationPlugin:
-        module_name = self._module_name_for_path(path)
-        plugin_path = path.resolve()
-        search_locations = None
-        if plugin_path.name == "__init__.py":
-            search_locations = [str(plugin_path.parent)]
-        spec = importlib.util.spec_from_file_location(
-            module_name,
-            plugin_path,
-            submodule_search_locations=search_locations,
-        )
-        if spec is None or spec.loader is None:
-            raise ImportError(f"无法加载插件: {path}")
-
-        module = importlib.util.module_from_spec(spec)
-        sys.modules[module_name] = module
-        dependency_paths = self._plugin_dependency_paths(plugin_path)
-        self._prepend_sys_paths(dependency_paths)
-        spec.loader.exec_module(module)
-
+    def _load_plugin_from_module(self, module_name: str) -> ApplicationPlugin:
+        module = importlib.import_module(module_name)
         factory = getattr(module, "create_plugin", None)
         if not callable(factory):
-            raise AttributeError(f"插件缺少 create_plugin(): {path}")
+            raise AttributeError(f"插件缺少 create_plugin(): {module_name}")
 
         plugin = factory()
         if not isinstance(plugin, ApplicationPlugin):
-            raise TypeError(f"create_plugin() 必须返回 ApplicationPlugin 实例: {path}")
+            raise TypeError(
+                f"create_plugin() 必须返回 ApplicationPlugin 实例: {module_name}"
+            )
         return plugin
 
 
@@ -378,21 +334,61 @@ class PluginCenterPage(ScrollArea):
     def refresh(self) -> None:
         self._clear_layout(self.layout)
 
-        title = StrongBodyLabel("插件管理", self)
-        self.layout.addWidget(title)
+        title_bar = QHBoxLayout()
+        title_bar.setContentsMargins(0, 0, 0, 0)
+        title_bar.setSpacing(8)
+        title_bar.addWidget(StrongBodyLabel("插件管理", self))
+        title_bar.addStretch(1)
 
-        action_layout = QHBoxLayout()
-        add_btn = PrimaryPushButton("添加插件", self)
-        add_btn.setIcon(FIF.ADD)
-        add_btn.clicked.connect(self.framework.add_plugin)
-        action_layout.addWidget(add_btn)
-        action_layout.addStretch(1)
-        self.layout.addLayout(action_layout)
+        self.group_manage_combo = EditableComboBox(self)
+        self.group_manage_combo.setPlaceholderText("新分组")
+        self.group_manage_combo.setFixedWidth(160)
+        self._reload_group_manage_options()
 
-        for plugin in self.framework.plugin_manager.available_plugins.values():
-            self.layout.addWidget(self._create_plugin_card(plugin))
+        add_group_btn = TransparentToolButton(FIF.ADD, self)
+        add_group_btn.setToolTip("添加分组")
+        add_group_btn.clicked.connect(self._add_group)
+
+        delete_group_btn = TransparentToolButton(FIF.DELETE, self)
+        delete_group_btn.setToolTip("删除分组")
+        delete_group_btn.clicked.connect(self._delete_group)
+
+        load_all_btn = TransparentToolButton(FIF.PLAY, self)
+        load_all_btn.setToolTip("全部加载")
+        load_all_btn.clicked.connect(self._load_all_plugins)
+
+        unload_all_btn = TransparentToolButton(FIF.CLOSE, self)
+        unload_all_btn.setToolTip("全部卸载")
+        unload_all_btn.clicked.connect(self._unload_all_plugins)
+
+        title_bar.addWidget(self.group_manage_combo)
+        title_bar.addWidget(add_group_btn)
+        title_bar.addWidget(delete_group_btn)
+        title_bar.addSpacing(6)
+        title_bar.addWidget(load_all_btn)
+        title_bar.addWidget(unload_all_btn)
+        self.layout.addLayout(title_bar)
+
+        ordered_groups, grouped_plugins = self._grouped_plugins()
+
+        for group in ordered_groups:
+            header = StrongBodyLabel(group, self)
+            self.layout.addWidget(header)
+            for plugin in sorted(
+                grouped_plugins[group], key=lambda item: item.info.name.lower()
+            ):
+                self.layout.addWidget(self._create_plugin_card(plugin))
 
         self.layout.addStretch(1)
+
+    def _grouped_plugins(self) -> tuple[list[str], Dict[str, list[ApplicationPlugin]]]:
+        grouped_plugins: Dict[str, list[ApplicationPlugin]] = {}
+        for plugin in self.framework.plugin_manager.available_plugins.values():
+            group = self.framework.plugin_group_by_id.get(plugin.info.plugin_id, "工具")
+            grouped_plugins.setdefault(group, []).append(plugin)
+
+        ordered_groups = self.framework._ordered_groups(grouped_plugins.keys())
+        return ordered_groups, grouped_plugins
 
     def _clear_layout(self, layout) -> None:
         while layout.count():
@@ -409,8 +405,8 @@ class PluginCenterPage(ScrollArea):
         is_loaded = self.framework.plugin_manager.is_loaded(info.plugin_id)
         card = CardWidget(self)
         card_layout = QHBoxLayout(card)
-        card_layout.setContentsMargins(16, 12, 16, 12)
-        card_layout.setSpacing(12)
+        card_layout.setContentsMargins(14, 10, 14, 10)
+        card_layout.setSpacing(10)
 
         text_layout = QVBoxLayout()
         name_label = StrongBodyLabel(f"{info.name}  v{info.version}", card)
@@ -421,6 +417,23 @@ class PluginCenterPage(ScrollArea):
         text_layout.addWidget(name_label)
         text_layout.addWidget(desc_label)
 
+        right_layout = QVBoxLayout()
+        right_layout.setContentsMargins(0, 0, 0, 0)
+        right_layout.setSpacing(6)
+
+        group_combo = EditableComboBox(card)
+        self._fill_group_combo(group_combo)
+        group_combo.setCurrentText(self.framework.plugin_group_by_id.get(info.plugin_id, "工具"))
+        group_combo.setFixedWidth(140)
+        group_combo.setToolTip("插件分组")
+        group_combo.currentTextChanged.connect(
+            lambda text, pid=info.plugin_id: self._change_plugin_group(pid, text)
+        )
+        right_layout.addWidget(group_combo)
+
+        action_row = QHBoxLayout()
+        action_row.setContentsMargins(0, 0, 0, 0)
+        action_row.setSpacing(8)
         load_btn = PrimaryPushButton("加载", card)
         load_btn.setIcon(FIF.ADD)
         load_btn.clicked.connect(lambda _, pid=info.plugin_id: self._load_plugin(pid))
@@ -440,24 +453,83 @@ class PluginCenterPage(ScrollArea):
         )
         jump_btn.setEnabled(is_loaded)
 
-        remove_btn = PushButton("移除", card)
-        remove_btn.setIcon(FIF.CLOSE)
-        remove_btn.clicked.connect(
-            lambda _, pid=info.plugin_id: self._remove_plugin(pid)
-        )
-        remove_btn.setEnabled(self.framework.is_user_plugin(info.plugin_id))
+        action_row.addWidget(load_btn)
+        action_row.addWidget(unload_btn)
+        action_row.addWidget(jump_btn)
 
         card_layout.addLayout(text_layout, 1)
-        card_layout.addWidget(load_btn)
-        card_layout.addWidget(unload_btn)
-        card_layout.addWidget(jump_btn)
-        card_layout.addWidget(remove_btn)
+        right_layout.addLayout(action_row)
+        card_layout.addLayout(right_layout)
         return card
+
+    def _fill_group_combo(self, combo: EditableComboBox) -> None:
+        combo.clear()
+        combo.addItems(self.framework.plugin_group_order or ["工具"])
+
+    def _reload_group_manage_options(self) -> None:
+        current = getattr(self, "group_manage_combo", None)
+        selected = current.currentText().strip() if current else ""
+        self.group_manage_combo.clear()
+        self.group_manage_combo.addItems(self.framework.plugin_group_order or ["工具"])
+        if selected:
+            self.group_manage_combo.setCurrentText(selected)
+
+    def _add_group(self) -> None:
+        title = self.group_manage_combo.currentText().strip()
+        if not title:
+            title, ok = QInputDialog.getText(self, "添加分组", "输入分组名称")
+            if not ok:
+                return
+            title = title.strip()
+        if not title:
+            return
+
+        if title not in self.framework.plugin_group_order:
+            self.framework.plugin_group_order.append(title)
+            self.framework._save_plugin_groups()
+        self.refresh()
+
+    def _delete_group(self) -> None:
+        title = self.group_manage_combo.currentText().strip()
+        if not title:
+            return
+        if title == "工具" and len(self.framework.plugin_group_order) <= 1:
+            return
+        if not self.framework.confirm_action(
+            "确认删除分组",
+            f"确定要删除分组“{title}”吗？该组中的插件会移动到“工具”。",
+        ):
+            return
+
+        for plugin_id, group_title in list(self.framework.plugin_group_by_id.items()):
+            if group_title == title:
+                self.framework.plugin_group_by_id[plugin_id] = "工具"
+
+        if title in self.framework.plugin_group_order and title != "工具":
+            self.framework.plugin_group_order.remove(title)
+        if "工具" not in self.framework.plugin_group_order:
+            self.framework.plugin_group_order.insert(0, "工具")
+
+        self.framework._save_plugin_groups()
+        self.framework.request_plugin_navigation_sync()
+        self.refresh()
+
+    def _change_plugin_group(self, plugin_id: str, group_title: str) -> None:
+        group_title = group_title.strip() or "工具"
+        if self.framework.plugin_group_by_id.get(plugin_id) == group_title:
+            return
+
+        self.framework.plugin_group_by_id[plugin_id] = group_title
+        if group_title not in self.framework.plugin_group_order:
+            self.framework.plugin_group_order.append(group_title)
+        self.framework._save_plugin_groups()
+        self.framework.request_plugin_navigation_sync()
+        self.refresh()
 
     def _load_plugin(self, plugin_id: str) -> None:
         try:
-            widget = self.framework.plugin_manager.load(plugin_id)
-            self.framework.navigate_to_widget(widget)
+            self.framework.plugin_manager.load(plugin_id)
+            self.framework._save_loaded_plugins()
             self.refresh()
             InfoBar.success(
                 title="已加载",
@@ -475,6 +547,86 @@ class PluginCenterPage(ScrollArea):
                 parent=self.framework,
                 position=InfoBarPosition.TOP,
                 duration=4000,
+            )
+
+    def _load_all_plugins(self) -> None:
+        loaded_count = 0
+        errors = []
+        for plugin in sorted(
+            self.framework.plugin_manager.available_plugins.values(),
+            key=lambda item: (
+                self.framework._plugin_group_sort_key(
+                    self.framework.plugin_group_by_id.get(item.info.plugin_id, "工具")
+                ),
+                item.info.name.lower(),
+                item.info.plugin_id,
+            ),
+        ):
+            plugin_id = plugin.info.plugin_id
+            if self.framework.plugin_manager.is_loaded(plugin_id):
+                continue
+            try:
+                self.framework.plugin_manager.load(plugin_id, sync_navigation=False)
+                loaded_count += 1
+            except Exception as exc:
+                errors.append(f"{plugin.info.name}: {exc}")
+
+        self.framework.request_plugin_navigation_sync()
+        self.framework._save_loaded_plugins()
+        self.refresh()
+        if loaded_count:
+            InfoBar.success(
+                title="已加载全部",
+                content=f"已加载 {loaded_count} 个插件",
+                parent=self.framework,
+                position=InfoBarPosition.TOP,
+                duration=2500,
+            )
+        if errors:
+            InfoBar.error(
+                title="部分插件加载失败",
+                content="; ".join(errors[-3:]),
+                parent=self.framework,
+                position=InfoBarPosition.TOP,
+                duration=5000,
+            )
+
+    def _unload_all_plugins(self) -> None:
+        loaded_ids = list(self.framework.plugin_manager.loaded_plugins.keys())
+        if not loaded_ids:
+            return
+        if not self.framework.confirm_action(
+            "确认全部卸载",
+            f"确定要卸载当前已加载的 {len(loaded_ids)} 个插件吗？",
+        ):
+            return
+
+        errors = []
+        for plugin_id in loaded_ids:
+            try:
+                self.framework.plugin_manager.unload(plugin_id, sync_navigation=False)
+            except Exception as exc:
+                errors.append(f"{self.framework.plugin_manager.available_plugins[plugin_id].info.name}: {exc}")
+
+        self.framework.request_plugin_navigation_sync()
+        self.framework._save_loaded_plugins()
+        self.framework.navigationInterface.setCurrentItem(self.framework.plugin_center_page.objectName())
+        self.refresh()
+        if errors:
+            InfoBar.error(
+                title="部分插件卸载失败",
+                content="; ".join(errors[-3:]),
+                parent=self.framework,
+                position=InfoBarPosition.TOP,
+                duration=5000,
+            )
+        else:
+            InfoBar.success(
+                title="已全部卸载",
+                content="已卸载当前全部插件",
+                parent=self.framework,
+                position=InfoBarPosition.TOP,
+                duration=2500,
             )
 
     def _jump_to_plugin(self, plugin_id: str) -> None:
@@ -497,34 +649,12 @@ class PluginCenterPage(ScrollArea):
 
         try:
             self.framework.plugin_manager.unload(plugin_id)
+            self.framework._save_loaded_plugins()
             self.framework.navigationInterface.setCurrentItem(self.objectName())
             self.refresh()
         except Exception as exc:
             InfoBar.error(
                 title="卸载失败",
-                content=str(exc),
-                parent=self.framework,
-                position=InfoBarPosition.TOP,
-                duration=4000,
-            )
-
-    def _remove_plugin(self, plugin_id: str) -> None:
-        plugin_name = self.framework.plugin_manager.available_plugins[
-            plugin_id
-        ].info.name
-        if not self.framework.confirm_action(
-            "确认移除",
-            f"确定要移除插件“{plugin_name}”吗？移除后下次启动不会自动加载到插件管理。",
-        ):
-            return
-
-        try:
-            self.framework.remove_user_plugin(plugin_id)
-            self.framework.navigationInterface.setCurrentItem(self.objectName())
-            self.refresh()
-        except Exception as exc:
-            InfoBar.error(
-                title="移除失败",
                 content=str(exc),
                 parent=self.framework,
                 position=InfoBarPosition.TOP,
@@ -542,28 +672,31 @@ class ApplicationFramework(FluentWindow):
         self, plugin_dir: str = "plugins", plugin_config: str = "config/plugins.json"
     ):
         super().__init__()
-        self.setWindowTitle("应用框架")
+        self.setWindowTitle(f"应用框架 {APP_VERSION}")
         self.resize(1200, 900)
 
         self.app_dir = Path(__file__).resolve().parent
         self.user_config_dir = APP_STATE_DIR
         self.plugin_manager = PluginManager(self)
-        self.plugin_dir = self._resolve_app_path(plugin_dir)
         self.default_plugin_config_path = self._resolve_app_path(plugin_config)
         self.plugin_config_path = self.user_config_dir / plugin_config
         self.legacy_plugin_config_path = self.user_config_dir / Path(plugin_config).name
-        self.user_plugin_paths: Dict[str, Path] = {}
+        self.plugin_load_errors: list = []
         self.plugin_group_by_id: Dict[str, str] = {}
         self.plugin_group_order: list[str] = []
-        self.plugin_load_errors: list = []
-        self._navigation_group_order: list[str] = []
+        self._plugin_navigation_header_keys: list[str] = []
+        self._plugin_navigation_sync_pending = False
 
-        # 默认主题色 / 主题模式;真正的值会在 _load_user_plugins() 里从配置覆盖
+        saved_config = self._read_plugin_config()
+        self.open_screen_interface = saved_config.get("open_screen_interface", "")
+
+        # 默认主题色 / 主题模式;真正的值会从配置覆盖
         self.theme_color = "#0078D4"
         self.theme_mode = ""
         setThemeColor(self.theme_color)
 
-        self._load_user_plugins()
+        self._load_builtin_plugins()
+        self._load_plugin_groups(saved_config)
 
         # 应用从配置中读到的主题色 / 主题模式
         setThemeColor(self.theme_color)
@@ -577,6 +710,23 @@ class ApplicationFramework(FluentWindow):
             NavigationItemPosition.BOTTOM,
         )
         self.navigationInterface.addItem(
+            routeKey="settings",
+            icon=FIF.SETTING,
+            text="设置",
+            selectable=False,
+            position=NavigationItemPosition.BOTTOM,
+        )
+        self.about_page = AboutPage(self)
+        self.stackedWidget.addWidget(self.about_page)
+        self.navigationInterface.addItem(
+            routeKey=self.about_page.objectName(),
+            icon=FIF.INFO,
+            text="关于",
+            onClick=lambda: self.switchTo(self.about_page),
+            position=NavigationItemPosition.BOTTOM,
+            parentRouteKey="settings",
+        )
+        self.navigationInterface.addItem(
             routeKey="theme",
             icon=FIF.CONSTRACT,
             text="切换主题",
@@ -584,6 +734,7 @@ class ApplicationFramework(FluentWindow):
             selectable=False,
             tooltip="切换主题",
             position=NavigationItemPosition.BOTTOM,
+            parentRouteKey="settings",
         )
         self.navigationInterface.addItem(
             routeKey="theme_color",
@@ -593,12 +744,13 @@ class ApplicationFramework(FluentWindow):
             selectable=False,
             tooltip="选择主题色",
             position=NavigationItemPosition.BOTTOM,
+            parentRouteKey="settings",
         )
 
         self.navigationInterface.setExpandWidth(200)
-        self._load_startup_plugins()
+        self._restore_loaded_plugins(saved_config)
         self.plugin_center_page.refresh()
-        self._navigate_to_open_screen()
+        self._show_plugin_load_errors()
 
     # ── 主题持久化 ────────────────────────────────────────
 
@@ -674,11 +826,133 @@ class ApplicationFramework(FluentWindow):
             encoding="utf-8",
         )
 
-    def _path_for_plugin_config(self, path: Path) -> str:
-        try:
-            return str(path.resolve().relative_to(self.app_dir)).replace("\\", "/")
-        except ValueError:
-            return str(path)
+    def _load_plugin_groups(self, data: Dict) -> None:
+        available_ids = set(self.plugin_manager.available_plugins.keys())
+        group_by_id: Dict[str, str] = {}
+        group_order: list[str] = []
+
+        groups = data.get("plugin_groups")
+        if isinstance(groups, list):
+            for group in groups:
+                if not isinstance(group, dict):
+                    continue
+
+                title = group.get("title", "工具")
+                if not isinstance(title, str) or not title.strip():
+                    title = "工具"
+                title = title.strip()
+
+                if title not in group_order:
+                    group_order.append(title)
+
+                plugins = group.get("plugins", [])
+                if not isinstance(plugins, list):
+                    continue
+
+                for raw_plugin_id in plugins:
+                    plugin_id = self._normalize_plugin_id(raw_plugin_id)
+                    if plugin_id in available_ids:
+                        group_by_id[plugin_id] = title
+
+        for plugin_id in available_ids:
+            group_by_id.setdefault(plugin_id, "工具")
+
+        if "工具" not in group_order:
+            group_order.insert(0, "工具")
+
+        self.plugin_group_by_id = group_by_id
+        self.plugin_group_order = group_order
+
+    def _ordered_groups(self, groups: Iterable[str]) -> list[str]:
+        group_set = set(groups)
+        ordered = [group for group in self.plugin_group_order if group in group_set]
+        for group in sorted(group_set):
+            if group not in ordered:
+                ordered.append(group)
+        return ordered
+
+    def _plugin_group_sort_key(self, group: str) -> tuple[int, str]:
+        if group in self.plugin_group_order:
+            return self.plugin_group_order.index(group), ""
+        return len(self.plugin_group_order), group.lower()
+
+    def _ordered_loaded_plugins(self) -> list[LoadedPlugin]:
+        return sorted(
+            self.plugin_manager.loaded_plugins.values(),
+            key=lambda item: (
+                self._plugin_group_sort_key(
+                    self._plugin_navigation_group(item.plugin.info.plugin_id)
+                ),
+                item.plugin.info.name.lower(),
+                item.plugin.info.plugin_id,
+            ),
+        )
+
+    def _plugin_navigation_header_key(self, group: str) -> str:
+        return f"plugin-group::{group}"
+
+    def _restore_loaded_plugins(self, data: Dict) -> None:
+        loaded_plugins = data.get("loaded_plugins")
+        if not isinstance(loaded_plugins, list):
+            target = self.open_screen_interface.strip() if isinstance(self.open_screen_interface, str) else ""
+            loaded_plugins = [target] if target and target in self.plugin_manager.available_plugins else []
+
+        restored = False
+        for raw_plugin_id in loaded_plugins:
+            plugin_id = self._normalize_plugin_id(raw_plugin_id)
+            if not plugin_id or plugin_id not in self.plugin_manager.available_plugins:
+                continue
+
+            try:
+                self.plugin_manager.load(plugin_id, sync_navigation=False)
+                restored = True
+            except Exception as exc:
+                self.plugin_load_errors.append(f"{plugin_id}: {exc}")
+
+        if restored:
+            self.request_plugin_navigation_sync()
+            self._save_loaded_plugins()
+
+    def _save_plugin_groups(self) -> None:
+        existing = self._read_plugin_config()
+        grouped_plugins: Dict[str, list[str]] = {}
+        for plugin_id in self.plugin_manager.available_plugins.keys():
+            group = self.plugin_group_by_id.get(plugin_id, "工具")
+            grouped_plugins.setdefault(group, []).append(plugin_id)
+
+        group_order = list(self.plugin_group_order)
+        for group in grouped_plugins:
+            if group not in group_order:
+                group_order.append(group)
+
+        existing["plugin_groups"] = [
+            {
+                "title": group,
+                "plugins": grouped_plugins.get(group, []),
+            }
+            for group in group_order
+            if grouped_plugins.get(group)
+        ]
+        self.plugin_config_path.parent.mkdir(parents=True, exist_ok=True)
+        self.plugin_config_path.write_text(
+            json.dumps(existing, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+
+    def _normalize_plugin_id(self, raw_plugin_id) -> str:
+        if not isinstance(raw_plugin_id, str):
+            return ""
+
+        raw_plugin_id = raw_plugin_id.strip().replace("\\", "/")
+        if not raw_plugin_id:
+            return ""
+
+        path = Path(raw_plugin_id)
+        if path.name == "__init__.py":
+            return path.parent.name
+        if path.suffix == ".py":
+            return path.stem
+        return path.name
 
     def _resolve_app_path(self, path: str | Path) -> Path:
         path = Path(path)
@@ -708,53 +982,64 @@ class ApplicationFramework(FluentWindow):
 
         return {}
 
-    def _default_plugin_group_by_path(self) -> Dict[str, str]:
-        try:
-            data = json.loads(
-                self.default_plugin_config_path.read_text(encoding="utf-8")
-            )
-        except Exception:
-            return {}
-
-        mapping: Dict[str, str] = {}
-        for group in data.get("plugin_groups", []):
-            if not isinstance(group, dict):
-                continue
-
-            title = group.get("title", "工具")
-            if not isinstance(title, str) or not title.strip():
-                title = "工具"
-            title = title.strip()
-
-            for raw_path in group.get("plugins", []):
-                if isinstance(raw_path, str) and raw_path.strip():
-                    mapping[self._normalize_plugin_config_path(raw_path)] = title
-        return mapping
-
-    def _normalize_plugin_config_path(self, path: str) -> str:
-        try:
-            resolved = self._resolve_app_path(path).resolve()
-            return str(resolved.relative_to(self.app_dir)).replace("\\", "/")
-        except Exception:
-            return path.replace("\\", "/")
-
     def add_plugin_widget(self, plugin: ApplicationPlugin, widget: QWidget) -> None:
         info = plugin.info
-        self._ensure_plugin_navigation_group(info.plugin_id)
-        self.addSubInterface(widget, info.icon, info.name, NavigationItemPosition.TOP)
-
-    def _ensure_plugin_navigation_group(self, plugin_id: str) -> None:
-        group = self._plugin_navigation_group(plugin_id)
-        if group in self._navigation_group_order:
-            return
-
-        if self._navigation_group_order:
-            self.navigationInterface.addSeparator(NavigationItemPosition.TOP)
-        self.navigationInterface.addItemHeader(group, NavigationItemPosition.TOP)
-        self._navigation_group_order.append(group)
+        self.addSubInterface(widget, info.icon, info.name, NavigationItemPosition.SCROLL)
 
     def _plugin_navigation_group(self, plugin_id: str) -> str:
         return self.plugin_group_by_id.get(plugin_id, "工具")
+
+    def request_plugin_navigation_sync(self) -> None:
+        if self._plugin_navigation_sync_pending:
+            return
+
+        self._plugin_navigation_sync_pending = True
+        QTimer.singleShot(0, self.sync_plugin_navigation)
+
+    def sync_plugin_navigation(self) -> None:
+        self._plugin_navigation_sync_pending = False
+        if not hasattr(self, "navigationInterface"):
+            return
+
+        current_widget = self.stackedWidget.currentWidget() if hasattr(self, "stackedWidget") else None
+        current_route_key = current_widget.objectName() if current_widget else ""
+
+        for header_key in self._plugin_navigation_header_keys:
+            self.navigationInterface.removeWidget(header_key)
+        self._plugin_navigation_header_keys.clear()
+
+        for loaded in list(self.plugin_manager.loaded_plugins.values()):
+            self.remove_plugin_widget(loaded.widget)
+
+        grouped_plugins: Dict[str, list[LoadedPlugin]] = {}
+        for loaded in self._ordered_loaded_plugins():
+            group = self._plugin_navigation_group(loaded.plugin.info.plugin_id)
+            grouped_plugins.setdefault(group, []).append(loaded)
+
+        for group in self._ordered_groups(grouped_plugins.keys()):
+            header_key = self._plugin_navigation_header_key(group)
+            header = NavigationItemHeader(group, self.navigationInterface)
+            self.navigationInterface.addWidget(
+                header_key, header, position=NavigationItemPosition.SCROLL
+            )
+            self._plugin_navigation_header_keys.append(header_key)
+
+            for loaded in grouped_plugins[group]:
+                self.add_plugin_widget(loaded.plugin, loaded.widget)
+
+        if current_route_key and current_route_key in self.plugin_manager.loaded_plugins:
+            self.navigate_to_widget(current_widget)
+
+    def _save_loaded_plugins(self) -> None:
+        existing = self._read_plugin_config()
+        existing["loaded_plugins"] = [
+            loaded.plugin.info.plugin_id for loaded in self._ordered_loaded_plugins()
+        ]
+        self.plugin_config_path.parent.mkdir(parents=True, exist_ok=True)
+        self.plugin_config_path.write_text(
+            json.dumps(existing, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
 
     def remove_plugin_widget(self, widget: QWidget) -> None:
         route_key = widget.objectName()
@@ -793,50 +1078,6 @@ class ApplicationFramework(FluentWindow):
         frame_geometry.moveCenter(available_geometry.center())
         self.move(frame_geometry.topLeft())
 
-    def add_plugin(self) -> None:
-        paths = self._select_plugin_paths()
-        if not paths:
-            return
-
-        added_plugins = []
-        errors = []
-
-        for path in paths:
-            try:
-                plugin_path = self.plugin_manager.resolve_plugin_path(path)
-                plugin = self.plugin_manager.register_from_path(plugin_path)
-                self.user_plugin_paths[plugin.info.plugin_id] = plugin_path
-                self.plugin_group_by_id.setdefault(plugin.info.plugin_id, "工具")
-                if "工具" not in self.plugin_group_order:
-                    self.plugin_group_order.append("工具")
-                added_plugins.append(plugin.info.name)
-            except Exception as exc:
-                errors.append(f"{path.name}: {exc}")
-
-        if added_plugins:
-            self._save_user_plugins()
-            self.plugin_center_page.refresh()
-            self.navigationInterface.setCurrentItem(
-                self.plugin_center_page.objectName()
-            )
-
-            InfoBar.success(
-                title="插件已添加",
-                content=f"已添加 {len(added_plugins)} 个插件",
-                parent=self,
-                position=InfoBarPosition.TOP,
-                duration=2500,
-            )
-
-        if errors:
-            InfoBar.error(
-                title="部分插件添加失败" if added_plugins else "添加失败",
-                content="; ".join(errors),
-                parent=self,
-                position=InfoBarPosition.TOP,
-                duration=5000,
-            )
-
     def confirm_action(self, title: str, content: str) -> bool:
         result = MessageConfirmBox(
             parent=self,
@@ -846,92 +1087,11 @@ class ApplicationFramework(FluentWindow):
         ).exec()
         return result
 
-    def is_user_plugin(self, plugin_id: str) -> bool:
-        return plugin_id in self.user_plugin_paths
+    def _load_builtin_plugins(self) -> None:
+        errors = self.plugin_manager.discover_builtin_plugins(BUILTIN_PLUGIN_MODULES)
+        self.plugin_load_errors = [f"{name}: {exc}" for name, exc in errors]
 
-    def remove_user_plugin(self, plugin_id: str) -> None:
-        if plugin_id not in self.user_plugin_paths:
-            raise ValueError("内置插件不能从插件管理中移除")
-
-        self.plugin_manager.unregister(plugin_id)
-        self.user_plugin_paths.pop(plugin_id, None)
-        self.plugin_group_by_id.pop(plugin_id, None)
-        self._save_user_plugins()
-
-    def _select_plugin_paths(self) -> list[Path]:
-        file_paths, _ = QFileDialog.getOpenFileNames(
-            self,
-            "选择插件文件",
-            str(self.plugin_dir),
-            "Python 插件 (*.py)",
-        )
-        return [Path(file_path) for file_path in file_paths]
-
-    def _load_user_plugins(self) -> None:
-        data = self._read_plugin_config()
-
-        self.open_screen_interface = data.get("open_screen_interface", "")
-
-        # 主题色 / 主题模式 — 在 __init__ 中会被读取并应用
-        saved_color = data.get("theme_color")
-        if isinstance(saved_color, str) and saved_color.strip():
-            self.theme_color = saved_color.strip()
-        saved_mode = data.get("theme_mode")
-        if isinstance(saved_mode, str):
-            self.theme_mode = saved_mode.strip()
-
-        self.plugin_group_by_id.clear()
-        self.plugin_group_order.clear()
-
-        for group_title, raw_path in self._iter_plugin_config_entries(data):
-            try:
-                resolved = self._resolve_app_path(raw_path)
-                plugin_path = self.plugin_manager.resolve_plugin_path(resolved)
-                plugin = self.plugin_manager.register_from_path(plugin_path)
-                self.user_plugin_paths[plugin.info.plugin_id] = plugin_path
-                self.plugin_group_by_id[plugin.info.plugin_id] = group_title
-                if group_title not in self.plugin_group_order:
-                    self.plugin_group_order.append(group_title)
-            except Exception as exc:
-                self.plugin_load_errors.append(f"{raw_path}: {exc}")
-
-    def _iter_plugin_config_entries(self, data: Dict):
-        groups = data.get("plugin_groups")
-        if isinstance(groups, list):
-            for group in groups:
-                if not isinstance(group, dict):
-                    continue
-
-                title = group.get("title", "工具")
-                if not isinstance(title, str) or not title.strip():
-                    title = "工具"
-                title = title.strip()
-
-                plugins = group.get("plugins", [])
-                if not isinstance(plugins, list):
-                    continue
-
-                for raw_path in plugins:
-                    if isinstance(raw_path, str) and raw_path.strip():
-                        yield title, raw_path
-            return
-
-        default_groups = self._default_plugin_group_by_path()
-        for raw_path in data.get("plugins", []):
-            if isinstance(raw_path, str) and raw_path.strip():
-                group = default_groups.get(
-                    self._normalize_plugin_config_path(raw_path),
-                    "工具",
-                )
-                yield group, raw_path
-
-    def _load_startup_plugins(self) -> None:
-        for plugin_id in list(self.user_plugin_paths.keys()):
-            try:
-                self.plugin_manager.load(plugin_id)
-            except Exception as exc:
-                self.plugin_load_errors.append(f"{plugin_id}: {exc}")
-
+    def _show_plugin_load_errors(self) -> None:
         if self.plugin_load_errors:
             InfoBar.error(
                 title="部分插件加载失败",
@@ -945,50 +1105,13 @@ class ApplicationFramework(FluentWindow):
         """根据插件配置 open_screen_interface 跳转到对应界面。"""
         target = getattr(self, "open_screen_interface", "")
 
-        if target and target != self.plugin_center_page.objectName():
-            # 在已加载的插件中查找匹配的 widget
-            for loaded in self.plugin_manager.loaded_plugins.values():
-                if loaded.widget.objectName() == target:
-                    self.navigate_to_widget(loaded.widget)
-                    return
+        if target and target in self.plugin_manager.available_plugins:
+            loaded = self.plugin_manager.loaded_plugins.get(target)
+            if loaded:
+                self.navigate_to_widget(loaded.widget)
+                return
 
-        # 默认回到插件管理页
         self.navigate_to_widget(self.plugin_center_page)
-
-    def _save_user_plugins(self) -> None:
-        existing = self._read_plugin_config()
-        grouped_plugins: Dict[str, list[str]] = {}
-        for plugin_id, path in self.user_plugin_paths.items():
-            group = self.plugin_group_by_id.get(plugin_id, "工具")
-            grouped_plugins.setdefault(group, []).append(self._path_for_plugin_config(path))
-
-        group_order = list(self.plugin_group_order)
-        for group in grouped_plugins:
-            if group not in group_order:
-                group_order.append(group)
-
-        data = {
-            "plugin_groups": [
-                {
-                    "title": group,
-                    "plugins": grouped_plugins.get(group, []),
-                }
-                for group in group_order
-                if grouped_plugins.get(group)
-            ],
-            "open_screen_interface": existing.get("open_screen_interface", ""),
-            "theme_color": getattr(
-                self, "theme_color", existing.get("theme_color", "#0078D4")
-            ),
-            "theme_mode": getattr(
-                self, "theme_mode", existing.get("theme_mode", "")
-            ),
-        }
-        self.plugin_config_path.parent.mkdir(parents=True, exist_ok=True)
-        self.plugin_config_path.write_text(
-            json.dumps(data, ensure_ascii=False, indent=2),
-            encoding="utf-8",
-        )
 
     def closeEvent(self, event) -> None:
         # 保存当前界面到配置，下次启动自动恢复
@@ -999,9 +1122,14 @@ class ApplicationFramework(FluentWindow):
         except Exception:
             pass
 
+        try:
+            self._save_loaded_plugins()
+        except Exception:
+            pass
+
         for plugin_id in list(self.plugin_manager.loaded_plugins.keys()):
             try:
-                self.plugin_manager.unload(plugin_id)
+                self.plugin_manager.unload(plugin_id, sync_navigation=False)
             except Exception:
                 pass
         event.accept()
