@@ -299,6 +299,7 @@ class PluginManager:
         """返回插件可携带的第三方依赖路径。"""
         plugin_dir = path.parent if path.name == "__init__.py" else path.parent
         candidates = [
+            plugin_dir,
             plugin_dir / "vendor",
             plugin_dir / "deps",
             plugin_dir.parent / "vendor",
