@@ -40,6 +40,22 @@ def _init_template(plugin_id: str, plugin_name: str, description: str, class_nam
 # -*- coding: utf-8 -*-
 """插件入口。"""
 
+import sys
+from pathlib import Path
+
+
+def _add_plugin_dependency_paths() -> None:
+    plugin_dir = Path(__file__).resolve().parent
+    for name in ("vendor", "deps"):
+        dependency_path = plugin_dir / name
+        if dependency_path.exists():
+            raw_path = str(dependency_path)
+            if raw_path not in sys.path:
+                sys.path.insert(0, raw_path)
+
+
+_add_plugin_dependency_paths()
+
 from ApplicationFramework import ApplicationPlugin, PluginInfo
 from qfluentwidgets import FluentIcon as FIF
 
@@ -169,6 +185,16 @@ def _readme_template(plugin_id: str, plugin_name: str, description: str) -> str:
 - `__init__.py`：插件入口，提供 `create_plugin()`
 - `ui.py`：插件页面
 - `storage.py`：可选 JSON 存储工具
+
+## 第三方依赖
+
+如果插件需要额外 Python 包，可以在插件目录创建 `requirements.txt`，然后执行：
+
+```bash
+python scripts/vendor_plugin_deps.py plugins/{plugin_id}
+```
+
+依赖会安装到插件自己的 `vendor/` 目录，编译版主程序也会自动识别，不需要重新编译主程序。
 '''
 
 

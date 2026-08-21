@@ -292,16 +292,49 @@ class PluginManager:
     def _module_name_for_path(self, path: Path) -> str:
         """根据路径生成稳定的模块名（不依赖哈希种子）。"""
         digest = hashlib.md5(str(path.resolve()).encode("utf-8")).hexdigest()[:12]
-        return f"app_plugin_{digest}_{path.stem}"
+        plugin_name = path.parent.name if path.name == "__init__.py" else path.stem
+        return f"app_plugin_{digest}_{plugin_name}"
+
+    def _plugin_dependency_paths(self, path: Path) -> list[Path]:
+        """返回插件可携带的第三方依赖路径。"""
+        plugin_dir = path.parent if path.name == "__init__.py" else path.parent
+        candidates = [
+            plugin_dir / "vendor",
+            plugin_dir / "deps",
+            plugin_dir.parent / "vendor",
+            plugin_dir.parent / "deps",
+        ]
+        dependency_paths = []
+        for candidate in candidates:
+            resolved = candidate.resolve()
+            if resolved.exists() and resolved not in dependency_paths:
+                dependency_paths.append(resolved)
+        return dependency_paths
+
+    def _prepend_sys_paths(self, paths: Iterable[Path]) -> None:
+        for raw_path in reversed([str(path) for path in paths]):
+            if raw_path in sys.path:
+                continue
+            sys.path.insert(0, raw_path)
 
     def _load_plugin_from_path(self, path: Path) -> ApplicationPlugin:
         module_name = self._module_name_for_path(path)
-        spec = importlib.util.spec_from_file_location(module_name, path)
+        plugin_path = path.resolve()
+        search_locations = None
+        if plugin_path.name == "__init__.py":
+            search_locations = [str(plugin_path.parent)]
+        spec = importlib.util.spec_from_file_location(
+            module_name,
+            plugin_path,
+            submodule_search_locations=search_locations,
+        )
         if spec is None or spec.loader is None:
             raise ImportError(f"无法加载插件: {path}")
 
         module = importlib.util.module_from_spec(spec)
         sys.modules[module_name] = module
+        dependency_paths = self._plugin_dependency_paths(plugin_path)
+        self._prepend_sys_paths(dependency_paths)
         spec.loader.exec_module(module)
 
         factory = getattr(module, "create_plugin", None)
