@@ -571,7 +571,6 @@ class PluginCenterPage(ScrollArea):
             except Exception as exc:
                 errors.append(f"{plugin.info.name}: {exc}")
 
-        self.framework.request_plugin_navigation_sync()
         self.framework._save_loaded_plugins()
         self.refresh()
         if loaded_count:
@@ -608,7 +607,6 @@ class PluginCenterPage(ScrollArea):
             except Exception as exc:
                 errors.append(f"{self.framework.plugin_manager.available_plugins[plugin_id].info.name}: {exc}")
 
-        self.framework.request_plugin_navigation_sync()
         self.framework._save_loaded_plugins()
         self.framework.navigationInterface.setCurrentItem(self.framework.plugin_center_page.objectName())
         self.refresh()
@@ -994,7 +992,7 @@ class ApplicationFramework(FluentWindow):
             return
 
         self._plugin_navigation_sync_pending = True
-        QTimer.singleShot(0, self.sync_plugin_navigation)
+        QTimer.singleShot(100, self.sync_plugin_navigation)
 
     def sync_plugin_navigation(self) -> None:
         self._plugin_navigation_sync_pending = False
