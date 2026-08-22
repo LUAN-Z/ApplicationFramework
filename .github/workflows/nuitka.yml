@@ -39,15 +39,7 @@ jobs:
         id: version
         shell: pwsh
         run: |
-          if ("${{ github.ref_type }}" -eq "tag") {
-            $version = "${{ github.ref_name }}" -replace '^v', ''
-          } else {
-            $version = "0.0.${{ github.run_number }}"
-          }
-
-          if ($version -notmatch '^\d+(\.\d+){0,3}$') {
-            $version = "0.0.${{ github.run_number }}"
-          }
+          $version = "1.0.0"
 
           "version=$version" >> $env:GITHUB_OUTPUT
           "BUILD_VERSION=$version" >> $env:GITHUB_ENV
@@ -63,9 +55,20 @@ jobs:
           include-package: |
             qfluentwidgets
             qfluentwidgets._rc
+            plugins.cmd_executor
+            plugins.config_viewer
+            plugins.file_replacer
+            plugins.json_viewer
+            plugins.log_excel_import
+            plugins.plugin_scaffolder
+            plugins.pomodoro
+            plugins.time_log
+            plugins.todo
           include-qt-plugins: platforms,styles,imageformats,iconengines
-          include-data-files: config/plugins.json=config/plugins.json
-          include-raw-dir: plugins=plugins
+          include-data-files: |
+            config/plugins.json=config/plugins.json
+            APPLICATIONS.ico=APPLICATIONS.ico
+          windows-icon-from-ico: APPLICATIONS.ico
           windows-console-mode: disable
           force-stderr-spec: "{PROGRAM_BASE}.err.txt"
           product-name: ApplicationFramework

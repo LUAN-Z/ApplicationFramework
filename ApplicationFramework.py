@@ -41,7 +41,7 @@ from pathlib import Path
 from typing import Dict, Iterable, Optional, Type
 
 from PyQt5.QtCore import Qt, QTimer
-from PyQt5.QtGui import QColor, QCursor
+from PyQt5.QtGui import QColor, QCursor, QIcon
 from PyQt5.QtWidgets import (
     QApplication,
     QFrame,
@@ -83,6 +83,7 @@ if __name__ == "__main__":
 
 APP_STATE_DIR = Path(os.environ.get("APPDATA") or Path.home()) / "ApplicationFramework"
 CRASH_LOG_PATH = APP_STATE_DIR / "crash.log"
+APP_ICON_PATH = Path(__file__).resolve().parent / "APPLICATIONS.ico"
 APP_VERSION = "1.0.0"
 BUILTIN_PLUGIN_MODULES = [
     "plugins.cmd_executor",
@@ -118,6 +119,23 @@ def _install_exception_hook() -> None:
         traceback.print_exception(exc_type, exc_value, exc_traceback)
 
     sys.excepthook = handle_exception
+
+
+def _apply_app_icon(target) -> None:
+    icon_path = _resolve_app_icon_path()
+    if icon_path is not None:
+        target.setWindowIcon(QIcon(str(icon_path)))
+
+
+def _resolve_app_icon_path() -> Path | None:
+    candidates = [
+        APP_ICON_PATH,
+        Path(sys.executable).resolve().parent / "APPLICATIONS.ico",
+    ]
+    for path in candidates:
+        if path.exists():
+            return path
+    return None
 
 
 def connect_theme_changed(callback) -> None:
@@ -670,6 +688,7 @@ class ApplicationFramework(FluentWindow):
         self, plugin_dir: str = "plugins", plugin_config: str = "config/plugins.json"
     ):
         super().__init__()
+        _apply_app_icon(self)
         self.setWindowTitle(f"应用框架 {APP_VERSION}")
         self.resize(1200, 900)
 
@@ -1153,6 +1172,7 @@ def main() -> None:
     )
     app = QApplication(sys.argv)
     app.setAttribute(Qt.AA_DontCreateNativeWidgetSiblings)
+    _apply_app_icon(app)
     window = ApplicationFramework()
     window.center_on_startup_screen()
     window._navigate_to_open_screen()
