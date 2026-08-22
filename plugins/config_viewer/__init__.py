@@ -5,10 +5,7 @@
 from ApplicationFramework import ApplicationPlugin, PluginInfo
 from qfluentwidgets import FluentIcon as FIF
 
-try:
-    from .ui import ConfigViewerPage
-except ImportError:
-    from ui import ConfigViewerPage
+from .ui import ConfigViewerPage
 
 
 class ConfigViewerPlugin(ApplicationPlugin):

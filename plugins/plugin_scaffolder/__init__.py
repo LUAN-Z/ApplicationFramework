@@ -5,10 +5,7 @@
 from ApplicationFramework import ApplicationPlugin, PluginInfo
 from qfluentwidgets import FluentIcon as FIF
 
-try:
-    from .ui import PluginScaffolderPage
-except ImportError:
-    from ui import PluginScaffolderPage
+from .ui import PluginScaffolderPage
 
 
 class PluginScaffolderPlugin(ApplicationPlugin):

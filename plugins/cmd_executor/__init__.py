@@ -5,10 +5,7 @@
 from ApplicationFramework import ApplicationPlugin, PluginInfo
 from qfluentwidgets import FluentIcon as FIF
 
-try:
-    from .ui import CommandToolPage
-except ImportError:
-    from ui import CommandToolPage
+from .ui import CommandToolPage
 
 
 class CommandExecutorPlugin(ApplicationPlugin):

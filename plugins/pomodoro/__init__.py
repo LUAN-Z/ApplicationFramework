@@ -5,10 +5,7 @@
 from ApplicationFramework import ApplicationPlugin, PluginInfo
 from qfluentwidgets import FluentIcon as FIF
 
-try:
-    from .ui import PomodoroPage
-except ImportError:
-    from ui import PomodoroPage
+from .ui import PomodoroPage
 
 
 class PomodoroPlugin(ApplicationPlugin):

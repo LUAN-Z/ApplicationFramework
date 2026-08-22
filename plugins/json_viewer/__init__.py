@@ -5,10 +5,7 @@
 from ApplicationFramework import ApplicationPlugin, PluginInfo
 from qfluentwidgets import FluentIcon as FIF
 
-try:
-    from .ui import JsonViewerPage
-except ImportError:
-    from ui import JsonViewerPage
+from .ui import JsonViewerPage
 
 
 class JsonViewerPlugin(ApplicationPlugin):

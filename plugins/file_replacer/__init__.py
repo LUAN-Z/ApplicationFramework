@@ -5,10 +5,7 @@
 from ApplicationFramework import ApplicationPlugin, PluginInfo
 from qfluentwidgets import FluentIcon as FIF
 
-try:
-    from .ui import FileReplacerPage
-except ImportError:
-    from ui import FileReplacerPage
+from .ui import FileReplacerPage
 
 
 class FileReplacerPlugin(ApplicationPlugin):

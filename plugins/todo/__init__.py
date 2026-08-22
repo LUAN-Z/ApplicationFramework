@@ -5,10 +5,7 @@
 from ApplicationFramework import ApplicationPlugin, PluginInfo
 from qfluentwidgets import FluentIcon as FIF
 
-try:
-    from .ui import TodoPage
-except ImportError:
-    from ui import TodoPage
+from .ui import TodoPage
 
 
 class TodoPlugin(ApplicationPlugin):

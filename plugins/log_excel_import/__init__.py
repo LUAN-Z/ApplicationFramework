@@ -5,17 +5,7 @@
 from ApplicationFramework import ApplicationPlugin, PluginInfo
 from qfluentwidgets import FluentIcon as FIF
 
-try:
-    from .dependencies import add_plugin_dependency_paths
-except ImportError:
-    from dependencies import add_plugin_dependency_paths
-
-add_plugin_dependency_paths()
-
-try:
-    from .ui import LogExcelImportPage
-except ImportError:
-    from ui import LogExcelImportPage
+from .ui import LogExcelImportPage
 
 
 class LogExcelImportPlugin(ApplicationPlugin):

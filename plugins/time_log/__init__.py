@@ -5,10 +5,7 @@
 from ApplicationFramework import ApplicationPlugin, PluginInfo
 from qfluentwidgets import FluentIcon as FIF
 
-try:
-    from .ui import TimeLogPage
-except ImportError:
-    from ui import TimeLogPage
+from .ui import TimeLogPage
 
 
 class TimeLogPlugin(ApplicationPlugin):
