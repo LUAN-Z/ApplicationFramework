@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 """插件脚手架 UI。"""
 
-import json
 import re
 from pathlib import Path
 
@@ -14,7 +13,6 @@ from qfluentwidgets import (
     CardWidget,
     CaptionLabel,
     CheckBox,
-    EditableComboBox,
     FluentIcon as FIF,
     InfoBar,
     InfoBarPosition,
@@ -40,28 +38,10 @@ def _init_template(plugin_id: str, plugin_name: str, description: str, class_nam
 # -*- coding: utf-8 -*-
 """插件入口。"""
 
-import sys
-from pathlib import Path
-
-
-def _add_plugin_dependency_paths() -> None:
-    plugin_dir = Path(__file__).resolve().parent
-    for dependency_path in (plugin_dir, plugin_dir / "vendor", plugin_dir / "deps"):
-        if dependency_path.exists():
-            raw_path = str(dependency_path)
-            if raw_path not in sys.path:
-                sys.path.insert(0, raw_path)
-
-
-_add_plugin_dependency_paths()
-
 from ApplicationFramework import ApplicationPlugin, PluginInfo
 from qfluentwidgets import FluentIcon as FIF
 
-try:
-    from .ui import {class_name}Page
-except ImportError:
-    from ui import {class_name}Page
+from .ui import {class_name}Page
 
 
 class {class_name}Plugin(ApplicationPlugin):
@@ -87,10 +67,7 @@ def _ui_template(class_name: str, plugin_name: str, description: str, with_stora
     storage_init = ""
     if with_storage:
         storage_import = """
-try:
-    from .storage import JsonStore
-except ImportError:
-    from storage import JsonStore
+from .storage import JsonStore
 """
         storage_init = """
         self.store = JsonStore(Path.home() / ".application_framework" / "{folder}" / "data.json")
@@ -184,16 +161,6 @@ def _readme_template(plugin_id: str, plugin_name: str, description: str) -> str:
 - `__init__.py`：插件入口，提供 `create_plugin()`
 - `ui.py`：插件页面
 - `storage.py`：可选 JSON 存储工具
-
-## 第三方依赖
-
-如果插件需要额外 Python 包，可以在插件目录创建 `requirements.txt`，然后执行：
-
-```bash
-python scripts/vendor_plugin_deps.py plugins/{plugin_id}
-```
-
-依赖会安装到插件自己的 `vendor/` 目录，编译版主程序也会自动识别，不需要重新编译主程序。
 '''
 
 
@@ -273,28 +240,10 @@ class PluginScaffolderPage(QWidget):
         self.storage_check = CheckBox("生成 storage.py", self)
         self.readme_check = CheckBox("生成 README.md", self)
         self.readme_check.setChecked(True)
-        self.register_check = CheckBox("创建后自动加入当前插件列表", self)
         self.storage_check.stateChanged.connect(self._update_preview)
         self.readme_check.stateChanged.connect(self._update_preview)
-        self.register_check.stateChanged.connect(self._sync_register_ui)
-        self.register_check.stateChanged.connect(self._update_preview)
         form.addWidget(self.storage_check)
         form.addWidget(self.readme_check)
-        form.addWidget(self.register_check)
-
-        group_row = QHBoxLayout()
-        group_row.addWidget(CaptionLabel("归类", self))
-        self.group_combo = EditableComboBox(self)
-        self.group_combo.setPlaceholderText("工具")
-        self._reload_group_options()
-        self.group_combo.textChanged.connect(self._update_preview)
-        group_row.addWidget(self.group_combo, 1)
-        reload_group_btn = PushButton("刷新", self)
-        reload_group_btn.setIcon(FIF.SYNC.icon())
-        reload_group_btn.clicked.connect(lambda _checked=False: self._reload_group_options())
-        group_row.addWidget(reload_group_btn)
-        form.addLayout(group_row)
-        self._sync_register_ui()
         form.addStretch(1)
 
         content.addWidget(form_card, 5)
@@ -353,49 +302,6 @@ class PluginScaffolderPage(QWidget):
     def _current_plugin_name(self) -> str:
         return self.name_edit.text().strip() or self.name_edit.placeholderText()
 
-    def _current_group_title(self) -> str:
-        return self.group_combo.currentText().strip() or "工具"
-
-    def _reload_group_options(self) -> None:
-        current = ""
-        if hasattr(self, "group_combo"):
-            current = self.group_combo.currentText().strip()
-
-        groups = self._load_plugin_groups()
-        self.group_combo.clear()
-        self.group_combo.addItems(groups)
-        self.group_combo.setText(current or groups[0])
-
-    def _load_plugin_groups(self) -> list[str]:
-        data = {}
-        groups = []
-        if self.framework is not None and hasattr(self.framework, "_read_plugin_config"):
-            data = self.framework._read_plugin_config()
-            for title in getattr(self.framework, "plugin_group_order", []):
-                if isinstance(title, str) and title.strip() and title.strip() not in groups:
-                    groups.append(title.strip())
-        else:
-            config_path = self.app_dir / "config" / "plugins.json"
-            try:
-                data = json.loads(config_path.read_text(encoding="utf-8"))
-            except Exception:
-                data = {}
-
-        for group in data.get("plugin_groups", []):
-            if not isinstance(group, dict):
-                continue
-            title = group.get("title")
-            if isinstance(title, str) and title.strip() and title.strip() not in groups:
-                groups.append(title.strip())
-
-        if not groups:
-            groups.append("工具")
-        return groups
-
-    def _sync_register_ui(self, *args) -> None:
-        enabled = self.register_check.isChecked()
-        self.group_combo.setEnabled(enabled)
-
     def _preview_lines(self) -> list[str]:
         plugin_id = self._current_plugin_id()
         lines = [
@@ -416,15 +322,10 @@ class PluginScaffolderPage(QWidget):
         target_path = Path(target_root).expanduser() / plugin_id
 
         validity = "可创建" if PLUGIN_ID_RE.match(plugin_id) else "插件 ID 格式不合法"
-        auto_register = (
-            f"会加入“{self._current_group_title()}”分类"
-            if self.register_check.isChecked()
-            else "仅生成文件"
-        )
         self.summary_label.setText(
             f"{plugin_name}\n"
             f"{target_path}\n"
-            f"{validity} · {auto_register}"
+            f"{validity} · 仅生成文件"
         )
         self.preview_text.setPlainText("\n".join(self._preview_lines()))
 
@@ -493,19 +394,4 @@ class PluginScaffolderPage(QWidget):
                 encoding="utf-8",
             )
 
-        if self.register_check.isChecked():
-            self._register_created_plugin(plugin_dir / "__init__.py")
-
         return plugin_dir
-
-    def _register_created_plugin(self, init_path: Path) -> None:
-        if self.framework is None:
-            return
-
-        plugin = self.framework.plugin_manager.register_from_path(init_path)
-        self.framework.user_plugin_paths[plugin.info.plugin_id] = init_path.resolve()
-        self.framework.plugin_group_by_id[plugin.info.plugin_id] = self._current_group_title()
-        if self._current_group_title() not in self.framework.plugin_group_order:
-            self.framework.plugin_group_order.append(self._current_group_title())
-        self.framework._save_user_plugins()
-        self.framework.plugin_center_page.refresh()

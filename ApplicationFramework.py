@@ -693,6 +693,9 @@ class ApplicationFramework(FluentWindow):
         self.resize(1200, 900)
 
         self.app_dir = Path(__file__).resolve().parent
+        app_dir_str = str(self.app_dir)
+        if app_dir_str not in sys.path:
+            sys.path.insert(0, app_dir_str)
         self.user_config_dir = APP_STATE_DIR
         self.plugin_manager = PluginManager(self)
         self.default_plugin_config_path = self._resolve_app_path(plugin_config)

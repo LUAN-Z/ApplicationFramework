@@ -52,10 +52,7 @@ from qfluentwidgets import (
 
 from ApplicationFramework import connect_theme_changed
 
-try:
-    from .storage import TimeLogStore, extract_tags
-except ImportError:
-    from storage import TimeLogStore, extract_tags
+from .storage import TimeLogStore, extract_tags
 
 
 WEEKDAY_CN = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]

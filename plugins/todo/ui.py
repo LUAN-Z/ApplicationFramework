@@ -59,10 +59,7 @@ from qfluentwidgets import (
 
 from ApplicationFramework import connect_theme_changed
 
-try:
-    from .storage import SYSTEM_LISTS, TodoStore
-except ImportError:
-    from storage import SYSTEM_LISTS, TodoStore
+from .storage import SYSTEM_LISTS, TodoStore
 
 
 # 系统视图 → 图标

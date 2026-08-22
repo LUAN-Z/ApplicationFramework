@@ -19,24 +19,14 @@ from qfluentwidgets import (
     BodyLabel, StrongBodyLabel, CardWidget, FluentIcon as FIF,
 )
 
-try:
-    from .logic import (
-        CommandExecutor,
-        build_command,
-        default_output_path,
-        ensure_output_directory,
-        get_tool_help,
-        output_path_in_directory,
-    )
-except ImportError:
-    from logic import (
-        CommandExecutor,
-        build_command,
-        default_output_path,
-        ensure_output_directory,
-        get_tool_help,
-        output_path_in_directory,
-    )
+from .logic import (
+    CommandExecutor,
+    build_command,
+    default_output_path,
+    ensure_output_directory,
+    get_tool_help,
+    output_path_in_directory,
+)
 
 from customWidget import InfoBarWithButton
 

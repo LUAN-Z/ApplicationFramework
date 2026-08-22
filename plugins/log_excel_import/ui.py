@@ -3,7 +3,6 @@
 """Log 导入 Excel 插件页面。"""
 
 import sys
-from pathlib import Path
 
 from PyQt5.QtCore import QObject, Qt, QThread, QUrl, pyqtSignal
 from PyQt5.QtGui import QDesktopServices
@@ -32,24 +31,14 @@ from qfluentwidgets import (
     StrongBodyLabel,
 )
 
-try:
-    from .core import (
-        DEFAULT_KEYWORDS,
-        build_sorted_content,
-        collect_txt_files,
-        export_to_excel,
-        resolve_output_path,
-        save_sorted_txt,
-    )
-except ImportError:
-    from core import (
-        DEFAULT_KEYWORDS,
-        build_sorted_content,
-        collect_txt_files,
-        export_to_excel,
-        resolve_output_path,
-        save_sorted_txt,
-    )
+from .core import (
+    DEFAULT_KEYWORDS,
+    build_sorted_content,
+    collect_txt_files,
+    export_to_excel,
+    resolve_output_path,
+    save_sorted_txt,
+)
 
 
 class _StdoutEmitter(QObject):

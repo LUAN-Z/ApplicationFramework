@@ -7,13 +7,6 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
-try:
-    from .dependencies import add_plugin_dependency_paths
-except ImportError:
-    from dependencies import add_plugin_dependency_paths
-
-add_plugin_dependency_paths()
-
 from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Font
 
